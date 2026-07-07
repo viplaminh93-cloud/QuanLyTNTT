@@ -86,18 +86,64 @@ async function startCamera(){
 
 
 
-function qrSuccess(code){
+async function qrSuccess(code){
+
 
     if(daQuet)
         return;
 
+
     daQuet=true;
+
 
     scanner.pause();
 
-    alert("QR đọc được: [" + code + "]");
 
-    guiDiemDanh(code);
+
+    try{
+
+
+        let maso = code;
+
+
+
+        // Nếu QR là link thì lấy nội dung bên trong
+        if(code.startsWith("http")){
+
+
+            const response = await fetch(code);
+
+
+            maso = await response.text();
+
+
+        }
+
+
+
+        maso = maso.trim();
+
+
+
+        alert("Mã gửi đi: [" + maso + "]");
+
+
+
+        guiDiemDanh(maso);
+
+
+
+    }catch(e){
+
+
+        alert(
+            "Không đọc được mã QR: "
+            + e
+        );
+
+
+    }
+
 
 }
 
