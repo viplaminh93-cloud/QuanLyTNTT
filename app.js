@@ -88,20 +88,16 @@ async function startCamera(){
 
 function qrSuccess(code){
 
-
     if(daQuet)
         return;
 
-
     daQuet=true;
-
 
     scanner.pause();
 
-
+    alert("QR đọc được: [" + code + "]");
 
     guiDiemDanh(code);
-
 
 }
 
