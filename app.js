@@ -161,7 +161,7 @@ function hienThi(data){
 
     const overlay = document.getElementById("overlay");
 
-    overlay.className = "";
+    overlay.classList.remove("hidden","success","warning","error");
 
     document.getElementById("overlayPhoto").style.display = "none";
     document.getElementById("overlayClass").style.display = "none";
