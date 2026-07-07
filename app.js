@@ -7,7 +7,7 @@ let daQuet = false;
 
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbytCAIVzZ8bOrDu_TBpqGbnfzGd7IWQdwqowjuj40yea5t_Fjt8Wbta2vh5MvZrq-iflg/exec";
+"https://script.google.com/macros/s/AKfycby1JPy05N6hDZnf-M9gFvV2XCex63JdRGqPPrlZp83u8XWdiFI066UmyIjczoDPFN-u2w/exec";
 
 
 
@@ -146,6 +146,7 @@ fetch(API_URL,{
 
 .then(data=>{
 
+    console.log(data);
 
     hienThi(data);
 
