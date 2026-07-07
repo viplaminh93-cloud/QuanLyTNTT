@@ -1,32 +1,41 @@
 let loaiDiemDanh = "";
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxCUmQZp5x3GcuSCoVzJbT-RUz615z8wVlVq1OWU2QbLCEnxae0osq5tzNNU4E40jIWTQ/exec";
-
-
 let scanner = null;
+
 let daQuet = false;
+
+
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbytCAIVzZ8bOrDu_TBpqGbnfzGd7IWQdwqowjuj40yea5t_Fjt8Wbta2vh5MvZrq-iflg/exec";
+
+
 
 
 
 function startApp(loai){
 
+
     loaiDiemDanh = loai;
 
 
-    document.querySelector(".card").style.display="none";
+    document.getElementById("home")
+    .classList.add("hidden");
 
 
     document.getElementById("scannerBox")
     .classList.remove("hidden");
 
 
+
     document.getElementById("typeTitle")
-    .innerText =
+    .innerHTML =
     "Điểm danh: " + loai;
 
 
+
     startCamera();
+
 
 }
 
@@ -66,19 +75,17 @@ async function startCamera(){
         );
 
 
-    }catch(err){
+    }
 
+    catch(err){
 
         alert(
             "Không mở được camera:\n"+
             err
         );
 
-
-        console.log(err);
-
-
     }
+
 
 }
 
@@ -86,7 +93,10 @@ async function startCamera(){
 
 
 
+
+
 function qrSuccess(code){
+
 
     if(daQuet)
         return;
@@ -98,7 +108,9 @@ function qrSuccess(code){
     scanner.pause();
 
 
+
     guiDiemDanh(code);
+
 
 
 }
@@ -108,7 +120,10 @@ function qrSuccess(code){
 
 
 
+
 function guiDiemDanh(maso){
+
+
 
 fetch(API_URL,{
 
@@ -122,8 +137,8 @@ fetch(API_URL,{
 
     })
 
-
 })
+
 
 
 .then(res=>res.json())
@@ -138,20 +153,27 @@ fetch(API_URL,{
 })
 
 
+
 .catch(err=>{
 
-    alert("Lỗi kết nối: " + err);
 
-    daQuet = false;
+    hienThi({
 
-    try{
-        scanner.resume();
-    }catch(e){}
+        success:false,
+
+        message:"Lỗi kết nối"
+
+    });
+
 
 });
 
 
+
 }
+
+
+
 
 
 
@@ -159,86 +181,179 @@ fetch(API_URL,{
 
 function hienThi(data){
 
-    const overlay = document.getElementById("overlay");
-
-    overlay.classList.remove("hidden","success","warning","error");
-
-    document.getElementById("overlayPhoto").style.display = "none";
-    document.getElementById("overlayClass").style.display = "none";
 
 
-    if(data.student.lop){
-
-    document.getElementById("overlayClass").innerHTML =
-    data.student.lop;
-
-    document.getElementById("overlayClass").style.display="block";
-
-    }
-
-    
-    
-    if(data.success){
-
-        overlay.classList.add("success");
-
-        document.getElementById("overlayIcon").innerHTML = "✅";
-        document.getElementById("overlayTitle").innerHTML = "ĐIỂM DANH THÀNH CÔNG";
-
-    }
-    else if(data.duplicate){
-
-        overlay.classList.add("warning");
-
-        document.getElementById("overlayIcon").innerHTML = "⚠️";
-        document.getElementById("overlayTitle").innerHTML = "ĐÃ ĐIỂM DANH";
-
-    }
-    else{
-
-        overlay.classList.add("error");
-
-        document.getElementById("overlayIcon").innerHTML = "❌";
-        document.getElementById("overlayTitle").innerHTML = "KHÔNG TÌM THẤY";
-
-    }
+const overlay =
+document.getElementById("overlay");
 
 
-    if(data.student){
 
-        document.getElementById("overlayPhoto").src = data.student.hinh;
-        document.getElementById("overlayPhoto").style.display = "block";
-
-        document.getElementById("overlayName").innerHTML = data.student.hoten;
-
-        document.getElementById("overlayCode").innerHTML = data.student.maso;
-
-    }else{
-
-        document.getElementById("overlayName").innerHTML = "";
-
-        document.getElementById("overlayCode").innerHTML = "";
-
-    }
+overlay.classList.remove(
+"hidden",
+"success",
+"warning",
+"error"
+);
 
 
-    overlay.classList.remove("hidden");
+
+
+
+if(data.success){
+
+
+    overlay.classList.add("success");
+
+
+    overlayIcon.innerHTML="✅";
+
+    overlayTitle.innerHTML=
+    "ĐIỂM DANH THÀNH CÔNG";
+
+
+}
+
+else if(data.duplicate){
+
+
+    overlay.classList.add("warning");
+
+
+    overlayIcon.innerHTML="⚠️";
+
+    overlayTitle.innerHTML=
+    "ĐÃ ĐIỂM DANH";
+
+
+}
+
+else{
+
+
+    overlay.classList.add("error");
+
+
+    overlayIcon.innerHTML="❌";
+
+    overlayTitle.innerHTML=
+    "KHÔNG TÌM THẤY";
+
 
 }
 
 
-window.onload = function(){
 
-    document.getElementById("overlay").onclick = function(){
 
-        this.classList.add("hidden");
+if(data.student){
 
-        daQuet = false;
 
-        try{
-            scanner.resume();
-        }catch(e){}
+    overlayPhoto.src =
+    data.student.hinh;
 
-    };
 
-};
+    overlayPhoto.style.display=
+    "block";
+
+
+    overlayName.innerHTML =
+    data.student.hoten;
+
+
+    overlayCode.innerHTML =
+    "Mã số: "
+    + data.student.maso;
+
+
+
+}
+else{
+
+
+    overlayPhoto.style.display="none";
+
+
+    overlayName.innerHTML="";
+
+
+    overlayCode.innerHTML=
+    data.message;
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+document
+.getElementById("overlay")
+.addEventListener(
+"click",
+function(){
+
+
+    this.classList.add("hidden");
+
+
+    daQuet=false;
+
+
+    try{
+
+        scanner.resume();
+
+    }
+
+    catch(e){}
+
+
+
+});
+
+
+
+
+
+
+
+
+function backHome(){
+
+
+
+try{
+
+
+scanner.stop();
+
+
+scanner.clear();
+
+
+}
+
+catch(e){}
+
+
+
+document
+.getElementById("scannerBox")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("home")
+.classList.remove("hidden");
+
+
+
+}
