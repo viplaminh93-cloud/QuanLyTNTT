@@ -152,3 +152,164 @@ button:active{
     display:none;
 
 }
+
+
+
+/* =========================
+   Overlay
+========================= */
+
+#overlay{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.82);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+    animation:fadeIn .2s;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+#overlayCard{
+
+    width:90%;
+    max-width:420px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
+
+}
+
+#overlay.success #overlayCard{
+
+    background:#2E7D32;
+
+    color:white;
+
+}
+
+#overlay.warning #overlayCard{
+
+    background:#F57C00;
+
+    color:white;
+
+}
+
+#overlay.error #overlayCard{
+
+    background:#D32F2F;
+
+    color:white;
+
+}
+
+#overlayIcon{
+
+    font-size:70px;
+
+    margin-bottom:10px;
+
+}
+
+#overlayTitle{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+#overlayPhoto{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    margin:20px auto;
+
+    display:block;
+
+    border:5px solid white;
+
+}
+
+#overlayName{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+#overlayCode{
+
+    font-size:22px;
+
+    margin-top:8px;
+
+}
+
+#overlayClass{
+
+    font-size:22px;
+
+    margin-top:5px;
+
+}
+
+#overlayHint{
+
+    margin-top:30px;
+
+    font-size:18px;
+
+    opacity:.9;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
