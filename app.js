@@ -215,14 +215,18 @@ function hienThi(data){
 }
 
 
-document.getElementById("overlay").addEventListener("click", function(){
+window.onload = function(){
 
-    this.classList.add("hidden");
+    document.getElementById("overlay").onclick = function(){
 
-    daQuet = false;
+        this.classList.add("hidden");
 
-    try{
-        scanner.resume();
-    }catch(e){}
+        daQuet = false;
 
-});
+        try{
+            scanner.resume();
+        }catch(e){}
+
+    };
+
+};
