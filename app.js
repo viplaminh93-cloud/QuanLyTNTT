@@ -86,8 +86,7 @@ async function startCamera(){
 
 
 
-async function qrSuccess(code){
-
+function qrSuccess(code){
 
     if(daQuet)
         return;
@@ -99,51 +98,7 @@ async function qrSuccess(code){
     scanner.pause();
 
 
-
-    try{
-
-
-        let maso = code;
-
-
-
-        // Nếu QR là link thì lấy nội dung bên trong
-        if(code.startsWith("http")){
-
-
-            const response = await fetch(code);
-
-
-            maso = await response.text();
-
-
-        }
-
-
-
-        maso = maso.trim();
-
-
-
-        alert("Mã gửi đi: [" + maso + "]");
-
-
-
-        guiDiemDanh(maso);
-
-
-
-    }catch(e){
-
-
-        alert(
-            "Không đọc được mã QR: "
-            + e
-        );
-
-
-    }
-
+    guiDiemDanh(code);
 
 }
 
