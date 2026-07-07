@@ -1,7 +1,7 @@
 let loaiDiemDanh = "";
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyzhHoxbeu_QLBs1JWF5dP-8JTTCTyCA98rRiB_q00xAIx57DldIdcpiBpAnjzGCnisKQ/exec";
+"https://script.google.com/macros/s/AKfycbz_Q-ijkxlp4l5iFXApGRATargvZdCZxs-dBon2_YSXR2d2PQHafh5z044tkOiW-4sftA/exec";
 
 
 let scanner = null;
