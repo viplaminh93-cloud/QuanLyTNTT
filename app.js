@@ -1,13 +1,11 @@
 let loaiDiemDanh = "";
-
 let scanner = null;
-
 let daQuet = false;
 
 
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbwV--HM8yP9b9ik8QI015SMGbAJGZCVkQka3iwz_18x-KEQdsJVEe8dRLK8lJgSVOdbiA/exec";
+"https://script.google.com/macros/s/AKfycbzbMeptJuenfXWzhMG9mdLj1t4KZCxdF8pCFNoqcEhy0Gt0RPmc2yjSmRWwK1wwKetDcA/exec";
 
 
 
@@ -15,27 +13,17 @@ const API_URL =
 
 function startApp(loai){
 
-
     loaiDiemDanh = loai;
-
 
     document.getElementById("home")
     .classList.add("hidden");
-
-
     document.getElementById("scannerBox")
     .classList.remove("hidden");
-
-
-
     document.getElementById("typeTitle")
     .innerHTML =
     "Điểm danh: " + loai;
 
-
-
     startCamera();
-
 
 }
 
@@ -47,8 +35,6 @@ async function startCamera(){
 
 
     scanner = new Html5Qrcode("reader");
-
-
     try{
 
 
