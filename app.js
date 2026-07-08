@@ -1,3 +1,5 @@
+alert("app.js đã chạy");
+
 let loaiDiemDanh = "";
 let scanner = null;
 let daQuet = false;
