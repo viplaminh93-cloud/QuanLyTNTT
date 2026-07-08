@@ -294,25 +294,6 @@ if(overlay){
 }
 
 
-    this.classList.add("hidden");
-
-
-    daQuet=false;
-
-
-    try{
-
-        scanner.resume();
-
-    }
-
-    catch(e){}
-
-
-
-});
-
-
 
 
 
