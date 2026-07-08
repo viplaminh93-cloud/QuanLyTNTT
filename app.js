@@ -234,48 +234,16 @@ else{
 
 
 
-if(data.student){
+if(data.student.hinh){
 
+    overlayPhoto.src = data.student.hinh;
+    overlayPhoto.style.display="block";
 
-    overlayPhoto.src =
-    data.student.hinh;
-
-
-    overlayPhoto.style.display=
-    "block";
-
-
-    overlayName.innerHTML =
-    data.student.hoten;
-
-
-    overlayCode.innerHTML =
-    "Mã số: "
-    + data.student.maso;
-
-
-
-}
-else{
-
+}else{
 
     overlayPhoto.style.display="none";
 
-
-    overlayName.innerHTML="";
-
-
-    overlayCode.innerHTML=
-    data.message;
-
-
 }
-
-
-
-
-}
-
 
 
 
