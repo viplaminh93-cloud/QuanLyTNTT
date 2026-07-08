@@ -3,7 +3,7 @@ let scanner = null;
 let daQuet = false;
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbz-xUx-7cxkvJt_IymsTemdZ4jXRey8QTph10WsEV7Xq4Iucq1m63dK4ME1ZBWedFfjTA/exec";
+"https://script.google.com/macros/s/AKfycbxW33RLy050T217GU_FtItVVGSCl2UUIKTVteXfDQZZ9vNX0NicaUyZzdy5s6BXPEh12g/exec";
 
 
 //======================
@@ -139,7 +139,7 @@ function hienThi(data){
     const photo=document.getElementById("overlayPhoto");
     const name=document.getElementById("overlayName");
     const code=document.getElementById("overlayCode");
-
+    const lop=document.getElementById("overlayClass");
 
 
     if(data.success){
@@ -177,7 +177,7 @@ function hienThi(data){
     if(data.student){
 
         name.innerHTML=data.student.hoten;
-
+        lop.innerHTML="Lớp: "+data.student.lop;
         code.innerHTML="Mã số: "+data.student.maso;
 
         if(data.student.hinh){
@@ -195,9 +195,8 @@ function hienThi(data){
     }else{
 
         name.innerHTML="";
-
+        lop.innerHTML="";
         code.innerHTML=data.message || "";
-
         photo.style.display="none";
 
     }
