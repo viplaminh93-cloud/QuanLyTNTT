@@ -304,7 +304,7 @@ window.onload = function(){
 
 
 
-function backHome(){
+async function backHome(){
 
 
 
