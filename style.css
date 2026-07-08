@@ -286,3 +286,13 @@ button:active{
     opacity:.9;
 
 }
+
+
+
+.todayCount{
+    margin:10px 0 20px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    color:#1976d2;
+}
