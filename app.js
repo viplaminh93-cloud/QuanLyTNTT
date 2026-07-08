@@ -5,7 +5,7 @@ let daQuet = false;
 
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyscKv7Kws2LGBsekdr8jmz19FD-ejMl4msXASxQs1Xg4jN8v8eM-fSDukB9_zrLHB2Gg/exec";
+"https://script.google.com/macros/s/AKfycbwz7L7UEMTK0lq04kn9C_BmeskbWe-QHb8jzD2pEPE6ANKFLWGQafAiuFmw9UdFugeaqQ/execc";
 
 
 
@@ -112,7 +112,7 @@ function qrSuccess(code){
 
 function guiDiemDanh(maso){
 
-
+maso = maso.trim().toUpperCase();
 
 fetch(API_URL,{
 
