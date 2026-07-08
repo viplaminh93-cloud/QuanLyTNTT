@@ -143,6 +143,7 @@ function hienThi(data){
     const name=document.getElementById("overlayName");
     const code=document.getElementById("overlayCode");
     const lop=document.getElementById("overlayClass");
+    const time=document.getElementById("overlayTime");
 
 
     if(data.success){
@@ -184,7 +185,19 @@ function hienThi(data){
             ? "Lớp: " + data.student.lop
             : "";
         code.innerHTML="Mã số: "+data.student.maso;
+        
+        
+        if(data.duplicate && data.gio){
+        
+            time.innerHTML = "🕒 Đã điểm danh lúc: " + data.gio;
+        
+        }else{
+        
+            time.innerHTML = "";
+        
+        }
 
+        
         if(data.student.hinh){
 
             photo.src=data.student.hinh;
@@ -199,10 +212,11 @@ function hienThi(data){
 
     }else{
 
-        name.innerHTML="";
-        lop.innerHTML="";
-        code.innerHTML=data.message || "";
-        photo.style.display="none";
+            name.innerHTML="";
+            lop.innerHTML="";
+            code.innerHTML=data.message || "";
+            time.innerHTML="";
+            photo.style.display="none";
 
     }
 
