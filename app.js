@@ -93,7 +93,7 @@ function guiDiemDanh(maso){
         redirect:"follow",
         headers:{
             "Content-Type":"text/plain;charset=utf-8"
-        },
+        }
         body: JSON.stringify({
             maso: maso,
             loai: loaiDiemDanh
