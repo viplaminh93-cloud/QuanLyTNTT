@@ -15,13 +15,19 @@ function startApp(loai){
 
     loaiDiemDanh = loai;
 
-    document.getElementById("home")
-    .classList.add("hidden");
+
+    document.querySelector(".home")
+    .style.display="none";
+
+
     document.getElementById("scannerBox")
     .classList.remove("hidden");
+
+
     document.getElementById("typeTitle")
-    .innerHTML =
+    .innerText =
     "Điểm danh: " + loai;
+
 
     startCamera();
 
