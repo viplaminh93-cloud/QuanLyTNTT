@@ -77,7 +77,7 @@ function loadTodayCount(){
     .then(data => {
 
         document.getElementById("todayCount").innerHTML =
-            "👦 Đã điểm danh hôm nay: <b>" +
+            "Đã điểm danh hôm nay: <b>" +
             data.count +
             "</b> em";
 
@@ -110,8 +110,8 @@ async function startCamera(){
             {
                 fps:10,
                 qrbox:{
-                    width:250,
-                    height:250
+                    width:200,
+                    height:200
                 }
             },
 
