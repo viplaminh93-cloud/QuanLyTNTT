@@ -169,14 +169,6 @@ function guiDiemDanh(maso){
 function hienThi(data){
     
     
-    if(typeof data.tong !== "undefined"){
-
-    tongHomNay = data.tong;
-
-    capNhatTong();
-
-    }
-
     const overlay=document.getElementById("overlay");
 
     overlay.classList.remove("hidden","success","warning","error");
@@ -190,6 +182,15 @@ function hienThi(data){
     const time=document.getElementById("overlayTime");
 
 
+
+    
+    if(typeof data.tong !== "undefined"){
+
+    tongHomNay = data.tong;
+
+    capNhatTong();
+
+    }
 
     if(data.success){
 
