@@ -4,7 +4,7 @@ let daQuet = false;
 let tongHomNay = 0;
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyJhX8Lx2fWzDtZN24EmdoH6jy7Pf4drlkunxXUuf3i4p0JYmjjL9KF06pJQ9u5BQL2mQ/exec";
+"https://script.google.com/macros/s/AKfycbwzn0VFvoKEX7kGx_JlGeOMBcMMuSkgVPTIvQNfT7WYXsGbELF53DfcrhXmj_laS5w55g/exec";
 
 
 //======================
@@ -25,9 +25,43 @@ function startApp(loai){
 
     loadTodayCount();      // ← thêm dòng này
 
+    capNhatTongTuServer(loai);
+    
     startCamera();
 
 }
+
+
+
+
+function capNhatTongTuServer(loai){
+
+    fetch(API_URL + "?count=1&loai=" + encodeURIComponent(loai))
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        tongHomNay = Number(data.count) || 0;
+
+        capNhatTong();
+
+    })
+
+    .catch(err => {
+
+        console.log(err);
+
+        tongHomNay = 0;
+
+        capNhatTong();
+
+    });
+
+}
+
+
+
 
 
 function loadTodayCount(){
