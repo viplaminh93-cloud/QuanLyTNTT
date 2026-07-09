@@ -108,11 +108,16 @@ async function startCamera(){
             { facingMode:"environment" },
 
             {
-                fps:10,
+                fps:15,
+                
                 qrbox:{
-                    width:250,
-                    height:250
-                }
+                    width:220,
+                    height:220
+                },
+                
+                rememberLastUsedCamera:true,
+                
+                disableFlip:true
             },
 
             qrSuccess
@@ -142,6 +147,10 @@ function qrSuccess(text){
     scanner.pause();
 
     guiDiemDanh(text);
+
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
 
 }
 
@@ -313,6 +322,10 @@ window.onload=function(){
         if(scanner){
 
             scanner.resume();
+
+            setTimeout(() => {
+                daQuet = false;
+            }, 200);
 
         }
 
