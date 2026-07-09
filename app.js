@@ -216,26 +216,18 @@ function hienThi(data){
     const time=document.getElementById("overlayTime");
 
 
-
-    
-    if(data.tong != null){
-    
-        tongHomNay = parseInt(data.tong,10);
-    
-        if(!isNaN(tongHomNay)){
-            capNhatTong();
-        }
-    
-    }
-
     if(data.success){
-
+    
+        tongHomNay++;
+    
+        capNhatTong();
+    
         overlay.classList.add("success");
-
+    
         icon.innerHTML="✅";
-
+    
         title.innerHTML="ĐIỂM DANH THÀNH CÔNG";
-
+    
     }
 
     else if(data.duplicate){
