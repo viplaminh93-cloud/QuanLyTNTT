@@ -15,10 +15,44 @@ function startApp(loai){
     loaiDiemDanh = loai;
 
     document.querySelector(".home").style.display="none";
-    document.getElementById("scannerBox").classList.remove("hidden");
-    document.getElementById("typeTitle").innerText="Điểm danh: "+loai;
+
+    document.getElementById("scannerBox")
+        .classList.remove("hidden");
+
+    document.getElementById("typeTitle")
+        .innerText = "Điểm danh: " + loai;
+
+    loadTodayCount();      // ← thêm dòng này
 
     startCamera();
+
+}
+
+
+function loadTodayCount(){
+
+    fetch(
+        API_URL +
+        "?count=1&loai=" +
+        encodeURIComponent(loaiDiemDanh)
+    )
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        document.getElementById("todayCount").innerHTML =
+            "👦 Đã điểm danh hôm nay: <b>" +
+            data.count +
+            "</b> em";
+
+    })
+
+    .catch(err=>{
+
+        console.log(err);
+
+    });
 
 }
 
