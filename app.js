@@ -13,6 +13,9 @@ const API_URL =
 
 function startApp(loai){
 
+    let scanner = null;
+    let dangXuLy = false;
+
     loaiDiemDanh = loai;
 
     document.querySelector(".home").style.display="none";
