@@ -13,24 +13,18 @@ function startApp(loai){
 
     App.loaiDiemDanh = loai;
 
-    document.querySelector(".home").style.display = "none";
+    qs(".home").style.display = "none";
 
-    document
-        .getElementById("scannerBox")
-        .classList.remove("hidden");
+    show(id("scannerBox"));
 
-    document
-        .getElementById("typeTitle")
-        .innerText = "Điểm danh: " + loai;
+    id("typeTitle").innerText =
+        "Điểm danh: " + loai;
 
     capNhatTongTuServer(loai);
-
-//    dongBoQueue();
 
     startCamera();
 
 }
-
 
 
 
@@ -85,13 +79,7 @@ function capNhatTongTuServer(loai){
 
 function capNhatTong(){
 
-    const obj =
-
-        document.getElementById(
-
-            "todayCount"
-
-        );
+    const obj = id("todayCount");
 
     if(!obj){
 
