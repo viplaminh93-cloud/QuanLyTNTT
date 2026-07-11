@@ -40,17 +40,18 @@ function taoRequest(maso){
 // NHẬN QR TỪ CAMERA
 //======================================
 
-window.onQRCode = async function(maso){
+App.onQRCode = async function(maso){
 
     const request = taoRequest(maso);
-    
+
     const data = await guiRequest(request);
-    
+
     if(data){
-    
+
         xuLyResponse(data);
-    
+
     }
+
 };
 
 
