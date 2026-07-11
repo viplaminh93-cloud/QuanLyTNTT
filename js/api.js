@@ -108,6 +108,9 @@ async function guiRequest(request){
 
 
 
+
+
+
 //======================================
 // XỬ LÝ RESPONSE
 //======================================
@@ -116,16 +119,25 @@ function xuLyResponse(data){
 
     console.log(data);
 
-    hienThi(data);
+    window.dispatchEvent(
+
+        new CustomEvent(
+
+            "attendance-response",
+
+            {
+
+                detail:data
+
+            }
+
+        )
+
+    );
 
 }
 
 
-
-
-//======================================
-// XỬ LÝ RESPONSE
-//======================================
 
 
 
