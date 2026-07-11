@@ -579,7 +579,29 @@ window.addEventListener(
 
 
 
+//======================
+// SPLASH
+//======================
 
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+        setTimeout(()=>{
+
+            document
+
+                .getElementById("splash")
+
+                .classList.add("hide");
+
+        },1500);
+
+    }
+
+);
 
 
 
