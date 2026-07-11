@@ -15,7 +15,7 @@ async function startCamera(){
 
         try{
 
-            await window.scanner.stop();
+            await App.scanner.stop();
 
             App.scanner.clear();
 
@@ -244,7 +244,7 @@ document.addEventListener(
 // QR SUCCESS
 //======================================
 
-function qrSuccess(text){
+async function qrSuccess(text){
 
     if(App.dangXuLy){
 
@@ -254,7 +254,7 @@ function qrSuccess(text){
 
     App.dangXuLy = true;
 
-    pauseCamera();
+    await pauseCamera();
 
     if(navigator.vibrate){
 
