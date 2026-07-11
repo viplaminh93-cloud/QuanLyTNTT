@@ -43,11 +43,10 @@ function taoRequest(maso){
 window.onQRCode = async function(maso){
 
     const request = taoRequest(maso);
-
+    
     const data = await guiRequest(request);
-
-    console.log(data);
-
+    
+    xuLyResponse(data);
 };
 
 
@@ -109,7 +108,17 @@ async function guiRequest(request){
 
 
 
+//======================================
+// XỬ LÝ RESPONSE
+//======================================
 
+function xuLyResponse(data){
+
+    console.log(data);
+
+    hienThi(data);
+
+}
 
 
 
