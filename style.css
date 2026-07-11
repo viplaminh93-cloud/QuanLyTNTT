@@ -1,57 +1,39 @@
 *{
-
     margin:0;
     padding:0;
-
     box-sizing:border-box;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
 }
-
-
 
 body{
 
-    background:#f2f4f7;
+    background:#eef4fb;
 
 }
-
-
 
 .container{
 
     width:100%;
-
     max-width:500px;
-
     margin:auto;
-
-    padding:20px;
+    padding:25px 18px;
 
 }
 
-
-
 .card{
 
-    background:white;
+    background:#ffffff;
 
     border-radius:20px;
 
-    padding:25px;
+    padding:30px 25px;
 
     margin-top:20px;
 
     box-shadow:
-    0 5px 20px rgba(0,0,0,.15);
+        0 10px 30px rgba(0,0,0,.08);
 
 }
-
-
 
 .hidden{
 
@@ -59,57 +41,67 @@ body{
 
 }
 
+/*========================
+HOME
+========================*/
 
+.home{
+
+    text-align:center;
+
+}
 
 h1{
 
-    text-align:center;
-
     color:#1565c0;
 
-    font-size:28px;
+    font-size:32px;
 
-    line-height:1.4;
+    margin-bottom:10px;
 
-    margin-bottom:30px;
+    font-weight:700;
 
 }
-
-
 
 h2{
 
-    text-align:center;
+    color:#1565c0;
 
-    margin-bottom:25px;
+    font-size:24px;
+
+    margin-bottom:20px;
 
 }
 
+.home p{
 
+    color:#666;
+
+    margin-bottom:30px;
+
+    font-size:18px;
+
+}
 
 button{
 
     width:100%;
 
-    padding:18px;
-
-    margin-top:15px;
-
     border:none;
 
-    border-radius:15px;
+    border-radius:14px;
 
-    background:#1565c0;
-
-    color:white;
+    padding:18px;
 
     font-size:22px;
 
     font-weight:bold;
 
+    cursor:pointer;
+
+    transition:.2s;
+
 }
-
-
 
 button:active{
 
@@ -117,44 +109,79 @@ button:active{
 
 }
 
+.btn{
 
+    background:#1976d2;
+
+    color:white;
+
+    margin-top:18px;
+
+}
+
+.btn:hover{
+
+    background:#1565c0;
+
+}
 
 .back{
 
-    background:#f57c00;
+    background:#78909c;
+
+    color:white;
 
     margin-top:25px;
 
 }
 
+/*========================
+TODAY
+========================*/
 
+.todayCount{
+
+    margin:15px 0 20px;
+
+    text-align:center;
+
+    color:#1565c0;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+}
+
+/*========================
+QR
+========================*/
 
 #reader{
 
     width:100%;
 
-    margin-top:20px;
+    overflow:hidden;
+
+    border-radius:18px;
 
 }
 
-
-
-/* =====================
-   POPUP
-===================== */
-
+/*========================
+POPUP
+========================*/
 
 #overlay{
 
     position:fixed;
 
+    left:0;
     top:0;
 
-    left:0;
-
     width:100%;
-
     height:100%;
+
+    background:rgba(0,0,0,.75);
 
     display:flex;
 
@@ -162,90 +189,71 @@ button:active{
 
     align-items:center;
 
-    background:
-    rgba(0,0,0,.8);
-
-    z-index:9999;
+    z-index:99999;
 
 }
 
-
-
 #overlayCard{
 
-    width:90%;
+    width:92%;
 
     max-width:420px;
 
-    padding:35px;
+    border-radius:22px;
 
-    border-radius:25px;
-
-    background:#2e7d32;
+    padding:35px 25px;
 
     color:white;
 
     text-align:center;
 
+    background:#1976d2;
+
+    transition:.25s;
+
 }
-
-
 
 #overlay.warning #overlayCard{
 
-    background:#f57c00;
+    background:#fb8c00 !important;
 
 }
-
-
 
 #overlay.error #overlayCard{
 
-    background:#d32f2f;
+    background:#d32f2f !important;
 
 }
 
+#overlayTitle{
 
+    font-size:30px;
 
-#overlayIcon{
-
-    font-size:80px;
+    font-weight:bold;
 
     margin-bottom:20px;
 
 }
 
-
-
-#overlayTitle{
-
-    font-size:32px;
-
-    font-weight:bold;
-
-}
-
-
-
 #overlayPhoto{
 
-    width:180px;
+    width:170px;
 
-    height:180px;
+    height:170px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    border:5px solid white;
+    border:5px solid rgba(255,255,255,.9);
 
-    margin:25px auto;
+    margin:15px auto 25px;
 
     display:block;
 
+    background:white;
+
 }
-
-
 
 #overlayName{
 
@@ -255,27 +263,29 @@ button:active{
 
 }
 
-
-
-#overlayCode{
-
-    font-size:24px;
+#overlayClass{
 
     margin-top:10px;
 
-}
-
-
-
-#overlayClass{
-
     font-size:22px;
 
-    margin-top:5px;
+}
+
+#overlayCode{
+
+    margin-top:10px;
+
+    font-size:21px;
 
 }
 
+#overlayTime{
 
+    margin-top:10px;
+
+    font-size:20px;
+
+}
 
 #overlayHint{
 
@@ -287,18 +297,35 @@ button:active{
 
 }
 
+/*========================
+MOBILE
+========================*/
 
+@media(max-width:500px){
 
-.todayCount{
+    .card{
 
-    margin:12px 0 18px;
+        padding:25px 18px;
 
-    font-size:18px;
+    }
 
-    font-weight:bold;
+    h1{
 
-    text-align:center;
+        font-size:28px;
 
-    color:#1565c0;
+    }
+
+    button{
+
+        font-size:20px;
+
+    }
+
+    #overlayPhoto{
+
+        width:150px;
+        height:150px;
+
+    }
 
 }
