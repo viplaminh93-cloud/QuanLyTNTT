@@ -91,17 +91,13 @@ async function guiRequest(request){
     }
 
     catch(err){
-
+    
         console.error(err);
-
-        return{
-
-            success:false,
-
-            message:"Không gửi được dữ liệu."
-
-        };
-
+    
+        xuLyError("Không gửi được dữ liệu.");
+    
+        return null;
+    
     }
 
 }
@@ -155,6 +151,21 @@ function capNhatDem(data){
 //======================================
 // XỬ LÝ LỖI
 //======================================
+
+function xuLyError(message){
+
+    hienThi({
+
+        success:false,
+
+        message:message
+
+    });
+
+}
+
+
+
 
 
 
