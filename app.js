@@ -166,6 +166,31 @@ function guiDiemDanh(maso){
 
     maso = maso.trim().toUpperCase();
 
+    const request = {
+
+        maso: maso,
+
+        loai: loaiDiemDanh,
+
+        requestId:
+            Date.now() +
+            "_" +
+            Math.random(),
+
+        time: Date.now()
+
+    };
+
+    //----------------------------------
+    // Lưu Queue trước
+    //----------------------------------
+
+    themQueue(request);
+
+    //----------------------------------
+    // Gửi Server
+    //----------------------------------
+
     fetch(API_URL,{
 
         method:"POST",
@@ -176,24 +201,23 @@ function guiDiemDanh(maso){
             "Content-Type":"text/plain;charset=utf-8"
         },
 
-        body:JSON.stringify({
-
-            maso:maso,
-
-            loai:loaiDiemDanh,
-
-            requestId:
-                Date.now()
-                + "_"
-                + Math.random()
-
-        })
+        body:JSON.stringify(request)
 
     })
 
     .then(res=>res.json())
 
     .then(data=>{
+
+        //----------------------------------
+        // Thành công hoặc trùng
+        //----------------------------------
+
+        if(data.success || data.duplicate){
+
+            xoaQueue(request.requestId);
+
+        }
 
         console.log(data);
 
@@ -205,11 +229,17 @@ function guiDiemDanh(maso){
 
         console.error(err);
 
+        //----------------------------------
+        // KHÔNG xóa queue
+        //----------------------------------
+
         hienThi({
 
             success:false,
 
-            message:"Không kết nối được máy chủ"
+            offline:true,
+
+            message:"Đã lưu tạm. Sẽ tự đồng bộ khi có mạng."
 
         });
 
@@ -402,6 +432,8 @@ function hienThi(data){
 //======================
 
 window.onload = function(){
+
+    dongBoQueue();
 
     document
         .getElementById("overlay")
@@ -664,6 +696,7 @@ function themQueue(item){
 
 
 
+
 function xoaQueue(requestId){
 
     const queue = layQueue()
@@ -675,6 +708,64 @@ function xoaQueue(requestId){
         );
 
     luuQueue(queue);
+
+}
+
+
+
+//======================
+// ĐỒNG BỘ QUEUE
+//======================
+
+async function dongBoQueue(){
+
+    const queue = layQueue();
+
+    if(queue.length == 0){
+
+        return;
+
+    }
+
+    for(const item of queue){
+
+        try{
+
+            const res = await fetch(API_URL,{
+
+                method:"POST",
+
+                redirect:"follow",
+
+                headers:{
+                    "Content-Type":"text/plain;charset=utf-8"
+                },
+
+                body:JSON.stringify(item)
+
+            });
+
+            const data = await res.json();
+
+            if(data.success || data.duplicate){
+
+                xoaQueue(item.requestId);
+
+            }else{
+
+                break;
+
+            }
+
+        }catch(err){
+
+            console.log("Offline Queue:",err);
+
+            break;
+
+        }
+
+    }
 
 }
 
