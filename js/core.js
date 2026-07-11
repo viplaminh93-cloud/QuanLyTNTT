@@ -6,16 +6,18 @@
 
 const App = {
 
-    scanner: null,
+    scanner:null,
 
-    loaiDiemDanh: "",
+    loaiDiemDanh:"",
 
-    dangXuLy: false,
+    dangXuLy:false,
 
-    tongHomNay: 0,
+    tongHomNay:0,
 
-    deferredPrompt: null
+    onQRCode:null
 
 };
+
+
 
 console.log("core.js loaded");
