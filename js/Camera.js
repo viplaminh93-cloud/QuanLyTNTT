@@ -76,26 +76,94 @@ async function startCamera(){
 }
 
 
+//======================================
+// Pause Camera
+//======================================
+
+async function pauseCamera(){
+
+    if(!scanner){
+
+        return;
+
+    }
+
+    try{
+
+        await scanner.pause(true);
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+    }
+
+}
+
+
+
+
+//======================================
+// Resume Camera
+//======================================
+
+async function resumeCamera(){
+
+    if(!scanner){
+
+        return;
+
+    }
+
+    try{
+
+        await scanner.resume();
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+    }
+
+}
 
 
 
 
 
-stopCamera()
+//======================================
+// Stop Camera
+//======================================
 
-pauseCamera()
+async function stopCamera(){
 
-resumeCamera()
+    if(!scanner){
 
+        return;
 
+    }
 
+    try{
 
+        await scanner.stop();
 
+        scanner.clear();
 
+    }
 
+    catch(err){
 
+        console.error(err);
 
+    }
 
+    scanner = null;
+
+}
 
 
 
@@ -110,38 +178,16 @@ resumeCamera()
 
 async function backHome(){
 
-    try{
-
-        if(scanner){
-
-            await dongBoQueue();
-
-            await scanner.stop();
-
-            scanner.clear();
-
-            scanner = null;
-
-        }
-
-    }catch(err){
-
-        console.log(err);
-
-    }
+    await stopCamera();
 
     dangXuLy = false;
 
     document
-
         .querySelector(".home")
-
         .style.display = "block";
 
     document
-
         .getElementById("scannerBox")
-
         .classList.add("hidden");
 
 }
@@ -198,7 +244,7 @@ document.addEventListener(
 // QR SUCCESS
 //======================================
 
-function qrSuccess(decodedText){
+function qrSuccess(text){
 
     if(dangXuLy){
 
@@ -208,11 +254,7 @@ function qrSuccess(decodedText){
 
     dangXuLy = true;
 
-    if(scanner){
-
-        scanner.pause(true);
-
-    }
+    pauseCamera();
 
     if(navigator.vibrate){
 
@@ -220,7 +262,11 @@ function qrSuccess(decodedText){
 
     }
 
-    guiDiemDanh(decodedText);
+    if(typeof window.onQRCode === "function"){
+
+        window.onQRCode(text);
+
+    }
 
 }
 
