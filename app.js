@@ -8,6 +8,12 @@ const API_URL =
 
 const STORAGE_VERSION = "phuhoa_version";
 
+const OFFLINE_QUEUE_KEY = "attendance_queue";
+
+
+
+
+
 
 //======================
 // Chọn loại điểm danh
@@ -604,5 +610,72 @@ window.addEventListener(
 );
 
 
+
+
+//======================
+// OFFLINE QUEUE
+//======================
+
+function layQueue(){
+
+    try{
+
+        return JSON.parse(
+
+            localStorage.getItem(
+                OFFLINE_QUEUE_KEY
+            ) || "[]"
+
+        );
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+
+function luuQueue(queue){
+
+    localStorage.setItem(
+
+        OFFLINE_QUEUE_KEY,
+
+        JSON.stringify(queue)
+
+    );
+
+}
+
+
+
+function themQueue(item){
+
+    const queue = layQueue();
+
+    queue.push(item);
+
+    luuQueue(queue);
+
+}
+
+
+
+function xoaQueue(requestId){
+
+    const queue = layQueue()
+
+        .filter(item =>
+
+            item.requestId != requestId
+
+        );
+
+    luuQueue(queue);
+
+}
 
 console.log("APP JS OK");
