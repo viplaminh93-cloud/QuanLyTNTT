@@ -31,11 +31,16 @@ function taoRequest(maso){
 
 
 
+
+
+
+
+
 //======================================
 // NHẬN QR TỪ CAMERA
 //======================================
 
-window.onQRCode = function(maso){
+window.onQRCode = async function(maso){
 
     const request = taoRequest(maso);
 
@@ -43,9 +48,67 @@ window.onQRCode = function(maso){
 
 };
 
+
+
+
+
+
+
+
 //======================================
 // GỬI REQUEST
 //======================================
+
+async function guiRequest(request){
+
+    try{
+
+        const res = await fetch(
+
+            API_URL,
+
+            {
+
+                method:"POST",
+
+                redirect:"follow",
+
+                headers:{
+
+                    "Content-Type":"text/plain;charset=utf-8"
+
+                },
+
+                body: JSON.stringify(request)
+
+            }
+
+        );
+
+        return await res.json();
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        return{
+
+            success:false,
+
+            message:"Không gửi được dữ liệu."
+
+        };
+
+    }
+
+}
+
+
+
+
+
 
 
 
