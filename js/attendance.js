@@ -105,7 +105,7 @@ function capNhatTong(){
 
         +
 
-        tongHomNay
+        App.tongHomNay
 
         +
 
