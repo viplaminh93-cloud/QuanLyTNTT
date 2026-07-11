@@ -4,7 +4,9 @@ let dangXuLy = false;
 let tongHomNay = 0;
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzMsIwR-Yc75ThToX0IR-ZTx30RAU-ksUESOOIlBJfQzWnX8R9cFHXfieoNNR2VBZds/exec";
+"https://script.google.com/macros/s/AKfycbxQjhV6gNjwyYPhZO3T_ielB7uCfvfqB6H3OtM-vxO8Im5oX_ge8J84M01bf3alO0kZXA/exec";
+
+const STORAGE_VERSION = "phuhoa_version";
 
 
 //======================
