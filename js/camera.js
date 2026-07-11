@@ -180,7 +180,7 @@ async function backHome(){
 
     await stopCamera();
 
-    dangXuLy = false;
+    App.dangXuLy = false;
 
     document
         .querySelector(".home")
@@ -246,13 +246,13 @@ document.addEventListener(
 
 function qrSuccess(text){
 
-    if(dangXuLy){
+    if(App.dangXuLy){
 
         return;
 
     }
 
-    dangXuLy = true;
+    App.dangXuLy = true;
 
     pauseCamera();
 
