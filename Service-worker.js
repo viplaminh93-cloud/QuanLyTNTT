@@ -1,4 +1,4 @@
-const CACHE_NAME = "phuhoa-qr-v1.0.0";
+const CACHE_NAME = "phuhoa-qr-" + APP_VERSION;
 
 const APP_FILES = [
 
