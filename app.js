@@ -220,15 +220,7 @@ function hienThi(data){
     const overlay =
         document.getElementById("overlay");
 
-    overlay.classList.remove(
-        "hidden",
-        "success",
-        "warning",
-        "error"
-    );
-
-    const icon =
-        document.getElementById("overlayIcon");
+    overlay.className = "hidden";
 
     const title =
         document.getElementById("overlayTitle");
@@ -239,60 +231,115 @@ function hienThi(data){
     const name =
         document.getElementById("overlayName");
 
-    const code =
-        document.getElementById("overlayCode");
+    const khoi =
+        document.getElementById("overlayKhoi");
 
     const lop =
         document.getElementById("overlayClass");
 
+    const code =
+        document.getElementById("overlayCode");
+
     const time =
         document.getElementById("overlayTime");
 
+    //------------------------------------
+    // Xóa màu cũ
+    //------------------------------------
 
+    overlay.classList.remove(
+
+        "khaitam",
+        "xungtoi",
+        "themsuc",
+        "songdao",
+        "vaodoi",
+
+        "success",
+        "warning",
+        "error"
+
+    );
+
+    //------------------------------------
+    // Chọn màu popup theo khối
+    //------------------------------------
+
+    if(data.student){
+
+        switch((data.student.khoi || "").toUpperCase()){
+
+            case "KHAI TÂM":
+
+                overlay.classList.add("khaitam");
+                break;
+
+            case "XƯNG TỘI":
+
+                overlay.classList.add("xungtoi");
+                break;
+
+            case "THÊM SỨC":
+
+                overlay.classList.add("themsuc");
+                break;
+
+            case "SỐNG ĐẠO":
+
+                overlay.classList.add("songdao");
+                break;
+
+            case "VÀO ĐỜI":
+
+                overlay.classList.add("vaodoi");
+                break;
+
+            default:
+
+                overlay.classList.add("success");
+
+        }
+
+    }
+
+    //------------------------------------
+    // Tiêu đề
+    //------------------------------------
 
     if(data.success){
 
-        tongHomNay++;
-
-        capNhatTong();
-
-        overlay.classList.add("success");
-
-        icon.innerHTML = "✅";
-
         title.innerHTML = "ĐIỂM DANH THÀNH CÔNG";
 
-    }
-
-    else if(data.duplicate){
+    }else if(data.duplicate){
 
         overlay.classList.add("warning");
 
-        icon.innerHTML = "⚠️";
-
         title.innerHTML = "ĐÃ ĐIỂM DANH";
 
-    }
-
-    else{
+    }else{
 
         overlay.classList.add("error");
-
-        icon.innerHTML = "❌";
 
         title.innerHTML = "KHÔNG TÌM THẤY";
 
     }
 
-
+    //------------------------------------
+    // Thông tin học sinh
+    //------------------------------------
 
     if(data.student){
 
         name.innerHTML = data.student.hoten;
 
+        khoi.innerHTML =
+            data.student.khoi
+            ? "Khối: " + data.student.khoi
+            : "";
+
         lop.innerHTML =
-            data.student.malop
-            ? "Lớp: " + data.student.malop
+            data.student.lop
+            ? "Lớp: " + data.student.lop
             : "";
 
         code.innerHTML =
@@ -301,7 +348,7 @@ function hienThi(data){
         if(data.duplicate && data.gio){
 
             time.innerHTML =
-                "🕒 Đã điểm danh lúc: "
+                "Đã điểm danh lúc: "
                 + data.gio;
 
         }else{
@@ -326,10 +373,11 @@ function hienThi(data){
 
         name.innerHTML = "";
 
+        khoi.innerHTML = "";
+
         lop.innerHTML = "";
 
-        code.innerHTML =
-            data.message || "";
+        code.innerHTML = data.message || "";
 
         time.innerHTML = "";
 
@@ -337,7 +385,7 @@ function hienThi(data){
 
     }
 
-
+    //------------------------------------
 
     setTimeout(()=>{
 
