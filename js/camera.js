@@ -196,12 +196,10 @@ async function backHome(){
 
     App.dangXuLy = false;
 
-    document
-        .querySelector(".home")
+    qs(".home")
         .style.display = "block";
 
-    document
-        .getElementById("scannerBox")
+    id("scannerBox")
         .classList.add("hidden");
 
 }
