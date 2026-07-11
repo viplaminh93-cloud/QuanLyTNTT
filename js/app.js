@@ -18,7 +18,6 @@ const API_URL =
 // APP
 //======================================
 
-const APP_VERSION = "1.0.0";
 
 const STORAGE_VERSION = "phuhoa_version";
 
