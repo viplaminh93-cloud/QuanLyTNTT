@@ -1,1 +1,9 @@
-console.log("popup");
+//======================================
+// HIỂN THỊ POPUP
+//======================================
+
+function hienThi(data){
+
+    console.log("Popup:", data);
+
+}
