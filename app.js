@@ -769,4 +769,19 @@ async function dongBoQueue(){
 
 }
 
+
+
+
+window.addEventListener(
+
+    "online",
+
+    ()=>{
+
+        dongBoQueue();
+
+    }
+
+);
+
 console.log("APP JS OK");
