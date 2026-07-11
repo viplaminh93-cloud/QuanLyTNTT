@@ -169,6 +169,8 @@ function qrSuccess(text){
 function guiDiemDanh(maso){
 
     maso = maso.trim().toUpperCase();
+    
+    dongBoQueue();
 
     const request = {
 
@@ -472,6 +474,8 @@ async function backHome(){
     try{
 
         if(scanner){
+
+            await dongBoQueue();
 
             await scanner.stop();
 
