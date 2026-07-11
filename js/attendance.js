@@ -13,53 +13,25 @@ function startApp(loai){
 
     loaiDiemDanh = loai;
 
-    const home =
-        document.querySelector(".home");
+    document.querySelector(".home").style.display = "none";
 
-    const scannerBox =
-        document.getElementById("scannerBox");
+    document
+        .getElementById("scannerBox")
+        .classList.remove("hidden");
 
-    const title =
-        document.getElementById("typeTitle");
-
-    if(home){
-
-        home.style.display = "none";
-
-    }
-
-    if(scannerBox){
-
-        scannerBox.classList.remove("hidden");
-
-    }
-
-    if(title){
-
-        title.innerHTML =
-            "Điểm danh: " + loai;
-
-    }
-
-    //----------------------------------
-    // Đồng bộ queue cũ
-    //----------------------------------
-
-    dongBoQueue();
-
-    //----------------------------------
-    // Lấy tổng hôm nay
-    //----------------------------------
+    document
+        .getElementById("typeTitle")
+        .innerText = "Điểm danh: " + loai;
 
     capNhatTongTuServer(loai);
 
-    //----------------------------------
-    // Mở camera
-    //----------------------------------
+    dongBoQueue();
 
     startCamera();
 
 }
+
+
 
 
 
