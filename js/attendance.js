@@ -64,9 +64,17 @@ function capNhatTongTuServer(loai){
     })
 
     .catch(err=>{
-
-        console.log(err);
-
+    
+        console.error(err);
+    
+        hienThi({
+    
+            success:false,
+    
+            message:"Không gửi được dữ liệu."
+    
+        });
+    
     });
 
 }
