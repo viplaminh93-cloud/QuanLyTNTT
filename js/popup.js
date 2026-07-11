@@ -1,0 +1,7 @@
+hienThi()
+
+showSuccess()
+
+showDuplicate()
+
+showError()
