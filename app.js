@@ -4,7 +4,7 @@ let dangXuLy = false;
 let tongHomNay = 0;
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbwKw7ClT18whwE-V4V-Uw6CrKkpaQsx7xZGDrq5psSWdZgNQtTqiHSGuowjfpTXTCBXkw/exec";
+"https://script.google.com/macros/s/AKfycbzMsIwR-Yc75ThToX0IR-ZTx30RAU-ksUESOOIlBJfQzWnX8R9cFHXfieoNNR2VBZds/exec";
 
 
 //======================
