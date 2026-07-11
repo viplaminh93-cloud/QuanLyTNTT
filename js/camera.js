@@ -141,11 +141,7 @@ async function resumeCamera(){
 
 async function stopCamera(){
 
-    if(!App.scanner){
-
-        return;
-
-    }
+    if(!App.scanner) return;
 
     try{
 
