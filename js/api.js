@@ -32,6 +32,18 @@ function taoRequest(maso){
 
 
 //======================================
+// NHẬN QR TỪ CAMERA
+//======================================
+
+window.onQRCode = function(maso){
+
+    const request = taoRequest(maso);
+
+    console.log(request);
+
+};
+
+//======================================
 // GỬI REQUEST
 //======================================
 
