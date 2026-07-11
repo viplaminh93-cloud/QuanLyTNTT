@@ -4,7 +4,7 @@ let dangXuLy = false;
 let tongHomNay = 0;
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbxMSAuM8p1NP5IRgX04qSIpMxV-eyij6rwU3rcA-AlyhnTT73C3pMukYqnF5kKNWbqfeQ/exec";
+"https://script.google.com/macros/s/AKfycbwKw7ClT18whwE-V4V-Uw6CrKkpaQsx7xZGDrq5psSWdZgNQtTqiHSGuowjfpTXTCBXkw/exec";
 
 
 //======================
@@ -15,7 +15,7 @@ function startApp(loai){
 
     loaiDiemDanh = loai;
 
-    document.querySelector(".home").style.display="none";
+    document.querySelector(".home").style.display = "none";
 
     document.getElementById("scannerBox")
         .classList.remove("hidden");
@@ -23,20 +23,25 @@ function startApp(loai){
     document.getElementById("typeTitle")
         .innerText = "Điểm danh: " + loai;
 
-    loadTodayCount(); 
-
     capNhatTongTuServer(loai);
-    
+
     startCamera();
 
 }
 
 
 
+//======================
+// Lấy tổng điểm danh
+//======================
 
 function capNhatTongTuServer(loai){
 
-    fetch(API_URL + "?count=1&loai=" + encodeURIComponent(loai))
+    fetch(
+        API_URL +
+        "?count=1&loai=" +
+        encodeURIComponent(loai)
+    )
 
     .then(res => res.json())
 
@@ -62,42 +67,23 @@ function capNhatTongTuServer(loai){
 
 
 
-
-
-function loadTodayCount(){
-
-    fetch(
-        API_URL +
-        "?count=1&loai=" +
-        encodeURIComponent(loaiDiemDanh)
-    )
-
-    .then(res => res.json())
-
-    .then(data => {
-
-        document.getElementById("todayCount").innerHTML =
-            "Đã điểm danh hôm nay: <b>" +
-            data.count +
-            "</b> em";
-
-    })
-
-    .catch(err=>{
-
-        console.log(err);
-
-    });
-
-}
-
-
-
 //======================
 // Camera
 //======================
 
 async function startCamera(){
+
+    if(scanner){
+
+        try{
+
+            await scanner.stop();
+
+            scanner.clear();
+
+        }catch(e){}
+
+    }
 
     scanner = new Html5Qrcode("reader");
 
@@ -108,16 +94,18 @@ async function startCamera(){
             { facingMode:"environment" },
 
             {
+
                 fps:10,
-                
+
                 qrbox:{
                     width:220,
                     height:220
                 },
-                
+
                 rememberLastUsedCamera:true,
-                
+
                 disableFlip:true
+
             },
 
             qrSuccess
@@ -126,7 +114,7 @@ async function startCamera(){
 
     }catch(err){
 
-        alert("Không mở được camera\n\n"+err);
+        alert("Không mở được camera\n\n" + err);
 
     }
 
@@ -171,47 +159,52 @@ function guiDiemDanh(maso){
     maso = maso.trim().toUpperCase();
 
     fetch(API_URL,{
+
         method:"POST",
+
         redirect:"follow",
+
         headers:{
             "Content-Type":"text/plain;charset=utf-8"
         },
+
         body:JSON.stringify({
-        
+
             maso:maso,
-        
+
             loai:loaiDiemDanh,
-        
+
             requestId:
-                Date.now() +
-                "_" +
-                Math.random()
-        
+                Date.now()
+                + "_"
+                + Math.random()
+
         })
+
     })
-    
+
     .then(res=>res.json())
-    
+
     .then(data=>{
-    
+
         console.log(data);
-    
+
         hienThi(data);
-    
+
     })
-    
+
     .catch(err=>{
-    
+
         console.error(err);
-    
+
         hienThi({
-    
+
             success:false,
-    
+
             message:"Không kết nối được máy chủ"
-    
+
         });
-    
+
     });
 
 }
@@ -223,42 +216,61 @@ function guiDiemDanh(maso){
 //======================
 
 function hienThi(data){
-    
-    
-    const overlay=document.getElementById("overlay");
 
-    overlay.classList.remove("hidden","success","warning","error");
+    const overlay =
+        document.getElementById("overlay");
 
-    const icon=document.getElementById("overlayIcon");
-    const title=document.getElementById("overlayTitle");
-    const photo=document.getElementById("overlayPhoto");
-    const name=document.getElementById("overlayName");
-    const code=document.getElementById("overlayCode");
-    const lop=document.getElementById("overlayClass");
-    const time=document.getElementById("overlayTime");
+    overlay.classList.remove(
+        "hidden",
+        "success",
+        "warning",
+        "error"
+    );
+
+    const icon =
+        document.getElementById("overlayIcon");
+
+    const title =
+        document.getElementById("overlayTitle");
+
+    const photo =
+        document.getElementById("overlayPhoto");
+
+    const name =
+        document.getElementById("overlayName");
+
+    const code =
+        document.getElementById("overlayCode");
+
+    const lop =
+        document.getElementById("overlayClass");
+
+    const time =
+        document.getElementById("overlayTime");
+
 
 
     if(data.success){
-    
+
         tongHomNay++;
-    
+
         capNhatTong();
-    
+
         overlay.classList.add("success");
-    
-        icon.innerHTML="✅";
-    
-        title.innerHTML="ĐIỂM DANH THÀNH CÔNG";
-    
+
+        icon.innerHTML = "✅";
+
+        title.innerHTML = "ĐIỂM DANH THÀNH CÔNG";
+
     }
 
     else if(data.duplicate){
 
         overlay.classList.add("warning");
 
-        icon.innerHTML="⚠️";
+        icon.innerHTML = "⚠️";
 
-        title.innerHTML="ĐÃ ĐIỂM DANH";
+        title.innerHTML = "ĐÃ ĐIỂM DANH";
 
     }
 
@@ -266,9 +278,9 @@ function hienThi(data){
 
         overlay.classList.add("error");
 
-        icon.innerHTML="❌";
+        icon.innerHTML = "❌";
 
-        title.innerHTML="KHÔNG TÌM THẤY";
+        title.innerHTML = "KHÔNG TÌM THẤY";
 
     }
 
@@ -276,53 +288,61 @@ function hienThi(data){
 
     if(data.student){
 
-        name.innerHTML=data.student.hoten;
-        lop.innerHTML = data.student.lop
-            ? "Lớp: " + data.student.lop
+        name.innerHTML = data.student.hoten;
+
+        lop.innerHTML =
+            data.student.malop
+            ? "Lớp: " + data.student.malop
             : "";
-        code.innerHTML="Mã số: "+data.student.maso;
-        
-        
+
+        code.innerHTML =
+            "Mã số: " + data.student.maso;
+
         if(data.duplicate && data.gio){
-        
+
             time.innerHTML =
-            "🕒 Đã điểm danh lúc: " + data.gio;
-        
+                "🕒 Đã điểm danh lúc: "
+                + data.gio;
+
         }else{
-        
+
             time.innerHTML = "";
-        
+
         }
 
-        
         if(data.student.hinh){
 
-            photo.src=data.student.hinh;
+            photo.src = data.student.hinh;
 
-            photo.style.display="block";
+            photo.style.display = "block";
 
         }else{
 
-            photo.style.display="none";
+            photo.style.display = "none";
 
         }
 
     }else{
 
-            name.innerHTML="";
-            lop.innerHTML="";
-            code.innerHTML=data.message || "";
-            time.innerHTML="";
-            photo.style.display="none";
+        name.innerHTML = "";
+
+        lop.innerHTML = "";
+
+        code.innerHTML =
+            data.message || "";
+
+        time.innerHTML = "";
+
+        photo.style.display = "none";
 
     }
 
-    setTimeout(() => {
-    
-        document
-            .getElementById("overlay")
-            .classList.remove("hidden");
-    
+
+
+    setTimeout(()=>{
+
+        overlay.classList.remove("hidden");
+
     },10);
 
 }
@@ -333,7 +353,7 @@ function hienThi(data){
 // Chạm popup để quét tiếp
 //======================
 
-window.onload=function(){
+window.onload = function(){
 
     document
         .getElementById("overlay")
@@ -355,7 +375,7 @@ window.onload=function(){
 
         });
 
-}
+};
 
 
 
@@ -373,26 +393,35 @@ async function backHome(){
 
             scanner.clear();
 
+            scanner = null;
+
         }
 
     }catch(e){}
 
     dangXuLy = false;
 
-    document.querySelector(".home").style.display="block";
+    document.querySelector(".home")
+        .style.display = "block";
 
-    document.getElementById("scannerBox").classList.add("hidden");
+    document.getElementById("scannerBox")
+        .classList.add("hidden");
 
 }
+
+
+
+//======================
+// Cập nhật bộ đếm
+//======================
 
 function capNhatTong(){
 
     document.getElementById("todayCount").innerHTML =
-    "Đã điểm danh hôm nay: <b>"
-    + tongHomNay +
-    "</b> em";
+        "Đã điểm danh hôm nay: <b>"
+        + tongHomNay
+        + "</b> em";
 
 }
-
 
 console.log("APP JS OK");
