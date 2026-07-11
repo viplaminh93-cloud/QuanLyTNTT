@@ -44,47 +44,47 @@ let deferredPrompt = null;
 // APP START
 //======================================
 
-window.addEventListener(
+//window.addEventListener(
 
-    "load",
+//    "load",
 
-    ()=>{
+//    ()=>{
 
-        console.log(
+//        console.log(
 
-            "================================"
+//            "================================"
 
-        );
+//        );
 
-        console.log(
+//        console.log(
 
-            "GIÁO XỨ PHÚ HÒA"
+//            "GIÁO XỨ PHÚ HÒA"
 
-        );
+//        );
 
-        console.log(
+//        console.log(
 
-            "QR Attendance"
+ //           "QR Attendance"
 
-        );
+//        );
 
-        console.log(
+//        console.log(
 
-            "Version:",
+//            "Version:",
 
-            APP_VERSION
+//            APP_VERSION
 
-        );
+//        );
 
-        console.log(
+//        console.log(
 
-            "================================"
+ //           "================================"
 
-        );
+ //       );
 
-    }
+//    }
 
-);
+//);
 
 
 
