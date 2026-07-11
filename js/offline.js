@@ -1,5 +1,9 @@
-themQueue()
+function themQueue(){
+  
+}
 
-xoaQueue()
+function xoaQueue(){
+}
 
-dongBoQueue()
+function dongBoQueue(){
+}
