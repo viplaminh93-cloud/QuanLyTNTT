@@ -12,19 +12,27 @@
 async function startCamera(){
 
     if(App.scanner){
-
+    
         try{
-
+    
             await App.scanner.stop();
-
-            App.scanner.clear();
-
+    
         }catch(err){
-
+    
             console.log(err);
-
+    
         }
-
+    
+        try{
+    
+            App.scanner.clear();
+    
+        }catch(err){
+    
+            console.log(err);
+    
+        }
+    
     }
 
     App.scanner = new Html5Qrcode("reader");
