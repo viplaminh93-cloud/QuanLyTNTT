@@ -59,7 +59,7 @@ async function startCamera(){
                 
                 }
                 
-                navigator.vibrate(CONFIG.CAMERA.VIBRATE);
+                navigator.vibrate(CONFIG.CAMERA.VIBRATE)
 
                 },
 
