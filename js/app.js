@@ -6,12 +6,7 @@
 "use strict";
 
 
-//======================================
-// API
-//======================================
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbyjP-G642qpQRfwjNEO4V6yV4uW8_K1BDgwebSYH_YiS46LtTP6BNpkkY8ChK6ihW-QxA/exec";
 
 
 //======================================
