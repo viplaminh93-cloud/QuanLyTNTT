@@ -46,4 +46,25 @@ const LOAI = Object.freeze({
 
 });
 
+
+//======================================
+// MESSAGE
+//======================================
+
+const MESSAGE = Object.freeze({
+
+    CAMERA_ERROR:
+
+        "Không mở được camera.",
+
+    NETWORK_ERROR:
+
+        "Không gửi được dữ liệu.",
+
+    UNKNOWN_ERROR:
+
+        "Có lỗi xảy ra."
+
+});
+
 console.log("constants.js loaded");
