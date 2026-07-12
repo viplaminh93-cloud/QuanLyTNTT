@@ -68,7 +68,7 @@ const CONFIG = {
     
         HINT:"Chạm màn hình để tiếp tục"
     
-    }
+    },
 
 
     //==============================
