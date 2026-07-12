@@ -11,9 +11,11 @@
 
 function hienThi(data){
 
+    // Luôn reset popup trước
     resetPopup();
 
-    console.log(data);
+    // Kiểm tra dữ liệu nhận được
+    console.log("Popup Data:", data);
 
 }
 
@@ -32,8 +34,10 @@ function resetPopup(){
 
     }
 
+    // Ẩn popup
     overlay.classList.add("hidden");
 
+    // Xóa toàn bộ class màu
     overlay.classList.remove(
 
         "success",
