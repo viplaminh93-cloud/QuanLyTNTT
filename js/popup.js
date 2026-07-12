@@ -117,4 +117,17 @@ function dongPopup(){
 
 }
 
+
+//======================================
+// CHẠM ĐỂ ĐÓNG
+//======================================
+
+id("overlay").addEventListener(
+
+    "click",
+
+    dongPopup
+
+);
+
 console.log("popup.js loaded");
