@@ -22,7 +22,15 @@ const EVENT={
 
     QR_SUCCESS:"qr-success",
 
-    POPUP_CLOSE:"popup-close"
+    QR_ERROR:"qr-error",
+
+    POPUP_SHOW:"popup-show",
+
+    POPUP_CLOSE:"popup-close",
+
+    API_SUCCESS:"api-success",
+
+    API_ERROR:"api-error"
 
 };
 
