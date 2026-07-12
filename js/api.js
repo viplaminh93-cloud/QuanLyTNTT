@@ -126,6 +126,14 @@ async function guiRequest(request){
 
 function xuLyModel(data){
 
+    if(data.offline){
+
+        hienThi(data);
+
+        return;
+
+    }
+
     const hocSinh = taoHocSinh(data);
 
     xuLyResponse(hocSinh);
