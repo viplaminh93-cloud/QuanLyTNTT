@@ -21,7 +21,7 @@ function hienThi(data){
 
 
 //======================================
-// RESET POPUP
+// RESET
 //======================================
 
 function resetPopup(){
@@ -34,34 +34,32 @@ function resetPopup(){
 
     }
 
-    // Ẩn popup
     overlay.classList.add("hidden");
 
-    // Xóa toàn bộ class màu
     Object.values(CONFIG.KHOI)
-    
-        .forEach(khoi=>{
-    
-            overlay.classList.remove(khoi.css);
-    
-        });
 
-    );
+        .forEach(khoi=>{
+
+            overlay.classList.remove(
+
+                khoi.css
+
+            );
+
+        });
 
 }
 
 
-
-
 //======================================
-// HIỂN THỊ TIÊU ĐỀ
+// TITLE
 //======================================
 
 function renderTitle(data){
 
-    const title = id("popupTitle");
+    const obj = id("overlayTitle");
 
-    if(!title){
+    if(!obj){
 
         return;
 
@@ -69,7 +67,7 @@ function renderTitle(data){
 
     if(data.success){
 
-        title.innerText = "✅ ĐIỂM DANH THÀNH CÔNG";
+        obj.innerText="✅ ĐIỂM DANH THÀNH CÔNG";
 
         return;
 
@@ -77,37 +75,27 @@ function renderTitle(data){
 
     if(data.duplicate){
 
-        title.innerText = "⚠️ ĐÃ ĐIỂM DANH";
+        obj.innerText="⚠️ ĐÃ ĐIỂM DANH";
 
         return;
 
     }
 
-    title.innerText = "❌ KHÔNG TÌM THẤY";
+    obj.innerText="❌ KHÔNG TÌM THẤY";
 
 }
 
 
-
-
-
 //======================================
-// HIỆN POPUP
+// SHOW
 //======================================
 
 function showPopup(){
 
-    const overlay = id("overlay");
+    id("overlay")
 
-    if(!overlay){
-
-        return;
-
-    }
-
-    overlay.classList.remove("hidden");
+        .classList.remove("hidden");
 
 }
-
 
 console.log("popup.js loaded");
