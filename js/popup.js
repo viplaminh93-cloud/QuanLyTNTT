@@ -37,13 +37,15 @@ function resetPopup(){
     overlay.classList.add("hidden");
 
     Object.values(CONFIG.KHOI)
-
+    
         .forEach(khoi=>{
-
+    
             overlay.classList.remove(
-
+    
                 khoi.css
-
+    
+            );
+    
         });
 
 }
