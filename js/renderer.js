@@ -72,7 +72,9 @@ function renderHide(elementId){
 
 
 
-
+//======================================
+// STUDENT
+//======================================
 
 function renderStudentName(name){
 
@@ -137,6 +139,27 @@ function renderStudentPhoto(photo){
         photo
 
     );
+
+}
+
+
+
+
+//======================================
+// RENDER STUDENT
+//======================================
+
+function renderStudent(data){
+
+    renderStudentName(data);
+
+    renderStudentKhoi(data);
+
+    renderStudentClass(data);
+
+    renderStudentCode(data);
+
+    renderStudentPhoto(data);
 
 }
 
