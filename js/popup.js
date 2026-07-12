@@ -107,9 +107,11 @@ function showPopup(){
 // ĐÓNG POPUP
 //======================================
 
-function dongPopup(){
+async function dongPopup(){
 
     hide(id("overlay"));
+
+    await sleep(150);
 
     App.dangXuLy = false;
 
