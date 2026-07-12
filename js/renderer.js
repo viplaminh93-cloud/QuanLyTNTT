@@ -68,4 +68,76 @@ function renderHide(elementId){
 
 
 
+
+
+
+
+
+
+function renderStudentName(name){
+
+    renderText(
+
+        "overlayName",
+
+        name
+
+    );
+
+}
+
+
+function renderStudentClass(lop){
+
+    renderText(
+
+        "overlayClass",
+
+        lop
+
+    );
+
+}
+
+
+
+function renderStudentKhoi(khoi){
+
+    renderText(
+
+        "overlayKhoi",
+
+        khoi
+
+    );
+
+}
+
+
+function renderStudentCode(maso){
+
+    renderText(
+
+        "overlayCode",
+
+        maso
+
+    );
+
+}
+
+
+
+function renderStudentPhoto(photo){
+
+    renderImage(
+
+        "overlayPhoto",
+
+        photo
+
+    );
+
+}
+
 console.log("renderer.js loaded");
