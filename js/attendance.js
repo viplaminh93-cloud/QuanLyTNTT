@@ -37,7 +37,7 @@ function capNhatTongTuServer(loai){
 
     fetch(
 
-        API_URL +
+        CONFIG.API.URL +
 
         "?count=1&loai=" +
 
