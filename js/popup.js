@@ -61,6 +61,10 @@ function resetPopup(){
 
 function renderTitle(data){
 
+    const success = data.success;
+
+    const duplicate = data.duplicate;
+
     const obj = id("overlayTitle");
 
     if(!obj){
