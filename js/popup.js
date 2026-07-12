@@ -11,11 +11,11 @@
 
 function hienThi(data){
 
-    // Luôn reset popup trước
     resetPopup();
 
-    // Kiểm tra dữ liệu nhận được
-    console.log("Popup Data:", data);
+    renderTitle(data);
+
+    showPopup();
 
 }
 
@@ -47,6 +47,65 @@ function resetPopup(){
         });
 
     );
+
+}
+
+
+
+
+//======================================
+// HIỂN THỊ TIÊU ĐỀ
+//======================================
+
+function renderTitle(data){
+
+    const title = id("popupTitle");
+
+    if(!title){
+
+        return;
+
+    }
+
+    if(data.success){
+
+        title.innerText = "✅ ĐIỂM DANH THÀNH CÔNG";
+
+        return;
+
+    }
+
+    if(data.duplicate){
+
+        title.innerText = "⚠️ ĐÃ ĐIỂM DANH";
+
+        return;
+
+    }
+
+    title.innerText = "❌ KHÔNG TÌM THẤY";
+
+}
+
+
+
+
+
+//======================================
+// HIỆN POPUP
+//======================================
+
+function showPopup(){
+
+    const overlay = id("overlay");
+
+    if(!overlay){
+
+        return;
+
+    }
+
+    overlay.classList.remove("hidden");
 
 }
 
