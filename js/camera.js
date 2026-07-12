@@ -192,11 +192,9 @@ async function backHome(){
 
     App.dangXuLy = false;
 
-    qs(".home")
-        .style.display = "block";
-
-    id("scannerBox")
-        .classList.add("hidden");
+    show(qs(".home"));
+    
+    hide(id("scannerBox"));
 
 }
 
@@ -219,14 +217,12 @@ document.addEventListener(
         }
 
         if(
-
+        
             App.scanner &&
-
-            !id("scannerBox")
-
-                .classList.contains("hidden")
-
-        ){
+        
+            !isHidden(id("scannerBox"))
+        
+        )
 
             try{
 
@@ -264,11 +260,15 @@ async function qrSuccess(text){
 
     vibrate();
 
-    if(typeof App.onQRCode === "function"){
-    
-        App.onQRCode(text);
-    
+    if(typeof App.onQRCode !== "function"){
+
+        App.dangXuLy = false;
+
+        return;
+
     }
+
+    App.onQRCode(text);
 
 }
 
