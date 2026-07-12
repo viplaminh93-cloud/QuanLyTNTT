@@ -101,9 +101,17 @@ async function guiRequest(request){
     
         console.error(err);
     
-        xuLyError("Không gửi được dữ liệu.");
+        saveRequest(request);
     
-        return null;
+        return {
+    
+            success:false,
+    
+            offline:true,
+    
+            message:"Đã lưu, sẽ đồng bộ khi có mạng."
+    
+        };
     
     }
 
