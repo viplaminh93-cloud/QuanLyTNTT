@@ -43,7 +43,7 @@ async function startCamera(){
 
             {
 
-                facingMode:"environment"
+                facingMode:CONFIG.CAMERA.FACING_MODE
 
             },
 
