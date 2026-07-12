@@ -51,16 +51,18 @@ function hide(element){
 
 
 //======================================
-// RUNG
+// RUNG THIẾT BỊ
 //======================================
 
-function vibrate(ms = 50){
+function vibrate(ms = CONFIG.CAMERA.VIBRATE){
 
-    if(navigator.vibrate){
+    if(!navigator.vibrate){
 
-        navigator.vibrate(ms);
+        return;
 
     }
+
+    navigator.vibrate(ms);
 
 }
 
