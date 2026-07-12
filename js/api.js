@@ -46,11 +46,15 @@ App.onQRCode = async function(maso){
 
     const data = await guiRequest(request);
 
-    if(data){
+    if(!data){
 
-        xuLyResponse(data);
+        return;
 
     }
+
+    const hocSinh = taoHocSinh(data);
+
+    xuLyResponse(hocSinh);
 
 };
 
