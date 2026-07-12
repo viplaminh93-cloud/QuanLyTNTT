@@ -1,18 +1,18 @@
 "use strict";
 
-//========================
+//======================================
 // STATUS
-//========================
+//======================================
 
-const STATUS={
+const STATUS = Object.freeze({
 
-    SUCCESS:"success",
+    SUCCESS : "success",
 
-    DUPLICATE:"duplicate",
+    DUPLICATE : "duplicate",
 
-    ERROR:"error"
+    ERROR : "error"
 
-};
+});
 
 //========================
 // EVENT
@@ -38,12 +38,12 @@ const EVENT={
 // LOAI DIEM DANH
 //========================
 
-const LOAI={
+const LOAI = Object.freeze({
 
-    LE:"Dự lễ",
+    LE : "Dự lễ",
 
-    GIAOLY:"Giáo lý"
+    GIAOLY : "Giáo lý"
 
-};
+});
 
 console.log("constants.js loaded");
