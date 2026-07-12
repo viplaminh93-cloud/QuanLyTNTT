@@ -7,7 +7,7 @@
 
 
 //======================================
-// LẤY ELEMENT THEO ID
+// DOM
 //======================================
 
 function id(name){
@@ -17,9 +17,6 @@ function id(name){
 }
 
 
-//======================================
-// QUERY SELECTOR
-//======================================
 
 function qs(selector){
 
@@ -28,33 +25,98 @@ function qs(selector){
 }
 
 
+function qsa(selector){
+
+    return document.querySelectorAll(selector);
+
+}
+
+
+function create(tag){
+
+    return document.createElement(tag);
+
+}
+
+
+
+
+
+
 //======================================
-// HIỆN
+// UI
 //======================================
 
 function show(element){
+
+    if(!element){
+
+        return;
+
+    }
 
     element.classList.remove("hidden");
 
 }
 
 
-//======================================
-// ẨN
-//======================================
+
 
 function hide(element){
+
+    if(!element){
+
+        return;
+
+    }
 
     element.classList.add("hidden");
 
 }
 
 
+
+function toggle(element){
+
+    if(!element){
+
+        return;
+
+    }
+
+    element.classList.toggle("hidden");
+
+}
+
+
+
+function isHidden(element){
+
+    if(!element){
+
+        return true;
+
+    }
+
+    return element.classList.contains("hidden");
+
+}
+
+
+
+
+
+
+
 //======================================
-// RUNG THIẾT BỊ
+// DEVICE
 //======================================
 
-function vibrate(ms = CONFIG.CAMERA.VIBRATE){
+function vibrate(
+
+    ms = CONFIG.CAMERA.VIBRATE
+
+){
 
     if(!navigator.vibrate){
 
@@ -67,13 +129,131 @@ function vibrate(ms = CONFIG.CAMERA.VIBRATE){
 }
 
 
+
+function sleep(ms){
+
+    return new Promise(resolve=>{
+
+        setTimeout(
+
+            resolve,
+
+            ms
+
+        );
+
+    });
+
+}
+
+
+
+
+
 //======================================
-// LOG
+// TIME
 //======================================
 
-function log(){
+function now(){
 
-    console.log(...arguments);
+    return new Date();
+
+}
+
+
+
+function formatTime(date = new Date()){
+
+    return date.toLocaleTimeString(
+
+        "vi-VN"
+
+    );
+
+}
+
+
+function formatDate(date = new Date()){
+
+    return date.toLocaleDateString(
+
+        "vi-VN"
+
+    );
+
+}
+
+
+
+//======================================
+// STRING
+//======================================
+
+
+function upper(text){
+
+    return String(text)
+
+        .toUpperCase();
+
+}
+
+
+function lower(text){
+
+    return String(text)
+
+        .toLowerCase();
+
+}
+
+
+function trim(text){
+
+    return String(text)
+
+        .trim();
+
+}
+
+
+
+//======================================
+// DEBUG
+//======================================
+
+
+function log(...args){
+
+    console.log(
+
+        ...args
+
+    );
+
+}
+
+
+
+function warn(...args){
+
+    console.warn(
+
+        ...args
+
+    );
+
+}
+
+
+
+function error(...args){
+
+    console.error(
+
+        ...args
+
+    );
 
 }
 
