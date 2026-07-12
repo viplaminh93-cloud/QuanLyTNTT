@@ -49,13 +49,17 @@ async function startCamera(){
 
             {
 
-                fps:10,
-
+                fps:CONFIG.CAMERA.FPS,
+                
                 qrbox:{
-
-                    width:220,
-
-                    height:220
+                
+                    width:CONFIG.CAMERA.WIDTH,
+                
+                    height:CONFIG.CAMERA.HEIGHT
+                
+                }
+                
+                navigator.vibrate(CONFIG.CAMERA.VIBRATE);
 
                 },
 
