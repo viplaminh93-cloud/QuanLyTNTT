@@ -26,4 +26,40 @@ function taoHocSinh(data){
 
 }
 
+
+
+//======================================
+// GETTERS
+//======================================
+
+function layHoTen(hocSinh){
+
+    return hocSinh.hoten;
+
+}
+
+function layLop(hocSinh){
+
+    return hocSinh.lop;
+
+}
+
+function layKhoi(hocSinh){
+
+    return hocSinh.khoi;
+
+}
+
+function layMaSo(hocSinh){
+
+    return hocSinh.maso;
+
+}
+
+function layAnh(hocSinh){
+
+    return hocSinh.photo;
+
+}
+
 console.log("model.js loaded");
