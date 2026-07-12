@@ -76,26 +76,26 @@ function renderHide(elementId){
 // STUDENT
 //======================================
 
-function renderStudentName(name){
+function renderStudentName(hocSinh){
 
     renderText(
 
         "overlayName",
 
-        name
+        layHoTen(hocSinh)
 
     );
 
 }
 
 
-function renderStudentClass(lop){
+function renderStudentClass(hocSinh){
 
     renderText(
 
         "overlayClass",
 
-        lop
+        layLop(hocSinh)
 
     );
 
@@ -103,26 +103,26 @@ function renderStudentClass(lop){
 
 
 
-function renderStudentKhoi(khoi){
+function renderStudentKhoi(hocSinh){
 
     renderText(
 
         "overlayKhoi",
 
-        khoi
+        layKhoi(hocSinh)
 
     );
 
 }
 
 
-function renderStudentCode(maso){
+function renderStudentCode(hocSinh){
 
     renderText(
 
         "overlayCode",
 
-        maso
+        layMaSo(hocSinh)
 
     );
 
@@ -130,13 +130,13 @@ function renderStudentCode(maso){
 
 
 
-function renderStudentPhoto(photo){
+function renderStudentPhoto(hocSinh){
 
     renderImage(
 
         "overlayPhoto",
 
-        photo
+        layAnh(hocSinh)
 
     );
 
