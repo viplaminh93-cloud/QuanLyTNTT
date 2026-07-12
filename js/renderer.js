@@ -163,4 +163,18 @@ function renderStudent(data){
 
 }
 
+
+
+
+
+//======================================
+// RENDER POPUP
+//======================================
+
+function renderPopup(data){
+
+    renderStudent(data);
+
+}
+
 console.log("renderer.js loaded");
