@@ -111,4 +111,14 @@ function removeRequest(){
 
 }
 
-console.log("offline.js loaded");
+
+
+
+
+debug(
+
+    "OFFLINE",
+
+    "offline.js loaded"
+
+);
