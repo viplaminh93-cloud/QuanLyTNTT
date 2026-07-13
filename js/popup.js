@@ -11,15 +11,40 @@
 
 function hienThi(data){
 
+    debug(
+        MODULE.POPUP,
+        "Show popup"
+    );
+    
     resetPopup();
+
+        debug(
+            MODULE.POPUP,
+            "Popup reset"
+        );
 
     renderPopup(data);
 
+        debug(
+            MODULE.POPUP,
+            "Popup rendered"
+        );
+
     renderTitle(data);
+
+        debug(
+            MODULE.POPUP,
+            "Title rendered"
+        );
 
     renderHint();
 
     showPopup();
+
+        debug(
+            MODULE.POPUP,
+            "Popup visible"
+        );
 
 }
 
