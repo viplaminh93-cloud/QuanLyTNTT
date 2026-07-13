@@ -119,7 +119,7 @@ function renderDebug(){
 // DEBUG
 //======================================
 
-function debug(message){
+function debug(module,message){
 
     if(!CONFIG.APP.DEBUG){
 
@@ -129,14 +129,20 @@ function debug(message){
 
     const now=new Date();
 
-    const line=
-
+    const line =
+    
         "["
-
+    
         + now.toLocaleTimeString()
-
+    
         + "] "
-
+    
+        + "["
+    
+        + module
+    
+        + "] "
+    
         + message;
 
     Debug.logs.push(line);
