@@ -4,15 +4,85 @@
 
 "use strict";
 
-const Debug = {
+const Debug={
 
-    logs:[]
+    logs:[],
+
+    opened:false
 
 };
 
 
 //======================================
-// ADD LOG
+// INIT
+//======================================
+
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+        if(!CONFIG.APP.DEBUG){
+
+            return;
+
+        }
+
+        show(
+
+            id("debugButton")
+
+        );
+
+        id("debugButton")
+
+            .addEventListener(
+
+                "click",
+
+                toggleDebug
+
+            );
+
+    }
+
+);
+
+
+//======================================
+// TOGGLE
+//======================================
+
+function toggleDebug(){
+
+    Debug.opened=!Debug.opened;
+
+    if(Debug.opened){
+
+        show(
+
+            id("debugPanel")
+
+        );
+
+    }
+
+    else{
+
+        hide(
+
+            id("debugPanel")
+
+        );
+
+    }
+
+}
+
+
+//======================================
+// DEBUG
 //======================================
 
 function debug(message){
@@ -23,24 +93,20 @@ function debug(message){
 
     }
 
-    const now = new Date();
+    const now=new Date();
 
-    const time =
-
-        now.toLocaleTimeString();
-
-    const text =
+    const line=
 
         "["
 
-        + time
+        + now.toLocaleTimeString()
 
         + "] "
 
         + message;
 
-    Debug.logs.push(text);
+    Debug.logs.push(line);
 
-    console.log(text);
+    console.log(line);
 
 }
