@@ -18,7 +18,7 @@ const CONFIG = {
     
         VERSION:"1.0.0",
     
-        DEBUG:false
+        DEBUG:false  // bật tắt debug
     
     },
 
