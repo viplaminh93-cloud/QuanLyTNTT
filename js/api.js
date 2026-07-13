@@ -244,16 +244,10 @@ function xuLyModel(data){
 // XỬ LÝ RESPONSE
 //======================================
 
-function xuLyResponse(hocSinh){
-
-    console.log(hocSinh);
-
-    capNhatDem(hocSinh);
-
-    hienThi(hocSinh);
-
-}
-
+debug(
+    MODULE.API,
+    "Response received"
+);
 
 
 
