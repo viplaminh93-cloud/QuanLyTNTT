@@ -244,7 +244,17 @@ function xuLyModel(data){
 
     }
 
+    debug(
+        MODULE.MODEL,
+        "Create student model"
+    );
+
     const hocSinh = taoHocSinh(data);
+
+    debug(
+        MODULE.MODEL,
+        "Student model created"
+    );
 
     xuLyResponse(hocSinh);
 
@@ -266,7 +276,18 @@ function xuLyResponse(hocSinh){
 
     capNhatDem(hocSinh);
 
+    debug(
+        MODULE.API,
+        "Counter updated"
+    );
+
     hienThi(hocSinh);
+
+    debug(
+        MODULE.POPUP,
+        "Popup requested"
+
+    );
 
 }
 
