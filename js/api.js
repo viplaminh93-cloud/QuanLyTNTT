@@ -259,5 +259,10 @@ function xuLyError(message){
 
 
 
+debug(
 
-console.log("api.js loaded");
+    "API",
+
+    "api.js loaded"
+
+);
