@@ -176,12 +176,14 @@ async function guiRequest(request){
 
         );
 
-        return await res.json();
-
+        const data = await res.json();
+        
         debug(
             MODULE.API,
             "Fetch success"
         );
+        
+        return data;
 
     }
 
