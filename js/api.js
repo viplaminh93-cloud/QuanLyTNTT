@@ -63,6 +63,64 @@ App.onQRCode = async function(maso){
 
 
 
+//======================================
+// FETCH WITH TIMEOUT
+//======================================
+
+async function fetchWithTimeout(
+
+    url,
+
+    options,
+
+    timeout = 5000
+
+){
+
+    const controller = new AbortController();
+
+    const timer = setTimeout(
+
+        ()=>controller.abort(),
+
+        timeout
+
+    );
+
+    try{
+
+        const response = await fetch(
+
+            url,
+
+            {
+
+                ...options,
+
+                signal:controller.signal
+
+            }
+
+        );
+
+        clearTimeout(timer);
+
+        return response;
+
+    }
+
+    catch(err){
+
+        clearTimeout(timer);
+
+        throw err;
+
+    }
+
+}
+
+
+
 
 
 //======================================
