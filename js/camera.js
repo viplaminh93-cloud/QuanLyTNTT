@@ -275,4 +275,10 @@ async function qrSuccess(text){
 }
 
 
-debug("camera.js loaded");
+debug(
+
+    "CAMERA",
+
+    "camera.js loaded"
+
+);
