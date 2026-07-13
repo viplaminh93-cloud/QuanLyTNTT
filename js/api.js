@@ -42,9 +42,29 @@ function taoRequest(maso){
 
 App.onQRCode = async function(maso){
 
+    debug(
+        MODULE.API,
+        "Receive QR: " + maso
+    );
+
     const request = taoRequest(maso);
 
+    debug(
+        MODULE.API,
+        "Request created"
+    );
+
+    debug(
+        MODULE.API,
+        "Send request"
+    );
+    
     const data = await guiRequest(request);
+
+    debug(
+        MODULE.API,
+        "Request finished"
+    );
   
     if(!data){
     
@@ -127,6 +147,11 @@ async function fetchWithTimeout(
 
 async function guiRequest(request){
 
+    debug(
+        MODULE.API,
+        "Fetch start"
+    );
+
     try{
 
         const res = await fetchWithTimeout(
@@ -153,6 +178,11 @@ async function guiRequest(request){
 
         return await res.json();
 
+        debug(
+            MODULE.API,
+            "Fetch success"
+        );
+
     }
 
     catch(err){
@@ -160,6 +190,16 @@ async function guiRequest(request){
         console.error(err);
     
         saveRequest(request);
+
+        debug(
+            MODULE.OFFLINE,
+            "Request saved"
+        );
+
+        debug(
+            MODULE.API,
+            "Return offline response"
+        );
     
         return {
     
