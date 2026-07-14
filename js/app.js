@@ -71,3 +71,91 @@ window.onQRCode = function(text){
     guiDiemDanh(text);
 
 };
+
+
+
+//======================================
+// INSTALL PWA
+//======================================
+
+let installPrompt = null;
+
+
+
+//======================================
+// BEFORE INSTALL
+//======================================
+
+window.addEventListener(
+
+    "beforeinstallprompt",
+
+    event=>{
+
+        event.preventDefault();
+
+        installPrompt = event;
+
+        show(
+
+            id("installBtn")
+
+        );
+
+        debug(
+
+            MODULE.APP,
+
+            "Install available"
+
+        );
+
+    }
+
+);
+
+
+
+//======================================
+// INSTALL BUTTON
+//======================================
+
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+        id("installBtn")
+
+        .addEventListener(
+
+            "click",
+
+            async()=>{
+
+                if(!installPrompt){
+
+                    return;
+
+                }
+
+                installPrompt.prompt();
+
+                await installPrompt.userChoice;
+
+                installPrompt = null;
+
+                hide(
+
+                    id("installBtn")
+
+                );
+
+            }
+
+        );
+
+    }
+
+);
