@@ -203,6 +203,26 @@ async function postRequest(request){
 
 
 //======================================
+// RESEND REQUEST
+//======================================
+
+async function resendRequest(request){
+
+    debug(
+
+        MODULE.API,
+
+        "Resend: " + request.maso
+
+    );
+
+    return await postRequest(request);
+
+}
+
+
+
+//======================================
 // GỬI REQUEST
 //======================================
 
