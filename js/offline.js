@@ -190,6 +190,33 @@ async function syncQueue(){
 
 
 
+//======================================
+// ONLINE
+//======================================
+
+window.addEventListener(
+
+    "online",
+
+    ()=>{
+
+        debug(
+
+            MODULE.OFFLINE,
+
+            "Network online"
+
+        );
+
+        syncQueue();
+
+    }
+
+);
+
+
+
+
 
 debug(
 
