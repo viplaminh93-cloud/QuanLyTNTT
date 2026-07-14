@@ -156,6 +156,10 @@ async function syncQueue(){
         "Sync start"
     );
 
+    App.syncing = true;
+
+    renderQueueBadge();
+
     debug(
         MODULE.OFFLINE,
         "Queue length = " + queueLength()
@@ -219,6 +223,10 @@ async function syncQueue(){
     
     }
 
+    App.syncing = false;
+    
+    renderQueueBadge();
+    
     debug(
         MODULE.OFFLINE,
         "Sync finished"
