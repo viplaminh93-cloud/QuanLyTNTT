@@ -220,7 +220,29 @@ async function guiRequest(request){
             "typeof saveRequest = " + typeof saveRequest
         );
     
-        saveRequest(request);
+        try{
+        
+            saveRequest(request);
+        
+        }
+        catch(err){
+        
+            debug(
+                MODULE.API,
+                "saveRequest ERROR: " + err.message
+            );
+        
+            return{
+        
+                success:false,
+        
+                offline:true,
+        
+                message:err.message
+        
+            };
+        
+        }
     
         debug(
             MODULE.OFFLINE,
