@@ -151,14 +151,21 @@ async function syncQueue(){
     );
 
     while(hasQueue()){
-
+    
         debug(
             MODULE.OFFLINE,
             "Remaining = " + queueLength()
         );
-
+    
+        const request = peekQueue();
+    
+        debug(
+            MODULE.OFFLINE,
+            "Peek request: " + request.maso
+        );
+    
         break;
-
+    
     }
 
     debug(
