@@ -214,6 +214,11 @@ async function guiRequest(request){
             MODULE.API,
             "Offline mode"
         );
+
+        debug(
+            MODULE.API,
+            "typeof saveRequest = " + typeof saveRequest
+        );
     
         saveRequest(request);
     
