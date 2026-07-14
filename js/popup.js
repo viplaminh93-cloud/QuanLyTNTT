@@ -112,6 +112,14 @@ function renderTitle(data){
 
     }
 
+    if(data.offline){
+
+        obj.innerText = "📴 ĐÃ LƯU OFFLINE";
+    
+        return;
+    
+    }
+
     if(data.duplicate){
 
         obj.innerText="⚠️ ĐÃ ĐIỂM DANH";
