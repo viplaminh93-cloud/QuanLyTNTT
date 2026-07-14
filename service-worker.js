@@ -2,11 +2,13 @@
 // SERVICE WORKER
 //======================================
 
+const APP_VERSION = "1.0.0";
+
 const CACHE_NAME =
 
     "phuhoa-" +
 
-    "1.0.0";
+    APP_VERSION;
 
 const FILES = [
 
@@ -15,7 +17,7 @@ const FILES = [
     "./index.html",
 
     "./manifest.json",
-
+    "./admin.html",
     "./css/style.css",
 
     "./js/config.js",
@@ -30,8 +32,9 @@ const FILES = [
     "./js/attendance.js",
     "./js/api.js",
     "./js/popup.js",
+    "./js/dashboard.js",
     "./js/app.js"
-
+    
 ];
 
 
