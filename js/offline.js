@@ -76,10 +76,48 @@ function saveRequest(request){
 
 
 //======================================
+// PEEK SIZE
+//======================================
+
+function peekQueue(){
+
+    const queue = loadQueue();
+
+    return queue[0];
+
+}
+
+//======================================
+// POP QUEUE
+//======================================
+
+function popQueue(){
+
+    const queue = loadQueue();
+
+    const item = queue.shift();
+
+    saveQueue(queue);
+
+    return item;
+
+}
+
+//======================================
+// CLEAR QUEUE
+//======================================
+function clearQueue(){
+
+    saveQueue([]);
+
+}
+
+
+//======================================
 // QUEUE SIZE
 //======================================
 
-function queueSize(){
+function queueLength(){
 
     return loadQueue().length;
 
@@ -92,7 +130,7 @@ function queueSize(){
 
 function hasQueue(){
 
-    return queueSize() > 0;
+    return queueLength() > 0;
 
 }
 
@@ -114,51 +152,20 @@ function removeRequest(){
 
 
 
+//======================================
+// SYNC QUEUE
+//======================================
 
-function queueLength(){
+async function syncQueue(){
 
-    return loadQueue().length;
+
 
 }
-
-
-
-function clearQueue(){
-
-    saveQueue([]);
-
-}
-
-
-
-function popQueue(){
-
-    const queue = loadQueue();
-
-    const item = queue.shift();
-
-    saveQueue(queue);
-
-    return item;
-
-}
-
-
-
-function peekQueue(){
-
-    const queue = loadQueue();
-
-    return queue[0];
-
-}
-
-
 
 
 debug(
 
-    "OFFLINE",
+    MODULE.OFFLINE,
 
     "offline.js loaded"
 
