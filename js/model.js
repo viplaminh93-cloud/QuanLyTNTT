@@ -1,5 +1,13 @@
 //======================================
-// STUDENT MODEL
+// MODEL
+//======================================
+
+"use strict";
+
+
+
+//======================================
+// STUDENT
 //======================================
 
 function taoHocSinh(data){
@@ -16,9 +24,9 @@ function taoHocSinh(data){
 
         photo : data.photo ?? "",
 
-        success : !!data.success,
+        success : Boolean(data.success),
 
-        duplicate : !!data.duplicate,
+        duplicate : Boolean(data.duplicate),
 
         time : data.time ?? ""
 
@@ -32,17 +40,19 @@ function taoHocSinh(data){
 // GETTERS
 //======================================
 
+function layMaSo(hocSinh){
+
+    return hocSinh.maso;
+
+}
+
+
 function layHoTen(hocSinh){
 
     return hocSinh.hoten;
 
 }
 
-function layLop(hocSinh){
-
-    return hocSinh.lop;
-
-}
 
 function layKhoi(hocSinh){
 
@@ -50,16 +60,16 @@ function layKhoi(hocSinh){
 
 }
 
-function layMaSo(hocSinh){
 
-    return hocSinh.maso;
+function layLop(hocSinh){
+
+    return hocSinh.lop;
 
 }
+
 
 function layAnh(hocSinh){
 
     return hocSinh.photo;
 
 }
-
-console.log("model.js loaded");
