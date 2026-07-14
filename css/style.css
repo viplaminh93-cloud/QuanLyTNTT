@@ -685,3 +685,19 @@ SPLASH
     }
 
 }
+
+
+
+
+
+.queueIcon{
+
+    display:inline-block;
+
+}
+
+.queue-badge.syncing .queueIcon{
+
+    animation:queueSpin 1s linear infinite;
+
+}
