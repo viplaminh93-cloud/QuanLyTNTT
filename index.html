@@ -3,53 +3,53 @@
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1">
-
-<title>Điểm danh Thiếu nhi Giáo xứ Phú Hòa</title>
-
-<meta
-    name="theme-color"
-    content="#1565c0">
-
-<meta
-    name="description"
-    content="Hệ thống điểm danh Thiếu nhi Giáo xứ Phú Hòa">
-
-<meta
-    name="mobile-web-app-capable"
-    content="yes">
-
-<meta
-    name="apple-mobile-web-app-capable"
-    content="yes">
-
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="default">
-
-<meta
-    name="apple-mobile-web-app-title"
-    content="Điểm danh QR">
-
-<!--<link
-    rel="manifest"
-    href="manifest.json">
-
-<link
-    rel="icon"
-    href="icons/icon-192.png">
-
-<link
-    rel="apple-touch-icon"
-    href="icons/icon-192.png">-->
-
-<link
-    rel="stylesheet"
-    href="css/style.css">
+    <meta charset="UTF-8">
+    
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1">
+    
+    <title>Điểm danh Thiếu nhi Giáo xứ Phú Hòa</title>
+    
+    <meta
+        name="theme-color"
+        content="#1565c0">
+    
+    <meta
+        name="description"
+        content="Hệ thống điểm danh Thiếu nhi Giáo xứ Phú Hòa">
+    
+    <meta
+        name="mobile-web-app-capable"
+        content="yes">
+    
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
+    
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default">
+    
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Điểm danh QR">
+    
+    <!--<link
+        rel="manifest"
+        href="manifest.json">
+    
+    <link
+        rel="icon"
+        href="icons/icon-192.png">
+    
+    <link
+        rel="apple-touch-icon"
+        href="icons/icon-192.png">-->
+    
+    <link
+        rel="stylesheet"
+        href="css/style.css">
 
 </head>
 
@@ -61,250 +61,256 @@
 
 <body>
 
-<div class="container">
-
-    <!--=========================
-            TRANG CHỦ
-    ==========================-->
-
-    <div class="card home">
-
-        <div class="logo">
-
-            <img
-                class="logo"
-                src="https://drive.google.com/uc?export=view&id=1pI05_C7SCHHwkGwZGNH47r6WcfZdwwlD"
-                alt="Logo Giáo xứ Phú Hòa">
-
+        <div id="queueBadge" class="queue-badge hidden">
+        
+            📤 <span id="queueCount">0</span>
+        
         </div>
 
-        <h1>
-
-            GIÁO XỨ PHÚ HÒA
-
-        </h1>
-
-        <div class="subTitle">
-
-            HỆ THỐNG ĐIỂM DANH QR
-
+        <div class="container">
+        
+            <!--=========================
+                    TRANG CHỦ
+            ==========================-->
+        
+            <div class="card home">
+        
+                <div class="logo">
+        
+                    <img
+                        class="logo"
+                        src="https://drive.google.com/uc?export=view&id=1pI05_C7SCHHwkGwZGNH47r6WcfZdwwlD"
+                        alt="Logo Giáo xứ Phú Hòa">
+        
+                </div>
+        
+                <h1>
+        
+                    GIÁO XỨ PHÚ HÒA
+        
+                </h1>
+        
+                <div class="subTitle">
+        
+                    HỆ THỐNG ĐIỂM DANH QR
+        
+                </div>
+        
+                <button
+                class="btn btnBlue"
+                onclick="startApp(LOAI.LE)">
+        
+                    DỰ LỄ
+        
+                </button>
+        
+                <button
+                class="btn btnBlue"
+                onclick="startApp(LOAI.GIAOLY)">
+        
+                    GIÁO LÝ
+        
+                </button>
+        
+                
+                <button
+                    id="installBtn"
+                    class="btn install hidden">
+                
+                    CÀI ĐẶT ỨNG DỤNG
+                
+                </button>
+        
+        
+                
+            </div>
+        
+        
+        
+            <!--=========================
+                    MÀN HÌNH QUÉT
+            ==========================-->
+        
+            <div
+            id="scannerBox"
+            class="card hidden">
+        
+                <div
+                id="typeTitle"
+                class="scannerTitle">
+                </div>
+        
+                <div
+                id="todayCount"
+                class="todayCount">
+        
+                    Đã điểm danh hôm nay: 0 em
+        
+                </div>
+        
+                <div id="reader"></div>
+        
+                <button
+                class="back"
+                onclick="backHome()">
+        
+                    QUAY LẠI
+        
+                </button>
+        
+            </div>
+        
         </div>
-
-        <button
-        class="btn btnBlue"
-        onclick="startApp(LOAI.LE)">
-
-            DỰ LỄ
-
-        </button>
-
-        <button
-        class="btn btnBlue"
-        onclick="startApp(LOAI.GIAOLY)">
-
-            GIÁO LÝ
-
-        </button>
-
         
-        <button
-            id="installBtn"
-            class="btn install hidden">
         
-            CÀI ĐẶT ỨNG DỤNG
         
-        </button>
-
-
+        <!--=========================
+                POPUP KẾT QUẢ
+        ==========================-->
         
-    </div>
-
-
-
-    <!--=========================
-            MÀN HÌNH QUÉT
-    ==========================-->
-
-    <div
-    id="scannerBox"
-    class="card hidden">
-
         <div
-        id="typeTitle"
-        class="scannerTitle">
-        </div>
-
-        <div
-        id="todayCount"
-        class="todayCount">
-
-            Đã điểm danh hôm nay: 0 em
-
-        </div>
-
-        <div id="reader"></div>
-
-        <button
-        class="back"
-        onclick="backHome()">
-
-            QUAY LẠI
-
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!--=========================
-        POPUP KẾT QUẢ
-==========================-->
-
-<div
-id="overlay"
-class="hidden">
-
-    <div id="overlayCard">
-
-        <div id="overlayTitle">
-
-            ĐIỂM DANH THÀNH CÔNG
-
-        </div>
-
-        <img id="overlayPhoto">
-
-        <div id="overlayName"></div>
+        id="overlay"
+        class="hidden">
         
-        <div id="overlayKhoi"></div>
+            <div id="overlayCard">
         
-        <div id="overlayClass"></div>
+                <div id="overlayTitle">
         
-        <div id="overlayCode"></div>
+                    ĐIỂM DANH THÀNH CÔNG
         
-        <div id="overlayTime"></div>
-
-        <div id="overlayHint">
-
-            Chạm màn hình để tiếp tục
-
+                </div>
+        
+                <img id="overlayPhoto">
+        
+                <div id="overlayName"></div>
+                
+                <div id="overlayKhoi"></div>
+                
+                <div id="overlayClass"></div>
+                
+                <div id="overlayCode"></div>
+                
+                <div id="overlayTime"></div>
+        
+                <div id="overlayHint">
+        
+                    Chạm màn hình để tiếp tục
+        
+                </div>
+        
+            </div>
+        
         </div>
-
-    </div>
-
-</div>
-
-
-<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-    
-<script src="js/config.js"></script>
-<script src="js/constants.js"></script>
-<script src="js/model.js"></script>
-<script src="js/core.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/debug.js"></script>
-<script src="js/utils.js"></script>
-
-<!--<script src="js/version.js"></script>-->
-
-<script src="js/camera.js"></script>
-<script src="js/offline.js"></script>
-<script src="js/attendance.js"></script>
-<script src="js/api.js"></script>    
-<script src="js/popup.js"></script> 
-<script src="js/app.js"></script>
-
-
-    
-    
-
-<script>
-/*
-if("serviceWorker" in navigator){
-
-    window.addEventListener("load",()=>{
-
-        navigator.serviceWorker
-            .register("./service-worker.js")
-            .then(reg=>{
-
-                console.log(
-                    "Service Worker OK",
-                    reg
-                );
-
-            })
-            .catch(err=>{
-
-                console.log(err);
-
+        
+        
+        <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+            
+        <script src="js/config.js"></script>
+        <script src="js/constants.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/core.js"></script>
+        <script src="js/renderer.js"></script>
+        <script src="js/debug.js"></script>
+        <script src="js/utils.js"></script>
+        
+        <!--<script src="js/version.js"></script>-->
+        
+        <script src="js/camera.js"></script>
+        <script src="js/offline.js"></script>
+        <script src="js/attendance.js"></script>
+        <script src="js/api.js"></script>    
+        <script src="js/popup.js"></script> 
+        <script src="js/app.js"></script>
+        
+        
+            
+            
+        
+        <script>
+        /*
+        if("serviceWorker" in navigator){
+        
+            window.addEventListener("load",()=>{
+        
+                navigator.serviceWorker
+                    .register("./service-worker.js")
+                    .then(reg=>{
+        
+                        console.log(
+                            "Service Worker OK",
+                            reg
+                        );
+        
+                    })
+                    .catch(err=>{
+        
+                        console.log(err);
+        
+                    });
+        
             });
-
-    });
-
-}    */
-
-</script>    
-
-
-<!--=========================
-        Splash
-==========================-->
-<!--<div id="splash">
-
-    <div class="splash-content">
-
-        <img
-            src="https://drive.google.com/file/d/1pI05_C7SCHHwkGwZGNH47r6WcfZdwwlD/view?usp=drive_link"
-            class="splash-logo">
-
-        <div class="splash-title">
-
-            GIÁO XỨ PHÚ HÒA
-
+        
+        }    */
+        
+        </script>    
+        
+        
+        <!--=========================
+                Splash
+        ==========================-->
+        <!--<div id="splash">
+        
+            <div class="splash-content">
+        
+                <img
+                    src="https://drive.google.com/file/d/1pI05_C7SCHHwkGwZGNH47r6WcfZdwwlD/view?usp=drive_link"
+                    class="splash-logo">
+        
+                <div class="splash-title">
+        
+                    GIÁO XỨ PHÚ HÒA
+        
+                </div>
+        
+                <div class="splash-sub">
+        
+                    Hệ thống điểm danh Thiếu nhi
+        
+                </div>
+        
+            </div>
+        
+        </div>  -->
+            
+        
+            
+         <!--=========================
+                DEBUG
+        ==========================-->
+        
+        <!--=========================
+                DEVELOPER TOOLS
+        ==========================-->
+        
+        <div id="debugButton" class="hidden">
+        
+            🐞
+        
         </div>
-
-        <div class="splash-sub">
-
-            Hệ thống điểm danh Thiếu nhi
-
+        
+        <div id="debugPanel" class="hidden">
+        
+            <div id="debugHeader">
+        
+                Developer Console
+        
+            </div>
+        
+            <div id="debugContent">
+        
+            </div>
+        
         </div>
-
-    </div>
-
-</div>  -->
-    
-
-    
- <!--=========================
-        DEBUG
-==========================-->
-
-<!--=========================
-        DEVELOPER TOOLS
-==========================-->
-
-<div id="debugButton" class="hidden">
-
-    🐞
-
-</div>
-
-<div id="debugPanel" class="hidden">
-
-    <div id="debugHeader">
-
-        Developer Console
-
-    </div>
-
-    <div id="debugContent">
-
-    </div>
-
-</div>
 
 </body>
 
