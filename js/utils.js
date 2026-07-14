@@ -17,7 +17,6 @@ function id(name){
 }
 
 
-
 function qs(selector){
 
     return document.querySelector(selector);
@@ -40,9 +39,6 @@ function create(tag){
 
 
 
-
-
-
 //======================================
 // UI
 //======================================
@@ -60,8 +56,6 @@ function show(element){
 }
 
 
-
-
 function hide(element){
 
     if(!element){
@@ -73,7 +67,6 @@ function hide(element){
     element.classList.add("hidden");
 
 }
-
 
 
 function toggle(element){
@@ -89,7 +82,6 @@ function toggle(element){
 }
 
 
-
 function isHidden(element){
 
     if(!element){
@@ -101,10 +93,6 @@ function isHidden(element){
     return element.classList.contains("hidden");
 
 }
-
-
-
-
 
 
 
@@ -129,7 +117,6 @@ function vibrate(
 }
 
 
-
 function sleep(ms){
 
     return new Promise(resolve=>{
@@ -148,8 +135,6 @@ function sleep(ms){
 
 
 
-
-
 //======================================
 // TIME
 //======================================
@@ -159,7 +144,6 @@ function now(){
     return new Date();
 
 }
-
 
 
 function formatTime(date = new Date()){
@@ -188,7 +172,6 @@ function formatDate(date = new Date()){
 //======================================
 // STRING
 //======================================
-
 
 function upper(text){
 
@@ -219,9 +202,20 @@ function trim(text){
 
 
 //======================================
-// DEBUG
+// OBJECT
 //======================================
 
+function clone(object){
+
+    return structuredClone(object);
+
+}
+
+
+
+//======================================
+// DEBUG
+//======================================
 
 function log(...args){
 
@@ -232,7 +226,6 @@ function log(...args){
     );
 
 }
-
 
 
 function warn(...args){
@@ -246,7 +239,6 @@ function warn(...args){
 }
 
 
-
 function error(...args){
 
     console.error(
@@ -256,6 +248,3 @@ function error(...args){
     );
 
 }
-
-
-console.log("utils.js loaded");
