@@ -115,6 +115,47 @@ function removeRequest(){
 
 
 
+function queueLength(){
+
+    return loadQueue().length;
+
+}
+
+
+
+function clearQueue(){
+
+    saveQueue([]);
+
+}
+
+
+
+function popQueue(){
+
+    const queue = loadQueue();
+
+    const item = queue.shift();
+
+    saveQueue(queue);
+
+    return item;
+
+}
+
+
+
+function peekQueue(){
+
+    const queue = loadQueue();
+
+    return queue[0];
+
+}
+
+
+
+
 debug(
 
     "OFFLINE",
