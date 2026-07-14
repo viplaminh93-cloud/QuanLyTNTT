@@ -228,9 +228,24 @@ async function stopCamera(){
 
 async function backHome(){
 
+    debug(
+        MODULE.APP,
+        "BackHome 1"
+    );
+    
     hide(id("scannerBox"));
-
+    
+    debug(
+        MODULE.APP,
+        "BackHome 2"
+    );
+    
     show(qs(".home"));
+    
+    debug(
+        MODULE.APP,
+        "BackHome 3"
+    );
 
     App.dangXuLy = false;
 
