@@ -17,6 +17,7 @@ const FILES = [
     "./index.html",
 
     "./manifest.json",
+    "./js/version.js",
     "./admin.html",
     "./css/style.css",
 
@@ -103,55 +104,31 @@ self.addEventListener("fetch",event=>{
 
     }
 
+    if(event.request.mode==="navigate"){
+
+        event.respondWith(
+
+            fetch(event.request)
+
+            .catch(()=>{
+
+                return caches.match("./index.html");
+
+            })
+
+        );
+
+        return;
+
+    }
+
     event.respondWith(
 
         caches.match(event.request)
 
         .then(cache=>{
 
-            if(cache){
-
-                return cache;
-
-            }
-
-            return fetch(event.request)
-
-            .then(response=>{
-
-                if(
-
-                    !response ||
-
-                    response.status!==200 ||
-
-                    response.type!=="basic"
-
-                ){
-
-                    return response;
-
-                }
-
-                const clone=response.clone();
-
-                caches.open(CACHE_NAME)
-
-                .then(cache=>{
-
-                    cache.put(
-
-                        event.request,
-
-                        clone
-
-                    );
-
-                });
-
-                return response;
-
-            });
+            return cache || fetch(event.request);
 
         })
 
