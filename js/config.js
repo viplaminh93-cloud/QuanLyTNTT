@@ -4,124 +4,120 @@
 
 "use strict";
 
-const CONFIG = {
+const CONFIG = Object.freeze({
 
     //==============================
     // APP
     //==============================
 
-    APP:{
-    
-        NAME:"Điểm danh TNTT",
-    
-        PARISH:"Giáo xứ Phú Hòa",
-    
-        VERSION:"1.0.0",
-    
-        DEBUG:true  // bật tắt debug
-    
-    },
+    APP: Object.freeze({
+
+        NAME: "Điểm danh TNTT",
+
+        PARISH: "Giáo xứ Phú Hòa",
+
+        DEBUG: true
+
+    }),
 
 
     //==============================
     // API
     //==============================
 
-    API:{
+    API: Object.freeze({
 
         URL:
         "https://script.google.com/macros/s/AKfycbwK6o2oEPL3K0hxPlX7LtBwds_jgFELSUoeFHYWyRuQi5tEGXZIulWtvV145t9d-42Atw/exec"
 
-    },
+    }),
 
 
     //==============================
     // CAMERA
     //==============================
 
-    CAMERA:{
-    
-        FPS:10,
-    
-        WIDTH:220,
-    
-        HEIGHT:220,
-    
-        VIBRATE:50,
-    
-        FACING_MODE:"environment",
-    
-        REMEMBER_CAMERA:true,
-    
-        DISABLE_FLIP:true
-    
-    },
+    CAMERA: Object.freeze({
+
+        FPS: 10,
+
+        WIDTH: 220,
+
+        HEIGHT: 220,
+
+        VIBRATE: 50,
+
+        FACING_MODE: "environment",
+
+        REMEMBER_CAMERA: true,
+
+        DISABLE_FLIP: true
+
+    }),
 
 
     //==============================
     // POPUP
     //==============================
 
-    POPUP:{
-    
-        AUTO_CLOSE:false,
-    
-        DURATION:3000,
-    
-        HINT:"Chạm màn hình để tiếp tục"
-    
-    },
+    POPUP: Object.freeze({
+
+        AUTO_CLOSE: false,
+
+        DURATION: 3000,
+
+        HINT: "Chạm màn hình để tiếp tục"
+
+    }),
 
 
     //==============================
     // OFFLINE
     //==============================
 
-    OFFLINE:{
+    OFFLINE: Object.freeze({
 
-        STORAGE_KEY:"attendance_queue"
+        STORAGE_KEY: "attendance_queue"
 
-    },
+    }),
 
 
     //==============================
     // KHỐI
     //==============================
 
-    KHOI:{
+    KHOI: Object.freeze({
 
-        "KHAI TÂM":{
+        "KHAI TÂM": Object.freeze({
 
-            css:"khaitam"
+            css: "khaitam"
 
-        },
+        }),
 
-        "XƯNG TỘI":{
+        "XƯNG TỘI": Object.freeze({
 
-            css:"xungtoi"
+            css: "xungtoi"
 
-        },
+        }),
 
-        "THÊM SỨC":{
+        "THÊM SỨC": Object.freeze({
 
-            css:"themsuc"
+            css: "themsuc"
 
-        },
+        }),
 
-        "SỐNG ĐẠO":{
+        "SỐNG ĐẠO": Object.freeze({
 
-            css:"songdao"
+            css: "songdao"
 
-        },
+        }),
 
-        "VÀO ĐỜI":{
+        "VÀO ĐỜI": Object.freeze({
 
-            css:"vaodoi"
+            css: "vaodoi"
 
-        }
+        })
 
-    }
+    })
 
-};
-
-console.log("config.js loaded");
+});
