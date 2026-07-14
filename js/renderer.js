@@ -184,6 +184,10 @@ function renderPopup(data){
 // QUEUE BADGE
 //======================================
 
+//======================================
+// QUEUE BADGE
+//======================================
+
 function renderQueueBadge(){
 
     const count = queueLength();
@@ -196,23 +200,49 @@ function renderQueueBadge(){
 
     );
 
-    if(count > 0){
+    const badge = id("queueBadge");
 
-        renderShow(
+    if(!badge){
 
-            "queueBadge"
+        return;
 
-        );
+    }
+
+    if(count===0){
+
+        hide(badge);
+
+        return;
+
+    }
+
+    show(badge);
+
+    if(App.syncing){
+
+        badge.innerHTML=
+
+            "🔄 <span id='queueCount'>"
+
+            + count +
+
+            "</span>";
+
+        badge.classList.add("syncing");
 
     }
 
     else{
 
-        renderHide(
+        badge.innerHTML=
 
-            "queueBadge"
+            "📤 <span id='queueCount'>"
 
-        );
+            + count +
+
+            "</span>";
+
+        badge.classList.remove("syncing");
 
     }
 
