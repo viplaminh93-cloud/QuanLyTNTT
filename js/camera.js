@@ -174,7 +174,6 @@ async function resumeCamera(){
 
 
 
-
 //======================================
 // STOP CAMERA
 //======================================
@@ -182,20 +181,22 @@ async function resumeCamera(){
 async function stopCamera(){
 
     debug(
-
         MODULE.CAMERA,
-    
         "Stop camera"
-    
     );
 
-    if(!App.scanner) return;
+    if(!App.scanner){
+
+        return;
+
+    }
 
     try{
 
         await App.scanner.stop();
 
-    }catch(err){
+    }
+    catch(err){
 
         console.log(err);
 
@@ -205,19 +206,18 @@ async function stopCamera(){
 
         App.scanner.clear();
 
-    }catch(err){
+    }
+    catch(err){
 
         console.log(err);
 
     }
 
+    id("reader").innerHTML = "";
+
     App.scanner = null;
 
 }
-
-
-
-
 
 
 
@@ -228,13 +228,13 @@ async function stopCamera(){
 
 async function backHome(){
 
-    await stopCamera();
+    hide(id("scannerBox"));
+
+    show(qs(".home"));
 
     App.dangXuLy = false;
 
-    show(qs(".home"));
-    
-    hide(id("scannerBox"));
+    await stopCamera();
 
 }
 
