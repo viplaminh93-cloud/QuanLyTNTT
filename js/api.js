@@ -95,6 +95,15 @@ async function fetchWithTimeout(
 
 ){
 
+    if (!navigator.onLine) {
+    
+        debug(
+            MODULE.API,
+            "Browser reports OFFLINE"
+        );
+    
+    }
+    
     const controller = new AbortController();
 
     const timer = setTimeout(
@@ -201,7 +210,7 @@ async function guiRequest(request){
 
     debug(
         MODULE.API,
-        "Fetch start"
+        "navigator.onLine = " + navigator.onLine
     );
 
     try{
@@ -210,7 +219,10 @@ async function guiRequest(request){
 
         debug(
             MODULE.API,
-            "Fetch success"
+            "connection = " +
+            (navigator.connection
+                ? navigator.connection.effectiveType
+                : "unknown")
         );
 
         return data;
