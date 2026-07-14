@@ -150,6 +150,11 @@ async function syncQueue(){
         "Sync start"
     );
 
+    debug(
+        MODULE.OFFLINE,
+        "Queue length = " + queueLength()
+    );
+
     while(hasQueue()){
     
         debug(
