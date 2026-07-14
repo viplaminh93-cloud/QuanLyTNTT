@@ -1,0 +1,147 @@
+/*======================================
+  STUDENTS
+======================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    background:#f4f6fb;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    color:#333;
+
+}
+
+.container{
+
+    width:min(1000px,95%);
+
+    margin:30px auto;
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:#1565C0;
+
+    font-size:32px;
+
+    margin-bottom:8px;
+
+}
+
+h2{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+
+}
+
+.student-list{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            auto-fill,
+
+            minmax(320px,1fr)
+
+        );
+
+    gap:20px;
+
+}
+
+.student-card{
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    display:flex;
+
+    gap:16px;
+
+    align-items:center;
+
+    box-shadow:
+
+        0 4px 12px
+
+        rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.student-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+        0 8px 20px
+
+        rgba(0,0,0,.15);
+
+}
+
+.student-photo{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #1565C0;
+
+    background:#eee;
+
+}
+
+.student-info{
+
+    flex:1;
+
+}
+
+.student-name{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+.student-row{
+
+    margin:4px 0;
+
+    color:#555;
+
+}
