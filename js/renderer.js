@@ -221,13 +221,13 @@ function renderQueueBadge(){
     if(App.syncing){
 
         badge.innerHTML=
-
-            "🔄 <span id='queueCount'>"
-
+        
+            "<span class='queueIcon'>🔄</span> <span id='queueCount'>"
+        
             + count +
-
+        
             "</span>";
-
+        
         badge.classList.add("syncing");
 
     }
@@ -235,11 +235,11 @@ function renderQueueBadge(){
     else{
 
         badge.innerHTML=
-
-            "📤 <span id='queueCount'>"
-
+        
+            "<span class='queueIcon'>📤</span> <span id='queueCount'>"
+        
             + count +
-
+        
             "</span>";
 
         badge.classList.remove("syncing");
