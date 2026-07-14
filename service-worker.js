@@ -42,7 +42,7 @@ self.addEventListener("install",event=>{
 
         caches
             .open(CACHE_NAME)
-            .then(cache=>cache.addAll(APP_FILES))
+            .then(cache=>cache.addAll(FILES)
 
     );
 
@@ -59,28 +59,26 @@ self.addEventListener("install",event=>{
 self.addEventListener("activate",event=>{
 
     event.waitUntil(
-
+    
         caches.keys().then(keys=>{
-
+    
             return Promise.all(
-
+    
                 keys.map(key=>{
-
+    
                     if(key!==CACHE_NAME){
-
+    
                         return caches.delete(key);
-
+    
                     }
-
+    
                 })
-
+    
             );
-
-        })
-
+    
+        }).then(()=>self.clients.claim())
+    
     );
-
-    self.clients.claim();
 
 });
 
