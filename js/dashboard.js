@@ -100,7 +100,7 @@ function renderDashboard(data){
 
     id("tongDiemDanh").innerText =
 
-        data.tong;
+        data.total;
 
     id("tongLe").innerText =
 
@@ -184,11 +184,7 @@ id(
 
     ()=>{
 
-        alert(
-
-            "Sprint sau sẽ lấy dữ liệu từ Apps Script."
-
-        );
+        loadDashboard();
 
     }
 
