@@ -239,6 +239,8 @@ async function backHome(){
         MODULE.APP,
         "BackHome 2"
     );
+
+    qs(".home").style.display = "";
     
     show(qs(".home"));
     
