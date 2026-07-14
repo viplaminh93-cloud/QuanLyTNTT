@@ -78,6 +78,11 @@ function resetPopup(){
     
         });
 
+    debug(
+        MODULE.POPUP,
+        "Reset class = " + overlay.className
+    );
+
 }
 
 
@@ -126,12 +131,21 @@ function renderTitle(data){
 
 function showPopup(){
 
-    id("overlay")
+    const overlay = id("overlay");
 
-        .classList.remove("hidden");
+    debug(
+        MODULE.POPUP,
+        "Before remove: " + overlay.className
+    );
+
+    overlay.classList.remove("hidden");
+
+    debug(
+        MODULE.POPUP,
+        "After remove: " + overlay.className
+    );
 
 }
-
 
 
 
