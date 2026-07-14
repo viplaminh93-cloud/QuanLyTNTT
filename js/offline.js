@@ -135,20 +135,6 @@ function hasQueue(){
 }
 
 
-//======================================
-// REMOVE REQUEST
-//======================================
-
-function removeRequest(){
-
-    const queue = loadQueue();
-
-    queue.shift();
-
-    saveQueue(queue);
-
-}
-
 
 
 
