@@ -7,62 +7,6 @@
 
 
 //======================================
-// SAMPLE DATA
-//======================================
-
-const sampleData = {
-
-    tong:128,
-
-    le:72,
-
-    giaoly:56,
-
-    list:[
-
-        {
-
-            maso:"12015",
-
-            hoten:"Nguyễn Văn An",
-
-            loai:"Dự lễ",
-
-            gio:"07:12"
-
-        },
-
-        {
-
-            maso:"11008",
-
-            hoten:"Trần Gia Bảo",
-
-            loai:"Giáo lý",
-
-            gio:"08:03"
-
-        },
-
-        {
-
-            maso:"13002",
-
-            hoten:"Lê Minh Đức",
-
-            loai:"Dự lễ",
-
-            gio:"07:25"
-
-        }
-
-    ]
-
-};
-
-
-
-//======================================
 // LOAD
 //======================================
 
@@ -72,15 +16,79 @@ window.addEventListener(
 
     ()=>{
 
-        renderDashboard(
+        loadDashboard();
 
-            sampleData
+    }
+
+);
+
+
+
+
+//======================================
+// LOAD DASHBOARD
+//======================================
+
+async function loadDashboard(){
+
+    try{
+
+        const response = await fetch(
+
+            CONFIG.API.URL,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"text/plain;charset=utf-8"
+
+                },
+
+                body:JSON.stringify({
+
+                    action:"dashboard"
+
+                })
+
+            }
+
+        );
+
+        const data = await response.json();
+
+        if(!data.success){
+
+            alert(
+
+                "Không lấy được Dashboard."
+
+            );
+
+            return;
+
+        }
+
+        renderDashboard(data);
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        alert(
+
+            "Không kết nối được máy chủ."
 
         );
 
     }
 
-);
+}
+
 
 
 
