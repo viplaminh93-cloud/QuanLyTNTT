@@ -280,3 +280,60 @@ id("studentModal")
     }
 
 );
+
+
+
+
+id("txtSearch").addEventListener(
+
+    "input",
+
+    filterStudents
+
+);
+
+function filterStudents(){
+
+    const keyword =
+
+        id("txtSearch")
+
+        .value
+
+        .trim()
+
+        .toLowerCase();
+
+    if(keyword === ""){
+
+        renderStudents(allStudents);
+
+        return;
+
+    }
+
+    const result = allStudents.filter(student=>{
+
+        return (
+
+            String(student.maso)
+
+                .toLowerCase()
+
+                .includes(keyword)
+
+            ||
+
+            String(student.hoten)
+
+                .toLowerCase()
+
+                .includes(keyword)
+
+        );
+
+    });
+
+    renderStudents(result);
+
+}
