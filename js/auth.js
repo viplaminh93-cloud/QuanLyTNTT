@@ -6,12 +6,12 @@
  * ======================================
  */
 
-const Auth = (() => {
+const Auth = (()=>{
 
     const TOKEN_KEY = "attendance_token";
 
     //----------------------------------
-    // Save
+    // SAVE
     //----------------------------------
 
     function save(token){
@@ -27,10 +27,10 @@ const Auth = (() => {
     }
 
     //----------------------------------
-    // Load
+    // TOKEN
     //----------------------------------
 
-    function token(){
+    function getToken(){
 
         return localStorage.getItem(
 
@@ -41,7 +41,7 @@ const Auth = (() => {
     }
 
     //----------------------------------
-    // Remove
+    // LOGOUT
     //----------------------------------
 
     function logout(){
@@ -52,59 +52,49 @@ const Auth = (() => {
 
         );
 
+        location.href = "login.html";
+
     }
 
     //----------------------------------
-    // Login
+    // LOGIN
     //----------------------------------
 
-    async function login(email){
+    async function login(token){
 
-        const response = await fetch(
+        save(token);
 
-            CONFIG.API.URL,
+    }
 
-            {
+    //----------------------------------
+    // REQUIRE LOGIN
+    //----------------------------------
 
-                method:"POST",
+    function requireLogin(){
 
-                headers:{
+        if(
 
-                    "Content-Type":"text/plain;charset=utf-8"
+            getToken()===""
 
-                },
+        ){
 
-                body:JSON.stringify({
+            location.href="login.html";
 
-                    action:"login",
-
-                    email:email
-
-                })
-
-            }
-
-        );
-
-        const result = await response.json();
-
-        if(result.success){
-
-            save(result.token);
+            return false;
 
         }
 
-        return result;
+        return true;
 
     }
 
     //----------------------------------
-    // Request
+    // POST
     //----------------------------------
 
-    async function post(body){
+    async function post(body={}){
 
-        body.token = token();
+        body.token = getToken();
 
         const response = await fetch(
 
@@ -138,44 +128,12 @@ const Auth = (() => {
 
         logout,
 
-        token,
+        getToken,
 
-        post
+        post,
+
+        requireLogin
 
     };
 
 })();
-
-
-
-//----------------------------------
-// Require Login
-//----------------------------------
-
-function requireLogin(){
-
-    if(
-
-        token()===""
-
-    ){
-
-        location.href="login.html";
-
-    }
-
-}
-
-return{
-
-    login,
-
-    logout,
-
-    token,
-
-    post,
-
-    requireLogin
-
-};
