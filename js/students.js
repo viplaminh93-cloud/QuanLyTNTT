@@ -170,6 +170,8 @@ function renderStudents(list){
 
         container.appendChild(card);
 
+        console.log(card.querySelector("img").src);
+
         card.addEventListener(
         
             "click",
