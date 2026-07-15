@@ -1,14 +1,18 @@
 "use strict";
 
-id("btnLogin")
+//======================================
+// LOGIN
+//======================================
 
-.addEventListener(
+id("btnLogin").addEventListener(
 
     "click",
 
     loginSystem
 
 );
+
+//======================================
 
 async function loginSystem(){
 
@@ -22,7 +26,7 @@ async function loginSystem(){
 
         .toLowerCase();
 
-    if(email==""){
+    if(email===""){
 
         alert(
 
@@ -34,7 +38,17 @@ async function loginSystem(){
 
     }
 
-    const result = await Auth.login(email);
+    //----------------------------------
+    // LOGIN SERVER
+    //----------------------------------
+
+    const result = await Auth.post({
+
+        action:"login",
+
+        email:email
+
+    });
 
     if(!result.success){
 
@@ -47,6 +61,18 @@ async function loginSystem(){
         return;
 
     }
+
+    //----------------------------------
+    // SAVE TOKEN
+    //----------------------------------
+
+    await Auth.login(
+
+        result.token
+
+    );
+
+    //----------------------------------
 
     location.href="dashboard.html";
 
