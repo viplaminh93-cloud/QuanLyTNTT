@@ -124,7 +124,7 @@ const CONFIG = Object.freeze({
     // AUTH
     //======================================
     
-    CONFIG.AUTH = {
+    AUTH = {
     
         TOKEN: null,
     
@@ -132,6 +132,6 @@ const CONFIG = Object.freeze({
     
         ROLE: null
     
-    };    
+    }    
 
 });
