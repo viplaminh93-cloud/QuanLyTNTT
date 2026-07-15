@@ -77,8 +77,10 @@ async function loadStudents(){
         }
 
             allStudents = data.list;
-
+            
             console.log(allStudents[0]);
+            
+            console.log(allStudents[0].hinh);
             
             renderStudents(allStudents);
 
