@@ -248,3 +248,28 @@ function error(...args){
     );
 
 }
+
+
+//======================================
+// TOKEN
+//======================================
+
+function setToken(token){
+
+    CONFIG.AUTH.TOKEN = token;
+
+}
+
+function getToken(){
+
+    return CONFIG.AUTH.TOKEN || "";
+
+}
+
+function setUser(email,role){
+
+    CONFIG.AUTH.EMAIL = email;
+
+    CONFIG.AUTH.ROLE = role;
+
+}
