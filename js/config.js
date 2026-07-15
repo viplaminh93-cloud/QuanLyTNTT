@@ -28,7 +28,7 @@ const CONFIG = Object.freeze({
     API: Object.freeze({
 
         URL:
-        "https://script.google.com/macros/s/AKfycby_tuxVM7WyjouJE83iBshpJoRinxMcwsjRIm1t3YDxcAj6CosJ4yxxpQI2n6JkMj7nfw/exec"
+        "https://script.google.com/macros/s/AKfycbzePiG7n-b-DLCsNwDtzTnaWTUTV8dQ_jkWbVHoOx2KAixq0z6RdfLqWkgFakxDIBh3Lw/exec"
 
     }),
 
