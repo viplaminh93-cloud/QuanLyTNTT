@@ -4,7 +4,9 @@
 
 "use strict";
 
+let currentType = "Dự lễ";
 
+let dashboardData = null;
 
 //======================================
 // LOAD
@@ -83,7 +85,9 @@ async function loadDashboard(){
 
         }
 
-        renderDashboard(data);
+        dashboardData = data;
+        
+        renderDashboard();
 
     }
 
@@ -108,25 +112,15 @@ async function loadDashboard(){
 // RENDER
 //======================================
 
-function renderDashboard(data){
-
-    id("tongDiemDanh").innerText =
-
-        data.total;
+function renderDashboard(){
 
     id("tongLe").innerText =
-
-        data.le;
+        dashboardData.le;
 
     id("tongGiaoLy").innerText =
+        dashboardData.giaoly;
 
-        data.giaoly;
-
-    renderTable(
-
-        data.list
-
-    );
+    renderTable();
 
 }
 
@@ -136,47 +130,51 @@ function renderDashboard(data){
 // TABLE
 //======================================
 
-function renderTable(list){
+function renderTable(){
 
     const body =
-
         id("attendanceBody");
 
     body.innerHTML = "";
 
-    list.forEach(
+    const list =
+        dashboardData.list.filter(item=>{
 
-        (item,index)=>{
+            return item.loai === currentType;
 
-            const tr =
+        });
 
-                document.createElement("tr");
+    id("tongDanhSach").innerText =
+        list.length;
 
-            tr.innerHTML =
+    list.forEach((item,index)=>{
 
-                "<td>" + (index+1) + "</td>"
+        const tr =
+            document.createElement("tr");
 
-                +
+        tr.innerHTML =
 
-                "<td>" + item.maso + "</td>"
+            "<td>"+(index+1)+"</td>"
 
-                +
+            +
 
-                "<td>" + item.hoten + "</td>"
+            "<td>"+item.maso+"</td>"
 
-                +
+            +
 
-                "<td>" + item.loai + "</td>"
+            "<td>"+item.hoten+"</td>"
 
-                +
+            +
 
-                "<td>" + item.gio + "</td>";
+            "<td>"+(item.lop||"")+"</td>"
 
-            body.appendChild(tr);
+            +
 
-        }
+            "<td>"+item.gio+"</td>";
 
-    );
+        body.appendChild(tr);
+
+    });
 
 }
 
@@ -201,3 +199,24 @@ id(
     }
 
 );
+
+
+//======================================
+// BUTTON
+//======================================
+
+id("btnLe").onclick = ()=>{
+
+    currentType = "Dự lễ";
+
+    renderTable();
+
+}
+
+id("btnGiaoLy").onclick = ()=>{
+
+    currentType = "Giáo lý";
+
+    renderTable();
+
+}
