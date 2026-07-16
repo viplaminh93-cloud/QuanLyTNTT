@@ -1,21 +1,59 @@
+//======================================
+// CONSTANTS
+// Giáo xứ Phú Hòa
+//======================================
+
 "use strict";
 
+/**
+ * ======================================
+ * CONSTANTS MODULE
+ *
+ * Chứa toàn bộ hằng số của hệ thống.
+ *
+ * Bao gồm:
+ * - Module Name
+ * - Loại điểm danh
+ * - Message
+ *
+ * Không chứa Config.
+ * Không chứa Business.
+ * ======================================
+ */
 
 //======================================
-// STATUS
+// MODULE
 //======================================
 
-const STATUS = Object.freeze({
+const MODULE = Object.freeze({
 
-    SUCCESS : "success",
+    APP         : "APP",
 
-    DUPLICATE : "duplicate",
+    API         : "API",
 
-    ERROR : "error"
+    ATTENDANCE  : "ATTENDANCE",
+
+    CAMERA      : "CAMERA",
+
+    POPUP       : "POPUP",
+
+    OFFLINE     : "OFFLINE",
+
+    MODEL       : "MODEL",
+
+    RENDERER    : "RENDERER",
+
+    DEBUG       : "DEBUG",
+
+    AUTH        : "AUTH",
+
+    STUDENTS    : "STUDENTS",
+
+    DASHBOARD   : "DASHBOARD",
+
+    LOGIN       : "LOGIN"
 
 });
-
-
 
 //======================================
 // LOẠI ĐIỂM DANH
@@ -23,35 +61,15 @@ const STATUS = Object.freeze({
 
 const LOAI = Object.freeze({
 
-    LE : "Dự lễ",
+    LE :
 
-    GIAOLY : "Giáo lý"
+        "DỰ LỄ",
 
-});
+    GIAOLY :
 
-
-
-//======================================
-// EVENT
-//======================================
-
-const EVENT = Object.freeze({
-
-    QR_SUCCESS : "qr-success",
-
-    QR_ERROR : "qr-error",
-
-    POPUP_SHOW : "popup-show",
-
-    POPUP_CLOSE : "popup-close",
-
-    API_SUCCESS : "api-success",
-
-    API_ERROR : "api-error"
+        "GIÁO LÝ"
 
 });
-
-
 
 //======================================
 // MESSAGE
@@ -59,40 +77,48 @@ const EVENT = Object.freeze({
 
 const MESSAGE = Object.freeze({
 
-    CAMERA_ERROR :
-
-        "Không mở được camera.",
-
     NETWORK_ERROR :
 
-        "Không gửi được dữ liệu.",
+        "Không kết nối được máy chủ.",
 
-    UNKNOWN_ERROR :
+    OFFLINE_SAVED :
 
-        "Có lỗi xảy ra."
+        "Đã lưu, sẽ đồng bộ khi có mạng.",
+
+    LOGIN_EXPIRED :
+
+        "Phiên đăng nhập đã hết hạn.",
+
+    LOGIN_REQUIRED :
+
+        "Vui lòng đăng nhập.",
+
+    STUDENT_NOT_FOUND :
+
+        "Không tìm thấy thiếu nhi."
 
 });
 
-
-
 //======================================
-// DEBUG MODULE
+// STATUS
 //======================================
 
-const MODULE = Object.freeze({
+const STATUS = Object.freeze({
 
-    APP : "APP",
+    SUCCESS :
 
-    API : "API",
+        "SUCCESS",
 
-    CAMERA : "CAMERA",
+    WARNING :
 
-    MODEL : "MODEL",
+        "WARNING",
 
-    OFFLINE : "OFFLINE",
+    ERROR :
 
-    POPUP : "POPUP",
+        "ERROR",
 
-    RENDERER : "RENDERER"
+    OFFLINE :
+
+        "OFFLINE"
 
 });
