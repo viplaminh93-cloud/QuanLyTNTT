@@ -7,8 +7,7 @@
 
 /**
  * ======================================
- * LOGIN CONTROLLER
- * Điều khiển toàn bộ màn hình Login
+ * KHỞI TẠO
  * ======================================
  */
 
@@ -20,65 +19,55 @@ window.addEventListener(
 
 );
 
+
 /**
  * ======================================
- * Khởi tạo
+ * GẮN SỰ KIỆN
  * ======================================
  */
 
 function initLogin(){
 
-    bindEvents();
+    const button = id("btnLogin");
 
-    LoginRenderer.focusEmail();
+    if(!button){
 
-}
+        return;
 
-/**
- * ======================================
- * Gán sự kiện
- * ======================================
- */
+    }
 
-function bindEvents(){
+    button.addEventListener(
 
-    id("btnLogin")
+        "click",
 
-        .addEventListener(
+        handleLogin
 
-            "click",
-
-            onLogin
-
-        );
+    );
 
 }
 
+
 /**
  * ======================================
- * Nhấn nút Login
+ * XỬ LÝ ĐĂNG NHẬP
  * ======================================
  */
 
-async function onLogin(){
-
-    const email =
-
-        id("txtEmail")
-
-            .value
-
-            .trim()
-
-            .toLowerCase();
+async function handleLogin(){
 
     //----------------------------------
-    // Kiểm tra dữ liệu
+    // Lấy email
+    //----------------------------------
+
+    const email = getLoginEmail();
+
+    //----------------------------------
+    // Kiểm tra
     //----------------------------------
 
     if(email === ""){
 
-        alert(
+        showLoginError(
 
             "Nhập Email."
 
@@ -89,47 +78,71 @@ async function onLogin(){
     }
 
     //----------------------------------
+    // Disable nút
+    //----------------------------------
+
+    setLoginLoading(true);
+
+    //----------------------------------
     // Gửi Server
     //----------------------------------
 
-    const result =
+    try{
 
-        await LoginService.login(email);
+        const result = await loginService(email);
 
-    LoginRenderer.hideLoading();
+        //----------------------------------
+        // Không thành công
+        //----------------------------------
 
-    //----------------------------------
-    // Sai
-    //----------------------------------
+        if(!result.success){
 
-    if(!result.success){
+            showLoginError(
 
-        alert(
+                result.message
 
-            result.message
+            );
+
+            return;
+
+        }
+
+        //----------------------------------
+        // Lưu Token
+        //----------------------------------
+
+        await Auth.login(
+
+            result.token
 
         );
 
-        return;
+        //----------------------------------
+        // Chuyển Dashboard
+        //----------------------------------
+
+        location.href =
+
+            "modules/dashboard/dashboard.html";
 
     }
 
-    //----------------------------------
-    // Lưu Token
-    //----------------------------------
+    catch(err){
 
-    await LoginService.saveToken(
+        console.error(err);
 
-        result.token
+        showLoginError(
 
-    );
+            "Không kết nối được máy chủ."
 
-    //----------------------------------
-    // Chuyển Dashboard
-    //----------------------------------
+        );
 
-    location.href =
+    }
 
-        "../dashboard/dashboard.html";
+    finally{
+
+        setLoginLoading(false);
+
+    }
 
 }
