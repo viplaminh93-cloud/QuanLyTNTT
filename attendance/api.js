@@ -9,13 +9,14 @@
  * ======================================
  * API MODULE
  *
- * Chức năng:
- * - Tạo request
+ * Chức năng
+ * - Tạo Request
  * - Gửi Apps Script
  * - Đồng bộ Offline
- * - Trả dữ liệu về Attendance Service
+ * - Trả dữ liệu về AttendanceService
  *
- * Không render giao diện.
+ * Không xử lý UI.
+ * Không xử lý Popup.
  * Không xử lý Camera.
  * ======================================
  */
@@ -23,7 +24,7 @@
 const AttendanceAPI = (()=>{
 
     //======================================
-    // TẠO REQUEST
+    // CREATE REQUEST
     //======================================
 
     function createRequest(maso){
@@ -51,15 +52,13 @@ const AttendanceAPI = (()=>{
     }
 
     //======================================
-    // FETCH TIMEOUT
+    // FETCH WITH TIMEOUT
     //======================================
 
     async function fetchWithTimeout(
 
         url,
-
         options,
-
         timeout = 5000
 
     ){
@@ -90,7 +89,7 @@ const AttendanceAPI = (()=>{
 
                         ...options,
 
-                        signal:
+                        signal :
 
                             controller.signal
 
@@ -241,7 +240,7 @@ const AttendanceAPI = (()=>{
     }
 
     //======================================
-    // QR CALLBACK
+    // RECEIVE QR
     //======================================
 
     async function receiveQRCode(maso){
@@ -250,7 +249,7 @@ const AttendanceAPI = (()=>{
 
             MODULE.API,
 
-            "QR : " + maso
+            "Receive QR : " + maso
 
         );
 
@@ -278,11 +277,11 @@ const AttendanceAPI = (()=>{
 
         receiveQRCode,
 
+        post,
+
         resend,
 
-        send,
-
-        post
+        send
 
     };
 
