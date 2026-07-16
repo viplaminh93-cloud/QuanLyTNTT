@@ -44,7 +44,7 @@ function initializeAttendance(){
 
         "Version:",
 
-        Version
+        Version.VERSION
 
     );
 
