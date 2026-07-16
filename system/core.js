@@ -1,13 +1,115 @@
-const App={
+//======================================
+// CORE
+// Giáo xứ Phú Hòa
+//======================================
 
-    scanner:null,
+"use strict";
 
-    dangXuLy:false,
+/**
+ * ======================================
+ * CORE MODULE
+ *
+ * Quản lý trạng thái của ứng dụng.
+ *
+ * Chức năng:
+ * - State toàn cục
+ * - Getter
+ * - Setter
+ * - Reset State
+ *
+ * Không chứa business.
+ * Không thao tác DOM.
+ * ======================================
+ */
 
-    loaiDiemDanh:"",
+const Core = (()=>{
 
-    tongHomNay:0,
+    //======================================
+    // STATE
+    //======================================
 
-    syncing:false
+    const state = {
 
-};
+        //----------------------------------
+        // Attendance
+        //----------------------------------
+
+        loaiDiemDanh : "",
+
+        tongHomNay : 0,
+
+        //----------------------------------
+        // Camera
+        //----------------------------------
+
+        scanner : null,
+
+        dangXuLy : false,
+
+        //----------------------------------
+        // Offline
+        //----------------------------------
+
+        syncing : false
+
+    };
+
+    //======================================
+    // GET
+    //======================================
+
+    function get(key){
+
+        return state[key];
+
+    }
+
+    //======================================
+    // SET
+    //======================================
+
+    function set(
+
+        key,
+
+        value
+
+    ){
+
+        state[key] = value;
+
+    }
+
+    //======================================
+    // RESET
+    //======================================
+
+    function reset(){
+
+        state.loaiDiemDanh = "";
+
+        state.tongHomNay = 0;
+
+        state.scanner = null;
+
+        state.dangXuLy = false;
+
+        state.syncing = false;
+
+    }
+
+    //======================================
+    // EXPORT
+    //======================================
+
+    return{
+
+        get,
+
+        set,
+
+        reset
+
+    };
+
+})();
