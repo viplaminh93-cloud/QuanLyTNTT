@@ -96,7 +96,9 @@ async function post(body={}){
 
     console.log("TOKEN =", getToken());
 
-    body.token = getToken();
+    if(body.action !== "login"){
+        body.token = getToken();
+    }
 
     console.log(body);
 
