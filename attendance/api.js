@@ -188,7 +188,7 @@ const AttendanceAPI = (()=>{
 
         if(!navigator.onLine){
 
-            saveRequest(request);
+            OfflineService.push(request);
 
             return{
 
@@ -220,7 +220,7 @@ const AttendanceAPI = (()=>{
 
             console.error(err);
 
-            saveRequest(request);
+            OfflineService.push(request);
 
             return{
 
