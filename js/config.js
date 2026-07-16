@@ -16,7 +16,7 @@ const CONFIG = Object.freeze({
 
         PARISH: "Giáo xứ Phú Hòa",
 
-        DEBUG: true
+        DEBUG: false
 
     }),
 
