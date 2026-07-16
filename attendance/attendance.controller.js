@@ -1,89 +1,100 @@
-/**
- * ======================================
- * ATTENDANCE CONTROLLER
- * --------------------------------------
- * Điều phối toàn bộ màn hình điểm danh.
- *
- * Controller KHÔNG xử lý giao diện.
- * Controller KHÔNG gọi fetch trực tiếp.
- * Controller chỉ:
- *
- * 1. nhận sự kiện
- * 2. gọi Service
- * 3. gọi Renderer
- *
- * ======================================
- */
+//======================================
+// ATTENDANCE CONTROLLER
+// Giáo xứ Phú Hòa
+//======================================
 
 "use strict";
 
 Auth.requireLogin();
 
-/**
- * ======================================
- * Khởi tạo Attendance
- * ======================================
- */
-const AttendanceController = (() => {
+const AttendanceController = (()=>{
 
-    /**
-     * ----------------------------------
-     * Loại điểm danh hiện tại
-     * ----------------------------------
-     */
     let currentType = "";
 
+    let processing = false;
+
+    let todayCounter = 0;
+
     /**
-     * ==================================
-     * Bắt đầu điểm danh
-     * ==================================
+     * ======================================
+     * BẮT ĐẦU ĐIỂM DANH
+     * ======================================
      */
+
     async function start(type){
 
         currentType = type;
 
-        App.loaiDiemDanh = type;
+        processing = false;
 
-        /**
-         * Nếu có dữ liệu Offline
-         * thì tiến hành đồng bộ trước
-         */
-        if(navigator.onLine && hasQueue()){
+        //----------------------------------
+        // Đồng bộ Offline
+        //----------------------------------
 
-            debug(
-                MODULE.OFFLINE,
-                "Offline queue detected"
-            );
+        if(
 
-            syncQueue();
+            navigator.onLine
+
+            &&
+
+            typeof Offline !== "undefined"
+
+            &&
+
+            Offline.hasQueue()
+
+        ){
+
+            await Offline.sync();
 
         }
 
+        //----------------------------------
+        // Hiển thị giao diện
+        //----------------------------------
+
         AttendanceRenderer.showScanner(type);
+
+        //----------------------------------
+        // Tổng hôm nay
+        //----------------------------------
 
         await loadTodayCounter();
 
-        CameraService.start();
+        //----------------------------------
+        // Camera
+        //----------------------------------
+
+        await startCamera();
 
     }
 
     /**
-     * ==================================
-     * Tải tổng điểm danh hôm nay
-     * ==================================
+     * ======================================
+     * LOAD COUNTER
+     * ======================================
      */
+
     async function loadTodayCounter(){
 
         try{
 
-            const total =
-                await AttendanceService.getTodayCounter(currentType);
+            todayCounter =
 
-            App.tongHomNay = total;
+                await AttendanceService.getTodayCounter(
 
-            AttendanceRenderer.renderTodayCounter(total);
+                    currentType
+
+                );
+
+            AttendanceRenderer.renderTodayCounter(
+
+                todayCounter
+
+            );
 
         }
+
         catch(error){
 
             console.error(error);
@@ -93,85 +104,99 @@ const AttendanceController = (() => {
     }
 
     /**
-     * ==================================
-     * QR được Camera đọc thành công
-     * ==================================
+     * ======================================
+     * QR SUCCESS
+     * ======================================
      */
-    async function onQRCode(text){
 
-        if(App.dangXuLy){
+    async function onQRCode(qrText){
+
+        if(processing){
 
             return;
 
         }
 
-        App.dangXuLy = true;
-
-        await CameraService.pause();
+        processing = true;
 
         try{
 
             const result =
-                await AttendanceService.sendAttendance(text);
+
+                await AttendanceService.sendAttendance(
+
+                    qrText,
+
+                    currentType
+
+                );
+
+            //----------------------------------
+            // Thành công
+            //----------------------------------
 
             if(result.success){
 
-                App.tongHomNay++;
+                todayCounter++;
 
                 AttendanceRenderer.renderTodayCounter(
-                    App.tongHomNay
+
+                    todayCounter
+
                 );
 
             }
 
-            PopupRenderer.show(result);
+            //----------------------------------
+            // Popup
+            //----------------------------------
+
+            PopupService.show(result);
 
         }
+
         catch(error){
 
             console.error(error);
 
+            processing = false;
+
+            await resumeCamera();
+
         }
 
     }
 
     /**
-     * ==================================
-     * Đóng Popup
-     * ==================================
+     * ======================================
+     * ĐÓNG POPUP
+     * ======================================
      */
+
     async function closePopup(){
 
-        PopupRenderer.hide();
+        processing = false;
 
-        App.dangXuLy = false;
-
-        await CameraService.resume();
+        await PopupService.close();
 
     }
 
     /**
-     * ==================================
-     * Quay về Trang chủ
-     * ==================================
+     * ======================================
+     * QUAY VỀ
+     * ======================================
      */
+
     async function backHome(){
 
-        PopupRenderer.hide();
-
-        await CameraService.stop();
+        await stopCamera();
 
         AttendanceRenderer.showHome();
 
-        App.dangXuLy = false;
+        processing = false;
 
     }
 
-    /**
-     * ==================================
-     * Public API
-     * ==================================
-     */
     return{
 
         start,
