@@ -36,7 +36,13 @@ function init(){
     // Kiểm tra đăng nhập
     //----------------------------------
 
-    Auth.requireLogin();
+     Auth.requireLogin();
+
+    //----------------------------------
+    // Hiển thị người dùng
+    //----------------------------------
+
+    loadUser();
 
     //----------------------------------
     // Gắn sự kiện
@@ -72,7 +78,7 @@ function bindEvents(){
 
     bind(
 
-        "btnReport",
+        "btnReports",
 
         openReport
 
@@ -121,6 +127,37 @@ function bind(id,callback){
         callback
 
     );
+
+}
+
+
+/**
+ * ======================================
+ * HIỂN THỊ NGƯỜI DÙNG
+ * ======================================
+ */
+
+function loadUser(){
+
+    const email =
+
+        Auth.getEmail?.() ||
+
+        "Chưa xác định";
+
+    const role =
+
+        Auth.getRole?.() ||
+
+        "Người dùng";
+
+    Utils.id("txtEmail").innerText =
+
+        email;
+
+    Utils.id("txtRole").innerText =
+
+        role;
 
 }
 
