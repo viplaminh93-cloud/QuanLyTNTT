@@ -52,7 +52,7 @@ const PopupRenderer = (()=>{
 
     function renderTitle(data){
 
-        const obj = id("overlayTitle");
+        const obj = Utils.id("overlayTitle");
 
         if(!obj){
 
@@ -116,7 +116,7 @@ const PopupRenderer = (()=>{
 
     function renderHint(){
 
-        id("overlayHint").innerText =
+        Utils.id("overlayHint").innerText =
 
             CONFIG.POPUP.HINT;
 
@@ -128,7 +128,7 @@ const PopupRenderer = (()=>{
 
     function show(){
 
-        id("overlay")
+        Utils.id("overlay")
 
             .classList
 
@@ -142,7 +142,7 @@ const PopupRenderer = (()=>{
 
     function hide(){
 
-        id("overlay")
+        Utils.id("overlay")
 
             .classList
 
