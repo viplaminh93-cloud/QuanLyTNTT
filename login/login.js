@@ -77,6 +77,6 @@ console.log(result);
 
     //----------------------------------
 
-    location.href="dashboard.html";
+    location.href="../dashboard/dashboard.html";
 
 }
