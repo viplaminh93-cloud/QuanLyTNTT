@@ -67,7 +67,7 @@ async function handleLogin(){
 
     if(email === ""){
 
-        showLoginError(
+        LoginRenderer.showError(
 
             "Nhập Email."
 
@@ -81,7 +81,7 @@ async function handleLogin(){
     // Disable nút
     //----------------------------------
 
-    setLoginLoading(true);
+    LoginRenderer.setLoading(true);
 
     //----------------------------------
     // Gửi Server
@@ -97,7 +97,7 @@ async function handleLogin(){
 
         if(!result.success){
 
-            showLoginError(
+            LoginRenderer.showError(
 
                 result.message
 
@@ -131,7 +131,7 @@ async function handleLogin(){
 
         console.error(err);
 
-        showLoginError(
+        LoginRenderer.showError(
 
             "Không kết nối được máy chủ."
 
@@ -141,7 +141,7 @@ async function handleLogin(){
 
     finally{
 
-        setLoginLoading(false);
+        LoginRenderer.setLoading(false);
 
     }
 
