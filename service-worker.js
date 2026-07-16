@@ -14,27 +14,27 @@ const FILES = [
 
     "./",
 
-    "./index.html",
+    "./attendance/attendance.html",
 
     "./manifest.json",
-    "./js/version.js",
+    "./system/version.js",
     "./admin.html",
-    "./css/style.css",
+    "./attendance/attendance.css",
 
-    "./js/config.js",
-    "./js/constants.js",
-    "./js/model.js",
-    "./js/core.js",
-    "./js/renderer.js",
-    "./js/debug.js",
-    "./js/utils.js",
-    "./js/camera.js",
-    "./js/offline.js",
-    "./js/attendance.js",
-    "./js/api.js",
-    "./js/popup.js",
-    "./js/dashboard.js",
-    "./js/app.js"
+    "./system/config.js",
+    "./system/constants.js",
+    "./system/model.js",
+    "./system/core.js",
+    "./system/renderer.js",
+    "./system/debug.js",
+    "./system/utils.js",
+    "./attendance/camera.js",
+    "./system/offline.js",
+    "./attendance/attendance.js",
+    "./attendance/api.js",
+    "./attendance/popup.js",
+    "./dashboard/dashboard.js",
+    "./attendance/app.js"
     
 ];
 
