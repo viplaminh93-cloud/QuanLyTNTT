@@ -1,89 +1,68 @@
 //======================================
-// GIÁO XỨ PHÚ HÒA
-// APP CORE
+// ATTENDANCE APP
+// Giáo xứ Phú Hòa
 //======================================
 
 "use strict";
 
-
-
-
-
-//======================================
-// APP
-//======================================
-
-
-const STORAGE_VERSION = "phuhoa_version";
-
-const OFFLINE_QUEUE_KEY = "attendance_queue";
-
-
-
-
-//======================================
-// APP START
-//======================================
+/**
+ * ======================================
+ * ATTENDANCE APP
+ *
+ * Bootstrap module Attendance.
+ * Không chứa Business.
+ * ======================================
+ */
 
 window.addEventListener(
 
     "load",
 
-    ()=>{
-
-        console.log(
-            "================================"
-        );
-
-        console.log(
-            "GIÁO XỨ PHÚ HÒA"
-        );
-
-        console.log(
-            "QR Attendance"
-        );
-
-        console.log(
-        
-            "Version:",
-        
-            APP_VERSION.VERSION
-        
-        );
-
-        console.log(
-            "================================"
-        );
-
-        renderQueueBadge();
-
-    }
+    initializeAttendance
 
 );
 
-
-
-
-
 //======================================
-// CAMERA CALLBACK
+// INIT
 //======================================
 
-window.onQRCode = function(text){
+function initializeAttendance(){
 
-    guiDiemDanh(text);
+    console.log(
+        "================================"
+    );
 
-};
+    console.log(
+        CONFIG.APP.PARISH
+    );
 
+    console.log(
+        CONFIG.APP.NAME
+    );
 
+    console.log(
+
+        "Version:",
+
+        APP_VERSION.VERSION
+
+    );
+
+    console.log(
+        "================================"
+    );
+
+    renderQueueBadge();
+
+    initializePWA();
+
+}
 
 //======================================
-// INSTALL PWA
+// PWA
 //======================================
 
 let installPrompt = null;
-
-
 
 //======================================
 // BEFORE INSTALL
@@ -117,48 +96,94 @@ window.addEventListener(
 
 );
 
-
-
 //======================================
-// INSTALL BUTTON
+// INIT INSTALL
 //======================================
 
-window.addEventListener(
+function initializePWA(){
 
-    "load",
+    const button =
 
-    ()=>{
+        id("installBtn");
 
-        id("installBtn")
+    if(!button){
 
-        .addEventListener(
-
-            "click",
-
-            async()=>{
-
-                if(!installPrompt){
-
-                    return;
-
-                }
-
-                installPrompt.prompt();
-
-                await installPrompt.userChoice;
-
-                installPrompt = null;
-
-                hide(
-
-                    id("installBtn")
-
-                );
-
-            }
-
-        );
+        return;
 
     }
 
-);
+    button.addEventListener(
+
+        "click",
+
+        installApplication
+
+    );
+
+}
+
+//======================================
+// INSTALL APP
+//======================================
+
+async function installApplication(){
+
+    if(!installPrompt){
+
+        return;
+
+    }
+
+    installPrompt.prompt();
+
+    await installPrompt.userChoice;
+
+    installPrompt = null;
+
+    hide(
+
+        id("installBtn")
+
+    );
+
+}
+
+//======================================
+// SERVICE WORKER
+//======================================
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener(
+
+        "load",
+
+        ()=>{
+
+            navigator.serviceWorker
+
+                .register(
+
+                    "../service-worker.js"
+
+                )
+
+                .then(reg=>{
+
+                    console.log(
+
+                        "Service Worker OK",
+
+                        reg
+
+                    );
+
+                })
+
+                .catch(console.error);
+
+        }
+
+    );
+
+}
