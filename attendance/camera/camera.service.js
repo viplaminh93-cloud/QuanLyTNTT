@@ -8,25 +8,32 @@
 /**
  * ======================================
  * CAMERA SERVICE
- * Chỉ giao tiếp với Html5Qrcode
- * Không xử lý API
- * Không xử lý Popup
+ *
+ * Chỉ làm việc với Html5Qrcode.
+ * Không Popup.
+ * Không API.
+ * Không Attendance.
  * ======================================
  */
 
-const CameraService = (() => {
+const CameraService = (()=>{
 
     let scanner = null;
 
-    //======================================
-    // START
-    //======================================
+    /**
+     * ======================================
+     * START
+     * ======================================
+     */
 
     async function start(onSuccess){
 
-        debug(
+        Debug.log?.(
+
             MODULE.CAMERA,
-            "Start camera"
+
+            "Start Camera"
+
         );
 
         if(scanner){
@@ -35,28 +42,47 @@ const CameraService = (() => {
 
         }
 
-        scanner = new Html5Qrcode("reader");
+        scanner = new Html5Qrcode(
+
+            "reader"
+
+        );
 
         await scanner.start(
 
             {
-                facingMode: CONFIG.CAMERA.FACING_MODE
+
+                facingMode:
+
+                    Config.CAMERA.FACING_MODE
+
             },
 
             {
 
-                fps: CONFIG.CAMERA.FPS,
+                fps:
+
+                    Config.CAMERA.FPS,
 
                 qrbox:{
-                    width:CONFIG.CAMERA.WIDTH,
-                    height:CONFIG.CAMERA.HEIGHT
+
+                    width:
+
+                        Config.CAMERA.WIDTH,
+
+                    height:
+
+                        Config.CAMERA.HEIGHT
+
                 },
 
                 rememberLastUsedCamera:
-                    CONFIG.CAMERA.REMEMBER_CAMERA,
+
+                    Config.CAMERA.REMEMBER_CAMERA,
 
                 disableFlip:
-                    CONFIG.CAMERA.DISABLE_FLIP
+
+                    Config.CAMERA.DISABLE_FLIP
 
             },
 
@@ -64,16 +90,13 @@ const CameraService = (() => {
 
         );
 
-        debug(
-            MODULE.CAMERA,
-            "Camera started"
-        );
-
     }
 
-    //======================================
-    // STOP
-    //======================================
+    /**
+     * ======================================
+     * STOP
+     * ======================================
+     */
 
     async function stop(){
 
@@ -89,38 +112,43 @@ const CameraService = (() => {
 
         }
 
-        catch(err){
+        catch(error){
 
-            console.error(err);
+            console.error(error);
 
         }
 
         try{
 
-            scanner.clear();
+            await scanner.clear();
 
         }
 
-        catch(err){
+        catch(error){
 
-            console.error(err);
+            console.error(error);
 
         }
 
         scanner = null;
 
-        id("reader").innerHTML = "";
+        const reader =
 
-        debug(
-            MODULE.CAMERA,
-            "Camera stopped"
-        );
+            Utils.id("reader");
+
+        if(reader){
+
+            reader.innerHTML = "";
+
+        }
 
     }
 
-    //======================================
-    // PAUSE
-    //======================================
+    /**
+     * ======================================
+     * PAUSE
+     * ======================================
+     */
 
     async function pause(){
 
@@ -132,21 +160,23 @@ const CameraService = (() => {
 
         try{
 
-            await scanner.pause(true);
+            scanner.pause(true);
 
         }
 
-        catch(err){
+        catch(error){
 
-            console.error(err);
+            console.error(error);
 
         }
 
     }
 
-    //======================================
-    // RESUME
-    //======================================
+    /**
+     * ======================================
+     * RESUME
+     * ======================================
+     */
 
     async function resume(){
 
@@ -158,21 +188,23 @@ const CameraService = (() => {
 
         try{
 
-            await scanner.resume();
+            scanner.resume();
 
         }
 
-        catch(err){
+        catch(error){
 
-            console.error(err);
+            console.error(error);
 
         }
 
     }
 
-    //======================================
-    // EXIST
-    //======================================
+    /**
+     * ======================================
+     * EXISTS
+     * ======================================
+     */
 
     function exists(){
 
@@ -180,15 +212,31 @@ const CameraService = (() => {
 
     }
 
-    //======================================
+    /**
+     * ======================================
+     * GET INSTANCE
+     * ======================================
+     */
+
+    function getScanner(){
+
+        return scanner;
+
+    }
 
     return{
 
         start,
+
         stop,
+
         pause,
+
         resume,
-        exists
+
+        exists,
+
+        getScanner
 
     };
 
