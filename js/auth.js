@@ -52,7 +52,7 @@ const Auth = (()=>{
 
         );
 
-        location.href = "login.html";
+        location.href="login.html";
 
     }
 
@@ -72,11 +72,7 @@ const Auth = (()=>{
 
     function requireLogin(){
 
-        if(
-
-            getToken()===""
-
-        ){
+        if(getToken()===""){
 
             location.href="login.html";
 
@@ -96,27 +92,63 @@ const Auth = (()=>{
 
         body.token = getToken();
 
-        const response = await fetch(
+        try{
 
-            CONFIG.API.URL,
+            const response = await fetch(
 
-            {
+                CONFIG.API.URL,
 
-                method:"POST",
+                {
 
-                headers:{
+                    method:"POST",
 
-                    "Content-Type":"text/plain;charset=utf-8"
+                    mode:"cors",
 
-                },
+                    headers:{
 
-                body:JSON.stringify(body)
+                        "Content-Type":"text/plain;charset=utf-8"
+
+                    },
+
+                    body:JSON.stringify(body)
+
+                }
+
+            );
+
+            const text = await response.text();
+
+            try{
+
+                return JSON.parse(text);
 
             }
 
-        );
+            catch(err){
 
-        return await response.json();
+                return{
+
+                    success:false,
+
+                    message:text
+
+                };
+
+            }
+
+        }
+
+        catch(err){
+
+            return{
+
+                success:false,
+
+                message:err.message
+
+            };
+
+        }
 
     }
 
