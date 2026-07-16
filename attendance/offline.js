@@ -253,3 +253,30 @@ const OfflineService = (()=>{
     };
 
 })();
+
+
+
+
+//======================================
+// ONLINE EVENT
+//======================================
+
+window.addEventListener(
+
+    "online",
+
+    ()=>{
+
+        debug(
+
+            MODULE.OFFLINE,
+
+            "Network Online"
+
+        );
+
+        OfflineService.sync();
+
+    }
+
+);
