@@ -33,18 +33,18 @@ function initializeAttendance(){
     );
 
     console.log(
-        CONFIG.APP.PARISH
+        Config.APP.PARISH
     );
-
+    
     console.log(
-        CONFIG.APP.NAME
+        Config.APP.NAME
     );
 
     console.log(
 
         "Version:",
 
-        APP_VERSION.VERSION
+        APP_VERSION
 
     );
 
@@ -52,7 +52,7 @@ function initializeAttendance(){
         "================================"
     );
 
-    renderQueueBadge();
+//    renderQueueBadge();
 
     initializePWA();
 
@@ -78,13 +78,13 @@ window.addEventListener(
 
         installPrompt = event;
 
-        show(
+        Renderer.show(
 
-            id("installBtn")
+            Utils.id("installBtn")
 
         );
 
-        debug(
+        debug.log(
 
             MODULE.APP,
 
@@ -104,7 +104,7 @@ function initializePWA(){
 
     const button =
 
-        id("installBtn");
+        Utils.id("installBtn");
 
     if(!button){
 
@@ -140,9 +140,9 @@ async function installApplication(){
 
     installPrompt = null;
 
-    hide(
+    Renderer.hide(
 
-        id("installBtn")
+        Utils.id("installBtn")
 
     );
 
