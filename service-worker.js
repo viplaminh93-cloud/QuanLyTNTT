@@ -18,11 +18,9 @@
  * ======================================
  */
 
-const CACHE_NAME =
+const CACHE_VERSION = "1.0.0";
 
-    "phuhoa-" +
-
-    VERSION;
+const CACHE_NAME = "phuhoa-" + CACHE_VERSION;
 
 
 //======================================
