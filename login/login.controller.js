@@ -30,6 +30,8 @@ function initLogin(){
 
     bindEvents();
 
+    LoginRenderer.focusEmail();
+
 }
 
 /**
@@ -93,6 +95,8 @@ async function onLogin(){
     const result =
 
         await LoginService.login(email);
+
+    LoginRenderer.hideLoading();
 
     //----------------------------------
     // Sai
