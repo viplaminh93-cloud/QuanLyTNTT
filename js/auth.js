@@ -60,11 +60,15 @@ const Auth = (()=>{
     // LOGIN
     //----------------------------------
 
-    async function login(token){
+async function login(token){
 
-        save(token);
+    console.log("SAVE TOKEN =",token);
 
-    }
+    save(token);
+
+    console.log(localStorage.getItem("attendance_token"));
+
+}
 
     //----------------------------------
     // REQUIRE LOGIN
@@ -88,69 +92,35 @@ const Auth = (()=>{
     // POST
     //----------------------------------
 
-    async function post(body={}){
+async function post(body={}){
 
-        body.token = getToken();
+    console.log("TOKEN =", getToken());
 
-        try{
+    body.token = getToken();
 
-            const response = await fetch(
+    console.log(body);
 
-                CONFIG.API.URL,
+    const response = await fetch(
 
-                {
+        CONFIG.API.URL,
 
-                    method:"POST",
+        {
 
-                    mode:"cors",
+            method:"POST",
 
-                    headers:{
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
 
-                        "Content-Type":"text/plain;charset=utf-8"
-
-                    },
-
-                    body:JSON.stringify(body)
-
-                }
-
-            );
-
-            const text = await response.text();
-
-            try{
-
-                return JSON.parse(text);
-
-            }
-
-            catch(err){
-
-                return{
-
-                    success:false,
-
-                    message:text
-
-                };
-
-            }
+            body:JSON.stringify(body)
 
         }
 
-        catch(err){
+    );
 
-            return{
+    return await response.json();
 
-                success:false,
-
-                message:err.message
-
-            };
-
-        }
-
-    }
+}
 
     //----------------------------------
 
