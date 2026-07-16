@@ -45,19 +45,19 @@ const DashboardController = (() => {
 
     function bindEvents() {
 
-        id("btnRefresh")
+        Utils.id("btnRefresh")
             .addEventListener(
                 "click",
                 load
             );
 
-        id("btnLe")
+        Utils.id("btnLe")
             .addEventListener(
                 "click",
                 showMass
             );
 
-        id("btnGiaoLy")
+        Utils.id("btnGiaoLy")
             .addEventListener(
                 "click",
                 showCatechism
