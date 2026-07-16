@@ -1,49 +1,12 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
+/*==================================================
+ATTENDANCE MODULE
+Giao diện màn hình điểm danh
+==================================================*/
 
-body{
 
-    background:#eef4fb;
-
-}
-
-.container{
-
-    width:100%;
-    max-width:500px;
-    margin:auto;
-    padding:25px 18px;
-
-}
-
-.card{
-
-    background:#ffffff;
-
-    border-radius:20px;
-
-    padding:30px 25px;
-
-    margin-top:20px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
-
-}
-
-.hidden{
-
-    display:none !important;
-
-}
-
-/*========================
+/*==================================================
 HOME
-========================*/
+==================================================*/
 
 .home{
 
@@ -54,14 +17,18 @@ HOME
 .logo{
 
     width:110px;
+
     height:110px;
+
     display:block;
+
     margin:0 auto 18px;
+
     object-fit:contain;
 
 }
 
-h1{
+.home h1{
 
     color:#1565c0;
 
@@ -73,37 +40,33 @@ h1{
 
 }
 
-h2{
+.home .subTitle{
 
     color:#4f6b88;
 
     font-size:18px;
 
-    font-weight:500;
-
-    margin-bottom:25px;
-
-}
-
-.home p{
-
-    color:#666;
-
     margin-bottom:30px;
 
-    font-size:18px;
-
 }
 
-button{
+
+
+/*==================================================
+BUTTON
+==================================================*/
+
+.btn{
 
     width:100%;
+
+    margin-top:18px;
+
+    padding:18px;
 
     border:none;
 
     border-radius:14px;
-
-    padding:18px;
 
     font-size:22px;
 
@@ -115,30 +78,39 @@ button{
 
 }
 
-button:active{
+.btn:active{
 
     transform:scale(.97);
 
 }
 
-.btn{
+.btnBlue{
 
     background:#1976d2;
 
-    color:white;
-
-    margin-top:18px;
+    color:#fff;
 
     box-shadow:
+
         0 8px 18px rgba(25,118,210,.25);
 
 }
 
-.btn:hover{
+.btnBlue:hover{
 
     background:#1565c0;
 
-    transform:translateY(-2px);
+}
+
+.install{
+
+    background:#2e7d32;
+
+}
+
+.install:hover{
+
+    background:#1b5e20;
 
 }
 
@@ -146,15 +118,31 @@ button:active{
 
     background:#607d8b;
 
-    color:white;
+    color:#fff;
 
     margin-top:25px;
 
 }
 
-/*========================
-TODAY
-========================*/
+
+
+/*==================================================
+SCANNER
+==================================================*/
+
+.scannerTitle{
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#1565c0;
+
+    margin-bottom:15px;
+
+}
 
 .todayCount{
 
@@ -170,10 +158,6 @@ TODAY
 
 }
 
-/*========================
-QR
-========================*/
-
 #reader{
 
     width:100%;
@@ -184,23 +168,21 @@ QR
 
     border:3px solid #1976d2;
 
-    background:white;
+    background:#fff;
 
 }
 
-/*========================
+
+
+/*==================================================
 POPUP
-========================*/
+==================================================*/
 
 #overlay{
 
     position:fixed;
 
-    left:0;
-    top:0;
-
-    width:100%;
-    height:100%;
+    inset:0;
 
     background:rgba(0,0,0,.75);
 
@@ -224,7 +206,7 @@ POPUP
 
     padding:35px 25px;
 
-    color:white;
+    color:#fff;
 
     text-align:center;
 
@@ -234,9 +216,11 @@ POPUP
 
 }
 
-/*========================
+
+
+/*==================================================
 MÀU KHỐI
-========================*/
+==================================================*/
 
 #overlay.khaitam #overlayCard{
 
@@ -268,9 +252,11 @@ MÀU KHỐI
 
 }
 
-/*========================
+
+
+/*==================================================
 TRẠNG THÁI
-========================*/
+==================================================*/
 
 #overlay.warning #overlayCard{
 
@@ -283,6 +269,12 @@ TRẠNG THÁI
     background:#d32f2f !important;
 
 }
+
+
+
+/*==================================================
+POPUP CONTENT
+==================================================*/
 
 #overlayTitle{
 
@@ -304,16 +296,17 @@ TRẠNG THÁI
 
     object-fit:cover;
 
-    border:6px solid white;
+    border:6px solid #fff;
 
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.25);
-
-    margin:15px auto 25px;
+    background:#fff;
 
     display:block;
 
-    background:white;
+    margin:15px auto 25px;
+
+    box-shadow:
+
+        0 5px 18px rgba(0,0,0,.25);
 
 }
 
@@ -367,9 +360,63 @@ TRẠNG THÁI
 
 }
 
-/*========================
-HIỆU ỨNG
-========================*/
+
+
+/*==================================================
+QUEUE BADGE
+==================================================*/
+
+.queue-badge{
+
+    position:fixed;
+
+    top:12px;
+
+    right:12px;
+
+    padding:8px 12px;
+
+    border-radius:999px;
+
+    background:#ff9800;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    box-shadow:
+
+        0 2px 8px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+}
+
+.queue-badge.syncing{
+
+    background:#2e7d32;
+
+}
+
+.queueIcon{
+
+    display:inline-block;
+
+}
+
+.queue-badge.syncing .queueIcon{
+
+    animation:queueSpin 1s linear infinite;
+
+}
+
+
+
+/*==================================================
+ANIMATION
+==================================================*/
 
 @keyframes popup{
 
@@ -391,285 +438,6 @@ HIỆU ỨNG
 
 }
 
-/*========================
-MOBILE
-========================*/
-
-@media(max-width:500px){
-
-    .card{
-
-        padding:25px 18px;
-
-    }
-
-    .logo{
-
-        width:90px;
-
-        height:90px;
-
-    }
-
-    h1{
-
-        font-size:26px;
-
-    }
-
-    h2{
-
-        font-size:17px;
-
-    }
-
-    button{
-
-        font-size:20px;
-
-    }
-
-    #overlayPhoto{
-
-        width:150px;
-
-        height:150px;
-
-    }
-
-}
-
-
-
-
-.install{
-
-    margin-top:18px;
-
-    background:#2e7d32;
-
-}
-
-.install:hover{
-
-    background:#1b5e20;
-
-}
-
-
-
-
-
-
-
-
-/*========================
-SPLASH
-========================*/
-
-#splash{
-
-    position:fixed;
-
-    inset:0;
-
-    background:white;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:999999;
-
-    transition:.6s;
-
-}
-
-#splash.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-}
-
-.splash-content{
-
-    text-align:center;
-
-}
-
-.splash-logo{
-
-    width:150px;
-
-    animation:zoomLogo 1.2s ease;
-
-}
-
-.splash-title{
-
-    margin-top:25px;
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    color:#1565c0;
-
-}
-
-.splash-sub{
-
-    margin-top:12px;
-
-    color:#666;
-
-    font-size:18px;
-
-}
-
-@keyframes zoomLogo{
-
-    from{
-
-        transform:scale(.8);
-
-        opacity:0;
-
-    }
-
-    to{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-
-
-/*=========================
-        DEBUG
-=========================*/
-
-#debugButton{
-
-    position:fixed;
-
-    right:18px;
-
-    bottom:18px;
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:50%;
-
-    background:#d32f2f;
-
-    color:white;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    z-index:99999;
-
-    user-select:none;
-
-}
-
-#debugPanel{
-
-    position:fixed;
-
-    left:10px;
-
-    right:10px;
-
-    bottom:80px;
-
-    height:320px;
-
-    background:#111;
-
-    color:#00ff66;
-
-    border-radius:12px;
-
-    overflow:auto;
-
-    padding:12px;
-
-    z-index:99998;
-
-    font-family:monospace;
-
-}
-
-#debugHeader{
-
-    font-weight:bold;
-
-    margin-bottom:10px;
-
-}
-
-
-
-
-.queue-badge{
-
-    position:fixed;
-
-    top:12px;
-
-    right:12px;
-
-    background:#ff9800;
-
-    color:#fff;
-
-    padding:8px 12px;
-
-    border-radius:999px;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    z-index:9999;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.25);
-
-}
-
-
-
-
-.queue-badge.syncing{
-
-    background:#2e7d32;
-
-}
-
-
-
-
 @keyframes queueSpin{
 
     from{
@@ -688,16 +456,44 @@ SPLASH
 
 
 
+/*==================================================
+RESPONSIVE
+==================================================*/
 
+@media(max-width:500px){
 
-.queueIcon{
+    .logo{
 
-    display:inline-block;
+        width:90px;
 
-}
+        height:90px;
 
-.queue-badge.syncing .queueIcon{
+    }
 
-    animation:queueSpin 1s linear infinite;
+    .home h1{
+
+        font-size:26px;
+
+    }
+
+    .subTitle{
+
+        font-size:17px;
+
+    }
+
+    .btn{
+
+        font-size:20px;
+
+    }
+
+    #overlayPhoto{
+
+        width:150px;
+
+        height:150px;
+
+    }
 
 }
