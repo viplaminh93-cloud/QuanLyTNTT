@@ -18,6 +18,19 @@ const LoginService = (() => {
 
     /**
      * ----------------------------------
+     * Lấy Email
+     * ----------------------------------
+     */
+    function getLoginEmail(){
+    
+        return Utils.id("txtEmail")
+            .value
+            .trim();
+    
+    }
+
+    /**
+     * ----------------------------------
      * Đăng nhập
      * ----------------------------------
      */
@@ -47,8 +60,10 @@ const LoginService = (() => {
     return {
 
         login,
-        saveToken
+        saveToken,
+        getLoginEmail
 
     };
 
 })();
+
