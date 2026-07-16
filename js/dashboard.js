@@ -51,46 +51,24 @@ async function loadDashboard(){
 
     try{
 
-        const response = await fetch(
+        const data = await Auth.post({
 
-            CONFIG.API.URL,
+            action:"dashboard"
 
-            {
+        });
 
-                method:"POST",
-
-                headers:{
-
-                    "Content-Type":"text/plain;charset=utf-8"
-
-                },
-
-                body:JSON.stringify({
-
-                    action:"dashboard"
-
-                })
-
-            }
-
-        );
-
-        const data = await response.json();
+        console.log(data);
 
         if(!data.success){
 
-            alert(
-
-                "Không lấy được Dashboard."
-
-            );
+            alert(data.message);
 
             return;
 
         }
 
         dashboardData = data;
-        
+
         renderDashboard();
 
     }
@@ -99,11 +77,7 @@ async function loadDashboard(){
 
         console.error(err);
 
-        alert(
-
-            "Không kết nối được máy chủ."
-
-        );
+        alert("Không kết nối được máy chủ.");
 
     }
 
