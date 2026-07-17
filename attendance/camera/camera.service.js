@@ -3,16 +3,9 @@
 // Giáo xứ Phú Hòa
 //======================================
 
-"use strict";
+/*"use strict";
 
-/**
- * ======================================
- * CAMERA CONTROLLER
- *
- * Điều khiển Camera.
- * Không làm việc với Html5Qrcode.
- * ======================================
- */
+
 
 window.daQuet = false;
 
