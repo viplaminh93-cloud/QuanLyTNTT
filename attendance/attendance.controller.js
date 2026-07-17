@@ -1,6 +1,6 @@
 "use strict";
 
-/* async function start(loai) {
+async function start(loai) {
     AttendanceService.setCurrentType(loai);
     processing = false;
     
@@ -9,9 +9,9 @@
     AttendanceRenderer.renderTodayCounter(count);
     
     await CameraController.start(); 
-}   */
+}
 
-const AttendanceController = (() => {
+/*const AttendanceController = (() => {
     let processing = false;
 
     async function start(loai) {
@@ -23,7 +23,7 @@ const AttendanceController = (() => {
         AttendanceRenderer.renderTodayCounter(count);
         
         await CameraService.startCamera(); 
-    }
+    } */
 
     async function onQRCode(qrText) {
         if (processing) return;
