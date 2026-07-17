@@ -81,7 +81,7 @@ function bindEvents(){
 
     );
 
-    Utils.id("btnReports").addEventListener("click", () => {
+    bind("btnReports").addEventListener("click", () => {
         if (Auth.getRole() !== "ADMIN" || "QUAN_LY") {
                 alert("Bạn không có quyền truy cập trang này!");
                 return;
