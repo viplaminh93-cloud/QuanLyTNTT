@@ -4,300 +4,323 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1">
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
 
-    <title>
+<title>
+Điểm danh Thiếu nhi
+</title>
 
-        Điểm danh Thiếu nhi Giáo xứ Phú Hòa
+<link
+rel="manifest"
+href="../manifest.json">
 
-    </title>
+<meta
+name="theme-color"
+content="#1565c0">
 
-    <!--==================================
-    PWA
-    ===================================-->
+<link
+rel="icon"
+href="../icons/icon-192.png">
 
-    <link
-        rel="manifest"
-        href="../manifest.json">
+<link
+rel="apple-touch-icon"
+href="../icons/icon-192.png">
 
-    <meta
-        name="theme-color"
-        content="#1565c0">
-
-    <meta
-        name="description"
-        content="Hệ thống điểm danh Thiếu nhi Giáo xứ Phú Hòa">
-
-    <meta
-        name="mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default">
-
-    <meta
-        name="apple-mobile-web-app-title"
-        content="Điểm danh QR">
-
-    <link
-        rel="icon"
-        href="../icons/icon-192.png">
-
-    <link
-        rel="apple-touch-icon"
-        href="../icons/icon-192.png">
-
-    <!--==================================
-    CSS
-    ===================================-->
-
-    <link
-        rel="stylesheet"
-        href="attendance.css">
+<link
+rel="stylesheet"
+href="attendance.css">
 
 </head>
 
 <body>
 
-    <!--==================================
-    QUEUE
-    ===================================-->
+<!--==============================
+QUEUE
+===============================-->
 
-    <div id="queueBadge" class="queue-badge">
+<div
+id="queueBadge"
+class="queue-badge">
 
-        📤
+📤
 
-        <span id="queueCount">
+<span id="queueCount">
 
-            0
+0
 
-        </span>
+</span>
 
-    </div>
+</div>
 
-    <!--==================================
-    CONTAINER
-    ===================================-->
+<!--==============================
+MAIN
+===============================-->
 
-    <div class="container">
+<div class="container">
 
-        <!--==============================
-        HOME
-        ==============================-->
+<div
+class="card home">
 
-        <div class="card home">
+<img
 
-            <img
+class="logo"
 
-                class="logo"
+src="../icons/icon-192.png"
 
-                src="https://drive.google.com/uc?export=view&id=1pI05_C7SCHHwkGwZGNH47r6WcfZdwwlD"
+alt="Logo">
 
-                alt="Logo">
+<h1>
 
-            <h1>
+GIÁO XỨ PHÚ HÒA
 
-                GIÁO XỨ PHÚ HÒA
+</h1>
 
-            </h1>
+<div class="subTitle">
 
-            <div class="subTitle">
+HỆ THỐNG ĐIỂM DANH QR
 
-                HỆ THỐNG ĐIỂM DANH QR
+</div>
 
-            </div>
+<button
 
-            <button
+id="btnLe"
 
-                class="btn"
+class="btn btnBlue">
 
-                onclick="AttendanceController.start(LOAI.LE)">
+DỰ LỄ
 
-                DỰ LỄ
+</button>
 
-            </button>
+<button
 
-            <button
+id="btnGiaoLy"
 
-                class="btn"
+class="btn btnBlue">
 
-                onclick="AttendanceController.start(LOAI.GIAOLY)">
+GIÁO LÝ
 
-                GIÁO LÝ
+</button>
 
-            </button>
+<button
 
-            <button
+id="installBtn"
 
-                id="installBtn"
+class="btn install hidden">
 
-                class="btn install hidden">
+CÀI ĐẶT ỨNG DỤNG
 
-                CÀI ĐẶT ỨNG DỤNG
+</button>
 
-            </button>
+</div>
 
-        </div>
+<!--==============================
+SCANNER
+===============================-->
 
-        <!--==============================
-        SCANNER
-        ==============================-->
+<div
 
-        <div
+id="scannerBox"
 
-            id="scannerBox"
+class="card hidden">
 
-            class="card hidden">
+<div
+id="typeTitle"
+class="scannerTitle">
 
-            <div id="typeTitle"></div>
+</div>
 
-            <div
+<div
+id="todayCount"
+class="todayCount">
 
-                id="todayCount"
+Đã điểm danh hôm nay: 0 em
 
-                class="todayCount">
+</div>
 
-                Đã điểm danh hôm nay: 0 em
+<div id="reader"></div>
 
-            </div>
+<button
 
-            <div id="reader"></div>
+id="btnBack"
 
-            <button
+class="btn back">
 
-                class="back"
+QUAY LẠI
 
-                onclick="CameraController.backHome()">
+</button>
 
-                QUAY LẠI
+</div>
 
-            </button>
+</div>
 
-        </div>
+<!--==============================
+POPUP
+===============================-->
 
-    </div>
+<div
 
-    <!--==================================
-    POPUP
-    ===================================-->
+id="overlay"
 
-    <div
+class="hidden">
 
-        id="overlay"
+<div id="overlayCard">
 
-        class="hidden">
+<div id="overlayTitle"></div>
 
-        <div id="overlayCard">
+<img id="overlayPhoto">
 
-            <div id="overlayTitle"></div>
+<div id="overlayName"></div>
 
-            <img id="overlayPhoto">
+<div id="overlayKhoi"></div>
 
-            <div id="overlayName"></div>
+<div id="overlayClass"></div>
 
-            <div id="overlayKhoi"></div>
+<div id="overlayCode"></div>
 
-            <div id="overlayClass"></div>
+<div id="overlayTime"></div>
 
-            <div id="overlayCode"></div>
+<div id="overlayHint"></div>
 
-            <div id="overlayTime"></div>
+</div>
 
-            <div id="overlayHint"></div>
+</div>
 
-        </div>
+<!--==============================
+DEBUG
+===============================-->
 
-    </div>
+<div
 
-    <!--==================================
-    DEBUG
-    ===================================-->
+id="debugButton"
 
-    <div
+class="hidden">
 
-        id="debugButton"
+🐞
 
-        class="hidden">
+</div>
 
-        🐞
+<div
 
-    </div>
+id="debugPanel"
 
-    <div
+class="hidden">
 
-        id="debugPanel"
+<div id="debugHeader">
 
-        class="hidden">
+Developer Console
 
-        <div id="debugHeader">
+</div>
 
-            Developer Console
+<div id="debugContent"></div>
 
-        </div>
+</div>
 
-        <div id="debugContent"></div>
+<!--==============================
+LIBRARY
+===============================-->
 
-    </div>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
-    <!--==================================
-    LIBRARY
-    ===================================-->
+<!--==============================
+SYSTEM
+===============================-->
 
-    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="../system/version.js"></script>
+<script src="../system/config.js"></script>
+<script src="../system/constants.js"></script>
+<script src="../system/model.js"></script>
+<script src="../system/core.js"></script>
+<script src="../system/renderer.js"></script>
+<script src="../system/debug.js"></script>
+<script src="../system/utils.js"></script>
+<script src="../system/auth.js"></script>
 
-    <!--==================================
-    SYSTEM
-    ===================================-->
+<!--==============================
+ATTENDANCE
+===============================-->
 
-    <script src="../system/version.js"></script>
-    <script src="../system/config.js"></script>
-    <script src="../system/constants.js"></script>
-    <script src="../system/model.js"></script>
-    <script src="../system/core.js"></script>
-    <script src="../system/renderer.js"></script>
-    <script src="../system/debug.js"></script>
-    <script src="../system/utils.js"></script>
-    <script src="../system/auth.js"></script>
+<script src="attendance.renderer.js"></script>
+<script src="attendance.service.js"></script>
+<script src="attendance.controller.js"></script>
 
-    <!--==================================
-    ATTENDANCE
-    ===================================-->
+<script src="api.js"></script>
+<script src="offline.js"></script>
 
-    <script src="attendance.renderer.js"></script>
-    <script src="attendance.service.js"></script>
-    <script src="attendance.controller.js"></script>
+<!--==============================
+CAMERA
+===============================-->
 
-    <script src="offline.js"></script>
-    <script src="api.js"></script>
+<script src="camera/camera.service.js"></script>
+<script src="camera/camera.controller.js"></script>
 
-    <!--==================================
-    CAMERA
-    ===================================-->
+<!--==============================
+POPUP
+===============================-->
 
-    <script src="camera/camera.service.js"></script>
-    <script src="camera/camera.controller.js"></script>
+<script src="popup/popup.renderer.js"></script>
+<script src="popup/popup.service.js"></script>
 
-    <!--==================================
-    POPUP
-    ===================================-->
+<!--==============================
+APP
+===============================-->
 
-    <script src="popup/popup.renderer.js"></script>
-    <script src="popup/popup.service.js"></script>
+<script src="app.js"></script>
 
-    <!--==================================
-    APP
-    ===================================-->
+<script>
 
-    <script src="app.js"></script>
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        Utils.id("btnLe")
+
+            .addEventListener(
+
+                "click",
+
+                ()=>AttendanceController.start(
+
+                    LOAI.LE
+
+                )
+
+            );
+
+        Utils.id("btnGiaoLy")
+
+            .addEventListener(
+
+                "click",
+
+                ()=>AttendanceController.start(
+
+                    LOAI.GIAOLY
+
+                )
+
+            );
+
+        Utils.id("btnBack")
+
+            .addEventListener(
+
+                "click",
+
+                AttendanceController.backHome
+
+            );
+
+    }
+
+);
+
+</script>
 
 </body>
 
