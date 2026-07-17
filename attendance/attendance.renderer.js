@@ -1,120 +1,33 @@
-//======================================
-// ATTENDANCE RENDERER
-// Giáo xứ Phú Hòa
-//======================================
-
 "use strict";
 
-const AttendanceRenderer = (()=>{
+const AttendanceRenderer = (() => {
 
-    //----------------------------------
-    // HOME
-    //----------------------------------
-
-    function showHome(){
-
-        const home = document.querySelector(".home");
-
-        if(home){
-
-            Renderer.show(home);
-
-        }
-
+    function showHome() {
+        Renderer.show("homeBox"); // Giả định ID của container home là homeBox
         hideScanner();
-
     }
 
-    function hideHome(){
-
-        const home = document.querySelector(".home");
-
-        if(home){
-
-            Renderer.hide(home);
-
-        }
-
+    function hideHome() {
+        Renderer.hide("homeBox");
     }
 
-    //----------------------------------
-    // SCANNER
-    //----------------------------------
-
-    function showScanner(loai){
-
+    function showScanner(loai) {
         hideHome();
-
-        const box = Utils.id("scannerBox");
-
-        Renderer.show(box);
-
+        Renderer.show("scannerBox");
         renderType(loai);
-
     }
 
-    function hideScanner(){
-
-        const box = Utils.id("scannerBox");
-
-        Renderer.hide(box);
-
+    function hideScanner() {
+        Renderer.hide("scannerBox");
     }
 
-    //----------------------------------
-    // TITLE
-    //----------------------------------
-
-    function renderType(loai){
-
-        const txt = Utils.id("typeTitle");
-
-        if(!txt){
-
-            return;
-
-        }
-
-        txt.innerText = "Điểm danh: " + loai;
-
+    function renderType(loai) {
+        Renderer.text("typeTitle", "Điểm danh: " + loai);
     }
 
-    //----------------------------------
-    // COUNTER
-    //----------------------------------
-
-    function renderTodayCounter(total){
-
-        const txt = Utils.id("todayCount");
-
-        if(!txt){
-
-            return;
-
-        }
-
-        txt.innerText =
-            "Đã điểm danh hôm nay: "
-            + total
-            + " em";
-
+    function renderTodayCounter(total) {
+        Renderer.text("todayCount", "Đã điểm danh hôm nay: " + total + " em");
     }
 
-    //----------------------------------
-    // PUBLIC
-    //----------------------------------
-
-    return{
-
-        showHome,
-        hideHome,
-
-        showScanner,
-        hideScanner,
-
-        renderType,
-        renderTodayCounter
-
-    };
-
+    return { showHome, hideHome, showScanner, hideScanner, renderType, renderTodayCounter };
 })();
