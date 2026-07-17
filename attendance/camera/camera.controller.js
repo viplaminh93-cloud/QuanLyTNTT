@@ -4,19 +4,26 @@ window.daQuet = false;
 
 async function startCamera() {
     window.daQuet = false;
-    await CameraService.start(qrSuccess);
+    // Kiểm tra để tránh lỗi nếu CameraService chưa load xong
+    if (typeof CameraService !== 'undefined') {
+        await CameraService.start(qrSuccess);
+    } else {
+        Utils.error("CameraService chưa được định nghĩa!");
+    }
 }
 
 async function stopCamera() {
     window.daQuet = false;
-    await CameraService.stop();
+    if (typeof CameraService !== 'undefined') await CameraService.stop();
 }
 
-async function pauseCamera() { await CameraService.pause(); }
+async function pauseCamera() { 
+    if (typeof CameraService !== 'undefined') await CameraService.pause(); 
+}
 
 async function resumeCamera() {
     window.daQuet = false;
-    await CameraService.resume();
+    if (typeof CameraService !== 'undefined') await CameraService.resume();
 }
 
 async function qrSuccess(qrText) {
@@ -36,7 +43,7 @@ async function qrSuccess(qrText) {
 }
 
 document.addEventListener("visibilitychange", async () => {
-    if (!document.hidden && CameraService.exists() && !window.daQuet) {
+    if (!document.hidden && typeof CameraService !== 'undefined' && CameraService.exists() && !window.daQuet) {
         try { await resumeCamera(); } catch (e) { Utils.error(e); }
     }
 });
