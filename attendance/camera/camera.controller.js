@@ -24,12 +24,12 @@ async function qrSuccess(qrText) {
     window.daQuet = true;
 
     await pauseCamera();
-    if (navigator.vibrate) navigator.vibrate(100);
+    Utils.vibrate(100);
 
     try {
         await AttendanceController.onQRCode(qrText);
     } catch (error) {
-        console.error(error);
+        Utils.error(error);
         window.daQuet = false;
         await resumeCamera();
     }
@@ -37,6 +37,6 @@ async function qrSuccess(qrText) {
 
 document.addEventListener("visibilitychange", async () => {
     if (!document.hidden && CameraService.exists() && !window.daQuet) {
-        try { await resumeCamera(); } catch (e) { console.error(e); }
+        try { await resumeCamera(); } catch (e) { Utils.error(e); }
     }
 });
