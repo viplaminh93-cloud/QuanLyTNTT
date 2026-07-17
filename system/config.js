@@ -36,7 +36,7 @@ const Config = Object.freeze({
 
         URL :
 
-            "https://script.google.com/macros/s/AKfycbzvE4lz1fSEEOGCMp5JC2_uBjA8unDnx36Ic6CO344dSyKX6ZEDMnrdJ6ffBzoBMUqxpw/exec"
+            "https://script.google.com/macros/s/AKfycbzsYEm3ghpVy9zAXI3xrJgYE6g-G0H_7q3FMT6s6hT1Ztq4Y6pDGy3z8jXGVa-rkTwx5Q/exec"
 
     }),
 
