@@ -5,14 +5,6 @@
 
 "use strict";
 
-/**
- * ======================================
- * ATTENDANCE APP
- *
- * Bootstrap Attendance Module
- * ======================================
- */
-
 window.addEventListener(
 
     "load",
@@ -27,40 +19,27 @@ window.addEventListener(
 
 function initializeAttendance(){
 
-    console.log(
-        "================================"
-    );
+    console.log("================================");
 
-    console.log(
-        Config.APP.PARISH
-    );
+    console.log(Config.APP.PARISH);
 
-    console.log(
-        Config.APP.NAME
-    );
+    console.log(Config.APP.NAME);
 
-    console.log(
-        "Version:",
-        Version.VERSION
-    );
+    console.log("Version:",Version.VERSION);
 
-    console.log(
-        "================================"
-    );
+    console.log("================================");
 
     //----------------------------------
-    // Queue Badge
+    // Queue
     //----------------------------------
 
     if(
 
-        typeof renderQueueBadge ===
-
-        "function"
+        typeof OfflineService !== "undefined"
 
     ){
 
-        renderQueueBadge();
+        OfflineService.renderQueueBadge();
 
     }
 
@@ -73,14 +52,10 @@ function initializeAttendance(){
 }
 
 //======================================
-// PWA
+// INSTALL
 //======================================
 
 let installPrompt = null;
-
-//======================================
-// BEFORE INSTALL
-//======================================
 
 window.addEventListener(
 
@@ -92,25 +67,19 @@ window.addEventListener(
 
         installPrompt = event;
 
-        Renderer.show(
-
-            Utils.id("installBtn")
-
-        );
+        Renderer.show("installBtn");
 
     }
 
 );
 
 //======================================
-// INSTALL INIT
+// INIT PWA
 //======================================
 
 function initializePWA(){
 
-    const button =
-
-        Utils.id("installBtn");
+    const button = Utils.id("installBtn");
 
     if(!button){
 
@@ -129,7 +98,7 @@ function initializePWA(){
 }
 
 //======================================
-// INSTALL
+// INSTALL APP
 //======================================
 
 async function installApplication(){
@@ -146,11 +115,7 @@ async function installApplication(){
 
     installPrompt = null;
 
-    Renderer.hide(
-
-        Utils.id("installBtn")
-
-    );
+    Renderer.hide("installBtn");
 
 }
 
@@ -164,26 +129,36 @@ if(
 
 ){
 
-    navigator.serviceWorker
+    window.addEventListener(
 
-        .register(
+        "load",
 
-            "../service-worker.js"
+        ()=>{
 
-        )
+            navigator.serviceWorker
 
-        .then(reg=>{
+                .register(
 
-            console.log(
+                    "../service-worker.js"
 
-                "Service Worker OK",
+                )
 
-                reg
+                .then(reg=>{
 
-            );
+                    console.log(
 
-        })
+                        "Service Worker OK",
 
-        .catch(console.error);
+                        reg
+
+                    );
+
+                })
+
+                .catch(console.error);
+
+        }
+
+    );
 
 }
