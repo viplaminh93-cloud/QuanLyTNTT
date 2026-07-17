@@ -1,202 +1,166 @@
 //======================================
-// API
+// ATTENDANCE API
 // Giáo xứ Phú Hòa
 //======================================
 
 "use strict";
 
-/**
- * ======================================
- * API MODULE
- *
- * Chức năng
- * - Tạo Request
- * - Gửi Apps Script
- * - Đồng bộ Offline
- * - Trả dữ liệu về AttendanceService
- *
- * Không xử lý UI.
- * Không xử lý Popup.
- * Không xử lý Camera.
- * ======================================
- */
-
 const AttendanceAPI = (()=>{
 
-    //======================================
+    //----------------------------------
     // CREATE REQUEST
-    //======================================
+    //----------------------------------
 
     function createRequest(maso){
 
         return{
 
-            maso :
-                maso
-                    .trim()
-                    .toUpperCase(),
+            action : "attendance",
 
-            loai :
-                App.loaiDiemDanh,
+            maso : String(maso)
+
+                .trim()
+
+                .toUpperCase(),
+
+            loai : AttendanceService.getCurrentType(),
 
             requestId :
-                Date.now()
-                + "_"
-                + Math.random(),
 
-            time :
                 Date.now()
+
+                + "_"
+
+                + Math.random()
+
+                    .toString(36)
+
+                    .substring(2,8),
+
+            time : Date.now()
 
         };
 
     }
 
-    //======================================
-    // FETCH WITH TIMEOUT
-    //======================================
+    //----------------------------------
+    // POST
+    //----------------------------------
 
-    async function fetchWithTimeout(
+    async function post(data){
 
-        url,
-        options,
-        timeout = 5000
+        return await Auth.post(data);
 
-    ){
+    }
 
-        const controller =
+    //----------------------------------
+    // SEND
+    //----------------------------------
 
-            new AbortController();
+    async function sendAttendance(maso){
 
-        const timer =
+        const request =
 
-            setTimeout(
+            createRequest(maso);
 
-                ()=>controller.abort(),
+        //----------------------------------
+        // OFFLINE
+        //----------------------------------
 
-                timeout
+        if(!navigator.onLine){
 
-            );
+            OfflineService.push(request);
+
+            return{
+
+                success : false,
+
+                offline : true,
+
+                maso : request.maso,
+
+                message :
+
+                    "Đã lưu Offline."
+
+            };
+
+        }
+
+        //----------------------------------
+        // ONLINE
+        //----------------------------------
 
         try{
 
-            const response =
-
-                await fetch(
-
-                    url,
-
-                    {
-
-                        ...options,
-
-                        signal :
-
-                            controller.signal
-
-                    }
-
-                );
-
-            clearTimeout(timer);
-
-            return response;
+            return await post(request);
 
         }
 
-        catch(err){
+        catch(error){
 
-            clearTimeout(timer);
+            console.error(error);
 
-            throw err;
+            OfflineService.push(request);
+
+            return{
+
+                success : false,
+
+                offline : true,
+
+                maso : request.maso,
+
+                message :
+
+                    "Đã lưu Offline."
+
+            };
 
         }
 
     }
 
-    //======================================
-    // POST
-    //======================================
-
-    async function post(request){
-
-        const response =
-
-            await fetchWithTimeout(
-
-                CONFIG.API.URL,
-
-                {
-
-                    method :
-
-                        "POST",
-
-                    redirect :
-
-                        "follow",
-
-                    headers : {
-
-                        "Content-Type":
-
-                        "text/plain;charset=utf-8"
-
-                    },
-
-                    body :
-
-                        JSON.stringify(request)
-
-                }
-
-            );
-
-        return await response.json();
-
-    }
-
-    //======================================
+    //----------------------------------
     // RESEND
-    //======================================
+    //----------------------------------
 
     async function resend(request){
-
-        debug(
-
-            MODULE.API,
-
-            "Resend : "
-
-            + request.maso
-
-        );
 
         return await post(request);
 
     }
 
-    //======================================
-    // SEND REQUEST
-    //======================================
+    //----------------------------------
+    // TODAY COUNTER
+    //----------------------------------
 
-    async function sendAttendance(maso){
-    
-        const request = createRequest(maso);
-    
-        return await send(request);
-    
+    async function getTodayCounter(loai){
+
+        return await Auth.post({
+
+            action : "todayCounter",
+
+            loai : loai
+
+        });
+
     }
 
+    //----------------------------------
+    // PUBLIC
+    //----------------------------------
 
+    return{
 
-    //======================================
+        sendAttendance,
 
-return{
+        getTodayCounter,
 
-    sendAttendance,
+        resend,
 
-    resend,
+        post
 
-    post
+    };
 
-};
+})();
