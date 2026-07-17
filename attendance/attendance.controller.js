@@ -1,6 +1,6 @@
 "use strict";
 
-async function start(loai) {
+/* async function start(loai) {
     AttendanceService.setCurrentType(loai);
     processing = false;
     
@@ -9,7 +9,7 @@ async function start(loai) {
     AttendanceRenderer.renderTodayCounter(count);
     
     await CameraController.start(); 
-}
+}   */
 
 const AttendanceController = (() => {
     let processing = false;
