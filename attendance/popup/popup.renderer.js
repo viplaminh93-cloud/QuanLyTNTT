@@ -31,47 +31,51 @@ const PopupRenderer = (()=>{
 
     function renderTitle(data){
 
-        const obj = Utils.id("overlayTitle");
-
-        if(!obj){
-
-            return;
-
-        }
+        let title = "❌ KHÔNG TÌM THẤY";
 
         if(data.success){
 
-            obj.innerText =
-
-                "✅ ĐIỂM DANH THÀNH CÔNG";
-
-            return;
+            title = "✅ ĐIỂM DANH THÀNH CÔNG";
 
         }
 
-        if(data.offline){
+        else if(data.offline){
 
-            obj.innerText =
-
-                "📴 ĐÃ LƯU OFFLINE";
-
-            return;
+            title = "📴 ĐÃ LƯU OFFLINE";
 
         }
 
-        if(data.duplicate){
+        else if(data.duplicate){
 
-            obj.innerText =
-
-                "⚠️ ĐÃ ĐIỂM DANH";
-
-            return;
+            title = "⚠️ ĐÃ ĐIỂM DANH";
 
         }
 
-        obj.innerText =
+        Renderer.text(
 
-            "❌ KHÔNG TÌM THẤY";
+            "overlayTitle",
+
+            title
+
+        );
+
+    }
+
+    //----------------------------------
+    // PHOTO
+    //----------------------------------
+
+    function renderPhoto(data){
+
+        Renderer.image(
+
+            "overlayPhoto",
+
+            data.photo ||
+
+            "../icons/avatar.png"
+
+        );
 
     }
 
@@ -79,15 +83,15 @@ const PopupRenderer = (()=>{
     // NAME
     //----------------------------------
 
-    function renderStudentName(data){
+    function renderName(data){
 
-        Utils.id("overlayName").innerText =
+        Renderer.text(
 
-            data.hoten ||
+            "overlayName",
 
-            data.name ||
+            data.hoten || ""
 
-            "";
+        );
 
     }
 
@@ -95,109 +99,65 @@ const PopupRenderer = (()=>{
     // KHỐI
     //----------------------------------
 
-    function renderStudentKhoi(data){
+    function renderKhoi(data){
 
-        const khoi =
+        Renderer.text(
 
-            data.khoi ||
+            "overlayKhoi",
 
-            "";
+            data.khoi || ""
 
-        Utils.id("overlayKhoi").innerText =
-
-            khoi;
-
-        if(
-
-            khoi &&
-
-            Config.KHOI[khoi]
-
-        ){
-
-            Utils.id("overlay")
-
-                .classList
-
-                .add(
-
-                    Config.KHOI[khoi].css
-
-                );
-
-        }
+        );
 
     }
 
     //----------------------------------
-    // LỚP
+    // CLASS
     //----------------------------------
 
-    function renderStudentClass(data){
+    function renderClass(data){
 
-        Utils.id("overlayClass").innerText =
+        Renderer.text(
 
-            data.lop ||
+            "overlayClass",
 
-            "";
+            data.lop || ""
+
+        );
 
     }
 
     //----------------------------------
-    // MÃ SỐ
+    // CODE
     //----------------------------------
 
-    function renderStudentCode(data){
+    function renderCode(data){
 
-        Utils.id("overlayCode").innerText =
+        Renderer.text(
 
-            data.maso ||
+            "overlayCode",
 
-            "";
+            data.maso || ""
+
+        );
 
     }
 
     //----------------------------------
-    // ẢNH
+    // TIME
     //----------------------------------
 
-    function renderStudentPhoto(data){
+    function renderTime(data){
 
-        const img =
+        Renderer.text(
 
-            Utils.id("overlayPhoto");
+            "overlayTime",
 
-        if(!img){
+            data.time ||
 
-            return;
+            Utils.formatTime()
 
-        }
-
-        img.src =
-
-            data.photo ||
-
-            data.hinhanh ||
-
-            "../icons/avatar.png";
-
-    }
-
-    //----------------------------------
-    // STUDENT
-    //----------------------------------
-
-    function renderStudent(data){
-
-        renderStudentName(data);
-
-        renderStudentKhoi(data);
-
-        renderStudentClass(data);
-
-        renderStudentCode(data);
-
-        renderStudentPhoto(data);
+        );
 
     }
 
@@ -207,9 +167,33 @@ const PopupRenderer = (()=>{
 
     function renderHint(){
 
-        Utils.id("overlayHint").innerText =
+        Renderer.text(
 
-            Config.POPUP.HINT;
+            "overlayHint",
+
+            "Chạm để tiếp tục"
+
+        );
+
+    }
+
+    //----------------------------------
+    // STUDENT
+    //----------------------------------
+
+    function renderStudent(data){
+
+        renderPhoto(data);
+
+        renderName(data);
+
+        renderKhoi(data);
+
+        renderClass(data);
+
+        renderCode(data);
+
+        renderTime(data);
 
     }
 
@@ -219,11 +203,7 @@ const PopupRenderer = (()=>{
 
     function show(){
 
-        Utils.id("overlay")
-
-            .classList
-
-            .remove("hidden");
+        Renderer.show("overlay");
 
     }
 
@@ -233,11 +213,7 @@ const PopupRenderer = (()=>{
 
     function hide(){
 
-        Utils.id("overlay")
-
-            .classList
-
-            .add("hidden");
+        Renderer.hide("overlay");
 
     }
 
