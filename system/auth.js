@@ -61,17 +61,17 @@ const Auth = (() => {
 
     function getEmail() {
         const userInfo = JSON.parse(localStorage.getItem(USER_INFO_KEY) || "{}");
-        return userInfo.email || "";
+        return userInfo.email || "Người dùng";
     }
 
     function getRole() {
         const userInfo = JSON.parse(localStorage.getItem(USER_INFO_KEY) || "{}");
-        return userInfo.role || "";
+        return userInfo.role || "KHACH";
     }
 
     function getName() {
         const userInfo = JSON.parse(localStorage.getItem(USER_INFO_KEY) || "{}");
-        return userInfo.userName || "";
+        return userInfo.name || userInfo.email;
     }
 
     async function post(body = {}) {
