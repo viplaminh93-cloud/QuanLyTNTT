@@ -3,16 +3,15 @@
 const AttendanceController = (() => {
     let processing = false;
 
-        async function start(loai) {
-            AttendanceService.setCurrentType(loai);
-            processing = false;
-            
-            AttendanceRenderer.showScanner(loai);
-            const count = await AttendanceService.getTodayCounter();
-            AttendanceRenderer.renderTodayCounter(count);
-            
-            await CameraController.start(); 
-        }
+    async function start(loai) {
+        AttendanceService.setCurrentType(loai);
+        processing = false;
+        
+        AttendanceRenderer.showScanner(loai);
+        const count = await AttendanceService.getTodayCounter();
+        AttendanceRenderer.renderTodayCounter(count);
+        
+        await CameraController.start(); 
     }
 
     async function onQRCode(qrText) {
@@ -29,7 +28,7 @@ const AttendanceController = (() => {
         } catch (error) {
             Utils.error(error);
             processing = false;
-            await CameraService.resumeCamera();
+            await CameraController.resume(); // Đã sửa từ CameraService.resumeCamera() thành CameraController.resume()
         }
     }
 
@@ -38,10 +37,11 @@ const AttendanceController = (() => {
         await PopupService.close();
     }
 
-async function backHome() {
-    processing = false;
-    await CameraController.stop();
-    AttendanceRenderer.showHome();
-}
+    async function backHome() {
+        processing = false;
+        await CameraController.stop();
+        AttendanceRenderer.showHome();
+    }
+
     return { start, onQRCode, closePopup, backHome };
 })();
