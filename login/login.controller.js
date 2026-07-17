@@ -53,96 +53,32 @@ function initLogin(){
  * ======================================
  */
 
-async function handleLogin(){
-
-    //----------------------------------
-    // Lấy email
-    //----------------------------------
-
+async function handleLogin() {
     const email = LoginService.getLoginEmail();
-
-    //----------------------------------
-    // Kiểm tra
-    //----------------------------------
-
-    if(email === ""){
-
-        LoginRenderer.showError(
-
-            "Nhập Email."
-
-        );
-
+    if (email === "") {
+        LoginRenderer.showError("Nhập Email.");
         return;
-
     }
-
-    //----------------------------------
-    // Disable nút
-    //----------------------------------
 
     LoginRenderer.setLoading(true);
-
-    //----------------------------------
-    // Gửi Server
-    //----------------------------------
-
-    try{
-
+    try {
         const result = await LoginService.login(email);
-
-        //----------------------------------
-        // Không thành công
-        //----------------------------------
-
-        if(!result.success){
-
-            LoginRenderer.showError(
-
-                result.message
-
-            );
-
+        if (!result.success) {
+            LoginRenderer.showError(result.message);
             return;
-
         }
 
-        //----------------------------------
-        // Lưu Token
-        //----------------------------------
+        // Truyền cả token và thông tin user vào đây
+        await Auth.login(result.token, { 
+            email: email, 
+            role: result.role || "Người dùng" 
+        });
 
-        await Auth.login(
-
-            result.token
-
-        );
-
-        //----------------------------------
-        // Chuyển Dashboard
-        //----------------------------------
-
-        location.href =
-
-            "../dashboard/dashboard.html";
-
-    }
-
-    catch(err){
-
+        location.href = "../dashboard/dashboard.html";
+    } catch (err) {
         console.error(err);
-
-        LoginRenderer.showError(
-
-            "Không kết nối được máy chủ."
-
-        );
-
-    }
-
-    finally{
-
+        LoginRenderer.showError("Không kết nối được máy chủ.");
+    } finally {
         LoginRenderer.setLoading(false);
-
     }
-
 }
