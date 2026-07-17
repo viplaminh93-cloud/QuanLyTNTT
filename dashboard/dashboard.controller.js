@@ -145,7 +145,7 @@ function loadUser(){
 
     const role =
 
-        Auth.getRole.() || "Người dùng";
+        Auth.getRole || "Người dùng";
 
     Utils.id("txtEmail").innerText =
 
