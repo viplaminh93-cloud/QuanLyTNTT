@@ -1,47 +1,138 @@
+//======================================
+// ATTENDANCE CONTROLLER
+// Giáo xứ Phú Hòa
+//======================================
+
 "use strict";
 
-const AttendanceController = (() => {
+const AttendanceController = (()=>{
+
     let processing = false;
 
-    async function start(loai) {
-        AttendanceService.setCurrentType(loai);
+    //----------------------------------
+    // START
+    //----------------------------------
+
+    async function start(loai){
+
         processing = false;
-        
+
+        AttendanceService.setCurrentType(loai);
+
         AttendanceRenderer.showScanner(loai);
-        const count = await AttendanceService.getTodayCounter();
-        AttendanceRenderer.renderTodayCounter(count);
-        
-        await CameraController.start(); 
+
+        const total =
+
+            await AttendanceService.getTodayCounter();
+
+        AttendanceRenderer.renderTodayCounter(total);
+
+        await CameraController.start();
+
     }
 
-    async function onQRCode(qrText) {
-        if (processing) return;
+    //----------------------------------
+    // QR SUCCESS
+    //----------------------------------
+
+    async function onQRCode(qrText){
+
+        if(processing){
+
+            return;
+
+        }
+
         processing = true;
 
-        try {
-            const result = await AttendanceService.sendAttendance(qrText);
-            if (result.success) {
-                const count = await AttendanceService.getTodayCounter();
-                AttendanceRenderer.renderTodayCounter(count);
+        try{
+
+            const result =
+
+                await AttendanceService.sendAttendance(
+
+                    qrText
+
+                );
+
+            //----------------------------------
+            // Update counter
+            //----------------------------------
+
+            if(result.success){
+
+                const total =
+
+                    await AttendanceService.getTodayCounter();
+
+                AttendanceRenderer.renderTodayCounter(
+
+                    total
+
+                );
+
             }
+
+            //----------------------------------
+            // Popup
+            //----------------------------------
+
             PopupService.show(result);
-        } catch (error) {
-            Utils.error(error);
-            processing = false;
-            await CameraController.resume();
+
         }
+
+        catch(error){
+
+            console.error(error);
+
+            processing = false;
+
+            await CameraController.resume();
+
+        }
+
     }
 
-    async function closePopup() {
+    //----------------------------------
+    // CLOSE POPUP
+    //----------------------------------
+
+    async function closePopup(){
+
         processing = false;
+
         await PopupService.close();
+
     }
 
-    async function backHome() {
+    //----------------------------------
+    // BACK HOME
+    //----------------------------------
+
+    async function backHome(){
+
         processing = false;
+
+        AttendanceService.reset();
+
         await CameraController.stop();
+
         AttendanceRenderer.showHome();
+
     }
 
-    return { start, onQRCode, closePopup, backHome };
+    //----------------------------------
+
+    return{
+
+        start,
+
+        onQRCode,
+
+        closePopup,
+
+        backHome
+
+    };
+
 })();
