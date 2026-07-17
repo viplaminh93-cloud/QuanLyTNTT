@@ -141,7 +141,7 @@ function loadUser(){
 
     const email =
 
-        Auth.getEmail.() || "Chưa xác định";
+        Auth.getToken.() || "Chưa xác định";
 
     const role =
 
