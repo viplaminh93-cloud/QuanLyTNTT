@@ -150,13 +150,12 @@ function bind(id,callback){
 function loadUser() {
 
     const name = Auth.getName() || "Bạn hiền";
-    const email = Auth.getEmail() || "Chưa xác định";
     const role = Auth.getRole() || "Người dùng";
 
-    const emailEl = Utils.id("txtEmail");
+    const nameEl = Utils.id("txtEmail");
     const roleEl = Utils.id("txtRole");
 
-    if (emailEl) emailEl.innerText = email;
+    if (nameEl) nameEl.innerText = name;
     if (roleEl) roleEl.innerText = role;
 }
 
