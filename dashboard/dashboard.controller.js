@@ -137,25 +137,25 @@ function bind(id,callback){
  * ======================================
  */
 
-function loadUser(){
+function loadUser() {
+    // Bây giờ Auth.getEmail() và Auth.getRole() đã tồn tại
+    const email = Auth.getEmail() || "Chưa xác định";
+    const role = Auth.getRole() || "Người dùng";
 
-    const email =
+    const emailEl = Utils.id("txtEmail");
+    const roleEl = Utils.id("txtRole");
 
-        Auth.getEmail() || "Chưa xác định";
-
-    const role =
-
-        Auth.getRole() || "Người dùng";
-
-    Utils.id("txtEmail").innerText =
-
-        email;
-
-    Utils.id("txtRole").innerText =
-
-        role;
-
+    if (emailEl) emailEl.innerText = email;
+    if (roleEl) roleEl.innerText = role;
 }
+
+function init() {
+    Auth.requireLogin();
+    loadUser();
+    bindEvents();
+}
+
+window.addEventListener("load", init);
 
 /**
  * ======================================
