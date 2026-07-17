@@ -43,7 +43,16 @@ function init(){
     //----------------------------------
 
     loadUser();
+    const role = Auth.getRole(); // Lấy quyền
 
+    // Ẩn/Hiện nút dựa trên quyền
+        if (role === "QUET_MA") {
+            Utils.id("btnStudents").style.display = "none";
+            Utils.id("btnReports").style.display = "none";
+        } else if (role === "QUAN_LY") {
+            Utils.id("btnReports").style.display = "none";
+        }
+    
     //----------------------------------
     // Gắn sự kiện
     //----------------------------------
