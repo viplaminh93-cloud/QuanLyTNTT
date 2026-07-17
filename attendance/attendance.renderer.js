@@ -3,22 +3,22 @@
 const AttendanceRenderer = (() => {
 
     function showHome() {
-        Renderer.show("homeBox"); // Giả định ID của container home là homeBox
+        Renderer.show(Utils.id("homeBox"));
         hideScanner();
     }
 
     function hideHome() {
-        Renderer.hide("homeBox");
+        Renderer.hide(Utils.id("homeBox"));
     }
 
     function showScanner(loai) {
         hideHome();
-        Renderer.show("scannerBox");
+        Renderer.show(Utils.id("scannerBox"));
         renderType(loai);
     }
 
     function hideScanner() {
-        Renderer.hide("scannerBox");
+        Renderer.hide(Utils.id("scannerBox"));
     }
 
     function renderType(loai) {
