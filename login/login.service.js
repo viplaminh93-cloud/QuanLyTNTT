@@ -61,8 +61,7 @@ const LoginService = (() => {
 
         login,
         saveToken,
-        getLoginEmail,
-        userName
+        getLoginEmail
 
     };
 
