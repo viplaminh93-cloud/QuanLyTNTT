@@ -14,21 +14,41 @@ const AttendanceController = (()=>{
     //----------------------------------
 
     async function start(loai){
-
-        processing = false;
-
-        AttendanceService.setCurrentType(loai);
-
-        AttendanceRenderer.showScanner(loai);
-
-        const total =
-
-            await AttendanceService.getTodayCounter();
-
-        AttendanceRenderer.renderTodayCounter(total);
-
-        await CameraController.start();
-
+    
+        try{
+    
+            processing = false;
+    
+            AttendanceService.setCurrentType(loai);
+    
+            console.log("1");
+    
+            AttendanceRenderer.showScanner(loai);
+    
+            console.log("2");
+    
+            const total = await AttendanceService.getTodayCounter();
+    
+            console.log("3");
+    
+            AttendanceRenderer.renderTodayCounter(total);
+    
+            console.log("4");
+    
+            await CameraController.start();
+    
+            console.log("5");
+    
+        }
+    
+        catch(e){
+    
+            console.error(e);
+    
+            alert(e.message);
+    
+        }
+    
     }
 
     //----------------------------------
