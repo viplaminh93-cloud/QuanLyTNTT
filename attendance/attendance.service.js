@@ -5,74 +5,22 @@
 
 "use strict";
 
-const AttendanceService = (()=>{
+const AttendanceService = (() => {
+    let currentType = "Mặc định";
 
-    //----------------------------------
-    // GỬI ĐIỂM DANH
-    //----------------------------------
+    function setCurrentType(loai) { currentType = loai; }
+    function getCurrentType() { return currentType; }
 
-    async function sendAttendance(qrText, loai){
-
-        return await AttendanceAPI.sendAttendance(
-
-            qrText,
-
-            loai
-
-        );
-
+    async function sendAttendance(qrText) {
+        return await AttendanceAPI.sendAttendance(qrText);
     }
 
-    //----------------------------------
-    // LẤY TỔNG HÔM NAY
-    //----------------------------------
-
-    async function getTodayCounter(loai){
-
-        try{
-
-            const response = await Auth.post({
-
-                action : "todayCounter",
-
-                loai : loai
-
-            });
-
-            if(!response.success){
-
-                return 0;
-
-            }
-
-            return Number(
-
-                response.total || 0
-
-            );
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
-            return 0;
-
-        }
-
+    async function getTodayCounter() {
+        try {
+            const response = await Auth.post({ action: "todayCounter", loai: currentType });
+            return response.success ? Number(response.total || 0) : 0;
+        } catch (e) { console.error(e); return 0; }
     }
 
-    //----------------------------------
-    // PUBLIC
-    //----------------------------------
-
-    return{
-
-        sendAttendance,
-
-        getTodayCounter
-
-    };
-
+    return { sendAttendance, getTodayCounter, setCurrentType, getCurrentType };
 })();
