@@ -9,8 +9,7 @@
  * ======================================
  * ATTENDANCE APP
  *
- * Bootstrap module Attendance.
- * Không chứa Business.
+ * Bootstrap Attendance Module
  * ======================================
  */
 
@@ -35,24 +34,39 @@ function initializeAttendance(){
     console.log(
         Config.APP.PARISH
     );
-    
+
     console.log(
         Config.APP.NAME
     );
 
     console.log(
-
         "Version:",
-
         Version.VERSION
-
     );
 
     console.log(
         "================================"
     );
 
-//    renderQueueBadge();
+    //----------------------------------
+    // Queue Badge
+    //----------------------------------
+
+    if(
+
+        typeof renderQueueBadge ===
+
+        "function"
+
+    ){
+
+        renderQueueBadge();
+
+    }
+
+    //----------------------------------
+    // PWA
+    //----------------------------------
 
     initializePWA();
 
@@ -84,20 +98,12 @@ window.addEventListener(
 
         );
 
-        debug.log(
-
-            MODULE.APP,
-
-            "Install available"
-
-        );
-
     }
 
 );
 
 //======================================
-// INIT INSTALL
+// INSTALL INIT
 //======================================
 
 function initializePWA(){
@@ -123,7 +129,7 @@ function initializePWA(){
 }
 
 //======================================
-// INSTALL APP
+// INSTALL
 //======================================
 
 async function installApplication(){
@@ -152,38 +158,32 @@ async function installApplication(){
 // SERVICE WORKER
 //======================================
 
-if("serviceWorker" in navigator){
+if(
 
-    window.addEventListener(
+    "serviceWorker" in navigator
 
-        "load",
+){
 
-        ()=>{
+    navigator.serviceWorker
 
-            navigator.serviceWorker
+        .register(
 
-                .register(
+            "../service-worker.js"
 
-                    "../service-worker.js"
+        )
 
-                )
+        .then(reg=>{
 
-                .then(reg=>{
+            console.log(
 
-                    console.log(
+                "Service Worker OK",
 
-                        "Service Worker OK",
+                reg
 
-                        reg
+            );
 
-                    );
+        })
 
-                })
-
-                .catch(console.error);
-
-        }
-
-    );
+        .catch(console.error);
 
 }
