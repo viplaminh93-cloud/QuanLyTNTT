@@ -70,7 +70,8 @@ async function handleLogin() {
 
         // Truyền cả token và thông tin user vào đây
         await Auth.login(result.token, { 
-            email: email, 
+            email: email,
+            username: username,
             role: result.role || "Người dùng" 
         });
 
