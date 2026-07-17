@@ -42,7 +42,9 @@ const Auth = (() => {
 
     async function login(token, userInfo = {}) {
         saveToken(token);
-        localStorage.setItem(USER_INFO_KEY, JSON.stringify(userInfo));
+        if(token){
+            localStorage.setItem(USER_INFO_KEY, JSON.stringify(userInfo));
+        }
     }
 
     function logout() {
