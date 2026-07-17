@@ -7,63 +7,179 @@
 
 const AttendanceService = (()=>{
 
-    /**
-     * ======================================
-     * GỬI ĐIỂM DANH
-     * ======================================
-     */
+    //----------------------------------
+    // Loại điểm danh
+    //----------------------------------
 
-    async function sendAttendance(qrText,loai){
+    let currentType = "";
 
-        return await Api.post({
+    //----------------------------------
+    // Tổng hôm nay
+    //----------------------------------
 
-            action:"attendance",
+    let todayCounter = 0;
 
-            maso:qrText,
+    //----------------------------------
+    // START SESSION
+    //----------------------------------
 
-            loai:loai
+    async function start(type){
 
-        });
+        currentType = type;
 
-    }
+        App.loaiDiemDanh = type;
 
-    /**
-     * ======================================
-     * TỔNG HÔM NAY
-     * ======================================
-     */
+        if(
 
-    async function getTodayCounter(loai){
+            navigator.onLine
 
-        const result =
+            &&
 
-            await Api.get({
+            OfflineService.hasQueue()
 
-                action:"todayCounter",
+        ){
 
-                loai:loai
-
-            });
-
-        if(!result.success){
-
-            return 0;
+            await OfflineService.sync();
 
         }
 
-        return Number(
+        AttendanceRenderer.showScanner(type);
 
-            result.total || 0
+        await loadTodayCounter();
+
+        await startCamera();
+
+    }
+
+    //----------------------------------
+    // LOAD COUNTER
+    //----------------------------------
+
+    async function loadTodayCounter(){
+
+        try{
+
+            const response = await Auth.post({
+
+                action : "todayCounter",
+
+                loai : currentType
+
+            });
+
+            if(response.success){
+
+                todayCounter =
+
+                    Number(response.total || 0);
+
+            }
+
+            else{
+
+                todayCounter = 0;
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            todayCounter = 0;
+
+        }
+
+        AttendanceRenderer.renderTodayCounter(
+
+            todayCounter
 
         );
 
     }
 
+    //----------------------------------
+    // SEND ATTENDANCE
+    //----------------------------------
+
+    async function sendAttendance(qrText){
+
+        return await AttendanceAPI.sendAttendance(
+
+            qrText
+
+        );
+
+    }
+
+    //----------------------------------
+    // COUNTER ++
+    //----------------------------------
+
+    function increaseCounter(){
+
+        todayCounter++;
+
+        AttendanceRenderer.renderTodayCounter(
+
+            todayCounter
+
+        );
+
+    }
+
+    //----------------------------------
+    // GET COUNTER
+    //----------------------------------
+
+    function getCounter(){
+
+        return todayCounter;
+
+    }
+
+    //----------------------------------
+    // GET TYPE
+    //----------------------------------
+
+    function getCurrentType(){
+
+        return currentType;
+
+    }
+
+    //----------------------------------
+    // RESET
+    //----------------------------------
+
+    function reset(){
+
+        currentType = "";
+
+        todayCounter = 0;
+
+    }
+
+    //----------------------------------
+    // PUBLIC
+    //----------------------------------
+
     return{
+
+        start,
+
+        loadTodayCounter,
 
         sendAttendance,
 
-        getTodayCounter
+        increaseCounter,
+
+        getCounter,
+
+        getCurrentType,
+
+        reset
 
     };
 
