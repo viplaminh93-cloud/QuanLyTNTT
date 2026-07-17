@@ -28,7 +28,7 @@ const AttendanceController = (() => {
         } catch (error) {
             Utils.error(error);
             processing = false;
-            await CameraController.resume(); // Đã sửa từ CameraService.resumeCamera() thành CameraController.resume()
+            await CameraController.resume();
         }
     }
 
