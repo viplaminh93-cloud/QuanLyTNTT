@@ -6,8 +6,10 @@ const AttendanceService = (() => {
     function setCurrentType(loai) { currentType = loai; }
     function getCurrentType() { return currentType; }
 
-    async function sendAttendance(qrText) {
-        return await AttendanceAPI.sendAttendance(qrText);
+    async function sendAttendance(qrText){
+    
+        return await AttendanceAPI.sendAttendance(qrText, currentType);
+    
     }
 
     async function getTodayCounter() {
