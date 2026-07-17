@@ -1,8 +1,3 @@
-//======================================
-// ATTENDANCE SERVICE
-// Giáo xứ Phú Hòa
-//======================================
-
 "use strict";
 
 const AttendanceService = (() => {
@@ -16,10 +11,8 @@ const AttendanceService = (() => {
     }
 
     async function getTodayCounter() {
-        try {
-            const response = await Auth.post({ action: "todayCounter", loai: currentType });
-            return response.success ? Number(response.total || 0) : 0;
-        } catch (e) { console.error(e); return 0; }
+        const response = await Auth.post({ action: "todayCounter", loai: currentType });
+        return response.success ? Number(response.total || 0) : 0;
     }
 
     return { sendAttendance, getTodayCounter, setCurrentType, getCurrentType };
