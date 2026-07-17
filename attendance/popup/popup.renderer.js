@@ -5,20 +5,11 @@
 
 "use strict";
 
-/**
- * ======================================
- * POPUP RENDERER
- *
- * Chỉ render giao diện.
- * Không xử lý business.
- * ======================================
- */
-
 const PopupRenderer = (()=>{
 
-    //======================================
+    //----------------------------------
     // RESET
-    //======================================
+    //----------------------------------
 
     function reset(){
 
@@ -30,25 +21,13 @@ const PopupRenderer = (()=>{
 
         }
 
-        overlay.classList.add("hidden");
-
-        Object.values(Config.KHOI)
-
-            .forEach(item=>{
-
-                overlay.classList.remove(
-
-                    item.css
-
-                );
-
-            });
+        overlay.className = "hidden";
 
     }
 
-    //======================================
+    //----------------------------------
     // TITLE
-    //======================================
+    //----------------------------------
 
     function renderTitle(data){
 
@@ -63,6 +42,7 @@ const PopupRenderer = (()=>{
         if(data.success){
 
             obj.innerText =
+
                 "✅ ĐIỂM DANH THÀNH CÔNG";
 
             return;
@@ -72,6 +52,7 @@ const PopupRenderer = (()=>{
         if(data.offline){
 
             obj.innerText =
+
                 "📴 ĐÃ LƯU OFFLINE";
 
             return;
@@ -81,6 +62,7 @@ const PopupRenderer = (()=>{
         if(data.duplicate){
 
             obj.innerText =
+
                 "⚠️ ĐÃ ĐIỂM DANH";
 
             return;
@@ -88,43 +70,152 @@ const PopupRenderer = (()=>{
         }
 
         obj.innerText =
+
             "❌ KHÔNG TÌM THẤY";
 
     }
 
-    //======================================
-    // STUDENT
-    //======================================
+    //----------------------------------
+    // NAME
+    //----------------------------------
 
-    function renderStudent(student){
+    function renderStudentName(data){
 
-        renderStudentName(student);
+        Utils.id("overlayName").innerText =
 
-        renderStudentKhoi(student);
+            data.hoten ||
 
-        renderStudentClass(student);
+            data.name ||
 
-        renderStudentCode(student);
-
-        renderStudentPhoto(student);
+            "";
 
     }
 
-    //======================================
+    //----------------------------------
+    // KHỐI
+    //----------------------------------
+
+    function renderStudentKhoi(data){
+
+        const khoi =
+
+            data.khoi ||
+
+            "";
+
+        Utils.id("overlayKhoi").innerText =
+
+            khoi;
+
+        if(
+
+            khoi &&
+
+            Config.KHOI[khoi]
+
+        ){
+
+            Utils.id("overlay")
+
+                .classList
+
+                .add(
+
+                    Config.KHOI[khoi].css
+
+                );
+
+        }
+
+    }
+
+    //----------------------------------
+    // LỚP
+    //----------------------------------
+
+    function renderStudentClass(data){
+
+        Utils.id("overlayClass").innerText =
+
+            data.lop ||
+
+            "";
+
+    }
+
+    //----------------------------------
+    // MÃ SỐ
+    //----------------------------------
+
+    function renderStudentCode(data){
+
+        Utils.id("overlayCode").innerText =
+
+            data.maso ||
+
+            "";
+
+    }
+
+    //----------------------------------
+    // ẢNH
+    //----------------------------------
+
+    function renderStudentPhoto(data){
+
+        const img =
+
+            Utils.id("overlayPhoto");
+
+        if(!img){
+
+            return;
+
+        }
+
+        img.src =
+
+            data.photo ||
+
+            data.hinhanh ||
+
+            "../icons/avatar.png";
+
+    }
+
+    //----------------------------------
+    // STUDENT
+    //----------------------------------
+
+    function renderStudent(data){
+
+        renderStudentName(data);
+
+        renderStudentKhoi(data);
+
+        renderStudentClass(data);
+
+        renderStudentCode(data);
+
+        renderStudentPhoto(data);
+
+    }
+
+    //----------------------------------
     // HINT
-    //======================================
+    //----------------------------------
 
     function renderHint(){
 
         Utils.id("overlayHint").innerText =
 
-            CONFIG.POPUP.HINT;
+            Config.POPUP.HINT;
 
     }
 
-    //======================================
+    //----------------------------------
     // SHOW
-    //======================================
+    //----------------------------------
 
     function show(){
 
@@ -136,9 +227,9 @@ const PopupRenderer = (()=>{
 
     }
 
-    //======================================
+    //----------------------------------
     // HIDE
-    //======================================
+    //----------------------------------
 
     function hide(){
 
@@ -150,7 +241,7 @@ const PopupRenderer = (()=>{
 
     }
 
-    //======================================
+    //----------------------------------
 
     return{
 
