@@ -47,11 +47,7 @@ function init(){
 
     // Ẩn/Hiện nút dựa trên quyền
         if (role === "QUET_MA") {
-            Utils.id("btnStudents").style.display = "none";
             Utils.id("btnReports").style.display = "none";
-        } else if (role === "QUAN_LY") {
-            Utils.id("btnReports").style.display = "none";
-        }
     
     //----------------------------------
     // Gắn sự kiện
@@ -86,9 +82,9 @@ function bindEvents(){
     );
 
     Utils.id("btnReports").addEventListener("click", () => {
-        if (!Auth.hasPermission(["ADMIN" || "QUAN_LY"])) {
-            alert("Bạn không có quyền truy cập tính năng này!");
-            return; 
+        if (Auth.getRole() !== "ADMIN" || "QUAN_LY") {
+                alert("Bạn không có quyền truy cập trang này!");
+                return;
         }
         openReport
     });
