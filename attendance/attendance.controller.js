@@ -1,29 +1,19 @@
 "use strict";
 
-async function start(loai) {
-    AttendanceService.setCurrentType(loai);
-    processing = false;
-    
-    AttendanceRenderer.showScanner(loai);
-    const count = await AttendanceService.getTodayCounter();
-    AttendanceRenderer.renderTodayCounter(count);
-    
-    await CameraController.start(); 
-}
-
-/*const AttendanceController = (() => {
+const AttendanceController = (() => {
     let processing = false;
 
-    async function start(loai) {
-        AttendanceService.setCurrentType(loai);
-        processing = false;
-        
-        AttendanceRenderer.showScanner(loai);
-        const count = await AttendanceService.getTodayCounter();
-        AttendanceRenderer.renderTodayCounter(count);
-        
-        await CameraService.startCamera(); 
-    } */
+        async function start(loai) {
+            AttendanceService.setCurrentType(loai);
+            processing = false;
+            
+            AttendanceRenderer.showScanner(loai);
+            const count = await AttendanceService.getTodayCounter();
+            AttendanceRenderer.renderTodayCounter(count);
+            
+            await CameraController.start(); 
+        }
+    }
 
     async function onQRCode(qrText) {
         if (processing) return;
