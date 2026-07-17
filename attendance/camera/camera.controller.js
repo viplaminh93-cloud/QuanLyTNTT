@@ -5,7 +5,7 @@ window.daQuet = false;
 async function startCamera() {
     window.daQuet = false;
     
-    // Cơ chế đợi tối đa 2 giây nếu CameraService chưa sẵn sàng
+    // Đợi tối đa 2 giây
     let attempts = 0;
     while (typeof CameraService === 'undefined' && attempts < 20) {
         await new Promise(resolve => setTimeout(resolve, 100));
@@ -15,7 +15,7 @@ async function startCamera() {
     if (typeof CameraService !== 'undefined') {
         await CameraService.start(qrSuccess);
     } else {
-        Utils.error("CameraService vẫn không phản hồi sau 2 giây!");
+        Utils.error("CameraService vẫn không phản hồi sau 2 giây! Hãy kiểm tra tab Network trong F12.");
     }
 }
 
@@ -38,7 +38,7 @@ async function qrSuccess(qrText) {
     window.daQuet = true;
 
     await pauseCamera();
-    Utils.vibrate(100);
+    if (navigator.vibrate) navigator.vibrate(100);
 
     try {
         await AttendanceController.onQRCode(qrText);
