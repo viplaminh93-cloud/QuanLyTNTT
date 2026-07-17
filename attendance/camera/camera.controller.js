@@ -1,56 +1,54 @@
 "use strict";
 
-window.daQuet = false;
-
-async function startCamera() {
+const CameraController = (() => {
     window.daQuet = false;
-    
-    // Đợi tối đa 2 giây
-    let attempts = 0;
-    while (typeof CameraService === 'undefined' && attempts < 20) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-        attempts++;
-    }
 
-    if (typeof CameraService !== 'undefined') {
-        await CameraService.start(qrSuccess);
-    } else {
-        Utils.error("CameraService vẫn không phản hồi sau 2 giây! Hãy kiểm tra tab Network trong F12.");
-    }
-}
-
-async function stopCamera() {
-    window.daQuet = false;
-    if (typeof CameraService !== 'undefined') await CameraService.stop();
-}
-
-async function pauseCamera() { 
-    if (typeof CameraService !== 'undefined') await CameraService.pause(); 
-}
-
-async function resumeCamera() {
-    window.daQuet = false;
-    if (typeof CameraService !== 'undefined') await CameraService.resume();
-}
-
-async function qrSuccess(qrText) {
-    if (window.daQuet) return;
-    window.daQuet = true;
-
-    await pauseCamera();
-    if (navigator.vibrate) navigator.vibrate(100);
-
-    try {
-        await AttendanceController.onQRCode(qrText);
-    } catch (error) {
-        Utils.error(error);
+    async function start() {
         window.daQuet = false;
-        await resumeCamera();
-    }
-}
+        
+        // Đợi CameraService sẵn sàng
+        let attempts = 0;
+        while (typeof CameraService === 'undefined' && attempts < 20) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+        }
 
-document.addEventListener("visibilitychange", async () => {
-    if (!document.hidden && typeof CameraService !== 'undefined' && CameraService.exists() && !window.daQuet) {
-        try { await resumeCamera(); } catch (e) { Utils.error(e); }
+        if (typeof CameraService !== 'undefined') {
+            await CameraService.start(qrSuccess);
+        } else {
+            Utils.error("CameraService chưa sẵn sàng!");
+        }
     }
-});
+
+    async function stop() {
+        window.daQuet = false;
+        if (typeof CameraService !== 'undefined') await CameraService.stop();
+    }
+
+    async function pause() {
+        if (typeof CameraService !== 'undefined') await CameraService.pause();
+    }
+
+    async function resume() {
+        window.daQuet = false;
+        if (typeof CameraService !== 'undefined') await CameraService.resume();
+    }
+
+    async function qrSuccess(qrText) {
+        if (window.daQuet) return;
+        window.daQuet = true;
+
+        await pause();
+        if (navigator.vibrate) navigator.vibrate(100);
+
+        try {
+            await AttendanceController.onQRCode(qrText);
+        } catch (error) {
+            Utils.error(error);
+            window.daQuet = false;
+            await resume();
+        }
+    }
+
+    return { start, stop, pause, resume };
+})();
