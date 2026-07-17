@@ -97,7 +97,7 @@ function bindEvents(){
                 return;
         }
 //        location.href = "../report/report.html";
-        openReport;
+        alert("Chức năng đang phát triển.");
         
     });
     
