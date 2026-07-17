@@ -1,5 +1,23 @@
 "use strict";
 
+async function start(loai) {
+    AttendanceService.setCurrentType(loai);
+    processing = false;
+    
+    AttendanceRenderer.showScanner(loai);
+    const count = await AttendanceService.getTodayCounter();
+    AttendanceRenderer.renderTodayCounter(count);
+    
+    await CameraController.start(); 
+}
+
+async function backHome() {
+    processing = false;
+    // SỬA Ở ĐÂY: Gọi thông qua module CameraController
+    await CameraController.stop();
+    AttendanceRenderer.showHome();
+}
+
 const AttendanceController = (() => {
     let processing = false;
 
@@ -37,11 +55,10 @@ const AttendanceController = (() => {
         await PopupService.close();
     }
 
-    async function backHome() {
-        processing = false;
-        await stopCamera();
-        AttendanceRenderer.showHome();
-    }
-
+async function backHome() {
+    processing = false;
+    await CameraController.stop();
+    AttendanceRenderer.showHome();
+}
     return { start, onQRCode, closePopup, backHome };
 })();
