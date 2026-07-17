@@ -1,148 +1,47 @@
-//======================================
-// ATTENDANCE CONTROLLER
-// Giáo xứ Phú Hòa
-//======================================
-
 "use strict";
 
-Auth.requireLogin();
-
-const AttendanceController = (()=>{
-
-    //----------------------------------
-    // Đang xử lý QR
-    //----------------------------------
-
+const AttendanceController = (() => {
     let processing = false;
 
-    //----------------------------------
-    // START
-    //----------------------------------
-
-    async function start(loai){
-
+    async function start(loai) {
+        AttendanceService.setCurrentType(loai);
         processing = false;
-
         AttendanceRenderer.showScanner(loai);
         
-        todayCounter = await AttendanceService.getTodayCounter(loai);
+        const count = await AttendanceService.getTodayCounter();
+        AttendanceRenderer.renderTodayCounter(count);
         
-        AttendanceRenderer.renderTodayCounter(todayCounter);
-        
-        await startCamera();
-
+        await startCamera(); // Hàm ở CameraController
     }
 
-    //----------------------------------
-    // QR SUCCESS
-    //----------------------------------
-
-    async function onQRCode(qrText){
-
-        if(processing){
-
-            return;
-
-        }
-
+    async function onQRCode(qrText) {
+        if (processing) return;
         processing = true;
 
-        try{
-
-            const result =
-
-                await AttendanceService.sendAttendance(
-
-                    qrText
-
-                );
-
-            //----------------------------------
-            // Thành công
-            //----------------------------------
-
-            if(result.success){
-
-                AttendanceService.increaseCounter();
-
+        try {
+            const result = await AttendanceService.sendAttendance(qrText);
+            if (result.success) {
+                const count = await AttendanceService.getTodayCounter();
+                AttendanceRenderer.renderTodayCounter(count);
             }
-
-            //----------------------------------
-            // Popup
-            //----------------------------------
-
             PopupService.show(result);
-
-        }
-
-        catch(error){
-
+        } catch (error) {
             console.error(error);
-
             processing = false;
-
             await resumeCamera();
-
         }
-
     }
 
-    //----------------------------------
-    // CLOSE POPUP
-    //----------------------------------
-
-    async function closePopup(){
-
+    async function closePopup() {
         processing = false;
-
         await PopupService.close();
-
     }
 
-    //----------------------------------
-    // BACK HOME
-    //----------------------------------
-
-    async function backHome(){
-
+    async function backHome() {
         processing = false;
-
-        PopupRenderer.hide();
-
         await stopCamera();
-
         AttendanceRenderer.showHome();
-
-        AttendanceService.reset();
-
     }
 
-    //----------------------------------
-    // Đang xử lý?
-    //----------------------------------
-
-    function isProcessing(){
-
-        return processing;
-
-    }
-
-    //----------------------------------
-    // PUBLIC
-    //----------------------------------
-
-    return{
-
-        start,
-
-        onQRCode,
-
-        closePopup,
-
-        backHome,
-
-        isProcessing
-
-    };
-
+    return { start, onQRCode, closePopup, backHome };
 })();
