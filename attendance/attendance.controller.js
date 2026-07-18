@@ -26,7 +26,7 @@ const AttendanceController = (() => {
         
                 // GỌI THỬ CAMERA CONTROLLER
                 console.log("4. Chuẩn bị gọi CameraController.start");
-                await CameraController.start(); 
+                await CameraController.camerastart(); 
                 console.log("5. CameraController.start đã chạy xong");
         
             } catch (e) {
