@@ -50,8 +50,8 @@ const CameraService = {
         }
     },
     
-    pause: () => { if (scanner.isScanning) scanner.pause(); },
-    resume: () => { if (scanner.isScanning) scanner.resume(); },
+/*    pause: () => { if (scanner.isScanning) scanner.pause(); },
+    resume: () => { if (scanner.isScanning) scanner.resume(); },*/
     exists: () => { return !!scanner; },
     isPaused: () => { return scanner.isPaused; }
 };
