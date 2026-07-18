@@ -1,225 +1,94 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Điểm danh Thiếu nhi</title>
-
-<link rel="manifest" href="../manifest.json">
-
-<meta name="theme-color" content="#1565c0">
-
-<link rel="icon" href="../icons/icon-192.png">
-
-<link rel="apple-touch-icon" href="../icons/icon-192.png">
-
-<link rel="stylesheet" href="attendance.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1565c0">
+    <title>Điểm danh Thiếu nhi</title>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../icons/icon-192.png">
+    <link rel="apple-touch-icon" href="../icons/icon-192.png">
+    <link rel="stylesheet" href="attendance.css">
 </head>
-
 <body>
 
-<div id="queueBadge" class="queue-badge">
-📤 <span id="queueCount">0</span>
-</div>
+    <div id="queueBadge" class="queue-badge">📤 <span id="queueCount">0</span></div>
 
-<div id="homeBox" class="container">
-
-    <div class="card home">
-
-        <img
-            class="logo"
-            src="../icons/icon-192.png">
-
-        <h1>GIÁO XỨ PHÚ HÒA</h1>
-
-        <div class="subTitle">
-            HỆ THỐNG ĐIỂM DANH QR
+    <!-- Màn hình chính -->
+    <div id="homeBox" class="container">
+        <div class="card home">
+            <img class="logo" src="../icons/icon-192.png">
+            <h1>GIÁO XỨ PHÚ HÒA</h1>
+            <div class="subTitle">HỆ THỐNG ĐIỂM DANH QR</div>
+            <button id="btnLe" class="btn btnBlue">DỰ LỄ</button>
+            <button id="btnGiaoLy" class="btn btnBlue">GIÁO LÝ</button>
+            <button id="installBtn" class="btn install hidden">CÀI ĐẶT ỨNG DỤNG</button>
         </div>
 
-        <button id="btnLe" class="btn btnBlue">
-            DỰ LỄ
-        </button>
-
-        <button id="btnGiaoLy" class="btn btnBlue">
-            GIÁO LÝ
-        </button>
-
-        <button
-            id="installBtn"
-            class="btn install hidden">
-
-            CÀI ĐẶT ỨNG DỤNG
-
-        </button>
-
-    </div>
-
-    <div
-        id="scannerBox"
-        class="card hidden">
-
-        <div
-            id="typeTitle"
-            class="scannerTitle">
+        <!-- Màn hình quét -->
+        <div id="scannerBox" class="card hidden">
+            <div id="typeTitle" class="scannerTitle"></div>
+            <div id="todayCount" class="todayCount">Đã điểm danh hôm nay: 0 em</div>
+            <div id="reader"></div>
+            <button id="btnBack" class="btn back">QUAY LẠI</button>
         </div>
+    </div>
 
-        <div
-            id="todayCount"
-            class="todayCount">
-
-            Đã điểm danh hôm nay: 0 em
-
+    <!-- Overlay kết quả -->
+    <div id="overlay" class="hidden">
+        <div id="overlayCard">
+            <div id="overlayTitle"></div>
+            <img id="overlayPhoto">
+            <div id="overlayName"></div>
+            <div id="overlayKhoi"></div>
+            <div id="overlayClass"></div>
+            <div id="overlayCode"></div>
+            <div id="overlayTime"></div>
+            <div id="overlayHint"></div>
         </div>
-
-        <div id="reader"></div>
-
-        <button
-            id="btnBack"
-            class="btn back">
-
-            QUAY LẠI
-
-        </button>
-
     </div>
 
-</div>
-
-<div id="overlay" class="hidden">
-
-    <div id="overlayCard">
-
-        <div id="overlayTitle"></div>
-
-        <img id="overlayPhoto">
-
-        <div id="overlayName"></div>
-
-        <div id="overlayKhoi"></div>
-
-        <div id="overlayClass"></div>
-
-        <div id="overlayCode"></div>
-
-        <div id="overlayTime"></div>
-
-        <div id="overlayHint"></div>
-
+    <!-- Debug Panel -->
+    <div id="debugButton" class="hidden">🐞</div>
+    <div id="debugPanel" class="hidden">
+        <div id="debugHeader">Developer Console</div>
+        <div id="debugContent"></div>
     </div>
 
-</div>
+    <!-- Thư viện & Scripts -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    
+    <!-- SYSTEM -->
+    <script src="../system/version.js"></script>
+    <script src="../system/config.js"></script>
+    <script src="../system/constants.js"></script>
+    <script src="../system/model.js"></script>
+    <script src="../system/core.js"></script>
+    <script src="../system/utils.js"></script>
+    <script src="../system/renderer.js"></script>
+    <script src="../system/debug.js"></script>
+    <script src="../system/auth.js"></script>
 
-<div id="debugButton" class="hidden">
-🐞
-</div>
+    <!-- MODULE -->
+    <script src="attendance.renderer.js"></script>
+    <script src="attendance.service.js"></script>
+    <script src="attendance.controller.js"></script>
+    <script src="api.js"></script>
+    <script src="offline.js"></script>
+    <script src="camera/camera.service.js"></script>
+    <script src="camera/camera.controller.js"></script>
+    <script src="popup/popup.renderer.js"></script>
+    <script src="popup/popup.service.js"></script>
+    <script src="app.js"></script>
 
-<div id="debugPanel" class="hidden">
-
-    <div id="debugHeader">
-        Developer Console
-    </div>
-
-    <div id="debugContent"></div>
-
-</div>
-
-<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-
-<!-- SYSTEM -->
-
-<script src="../system/version.js"></script>
-<script src="../system/config.js"></script>
-<script src="../system/constants.js"></script>
-<script src="../system/model.js"></script>
-<script src="../system/core.js"></script>
-<script src="../system/utils.js"></script>
-<script src="../system/renderer.js"></script>
-<script src="../system/debug.js"></script>
-<script src="../system/auth.js"></script>
-
-<!-- MODULE -->
-
-<script src="attendance.renderer.js"></script>
-<script src="attendance.service.js"></script>
-<script src="attendance.controller.js"></script>
-
-<script src="api.js"></script>
-<script src="offline.js"></script>
-
-<script src="camera/camera.service.js"></script>
-<script src="camera/camera.controller.js"></script>
-
-<script src="popup/popup.renderer.js"></script>
-<script src="popup/popup.service.js"></script>
-
-<script src="app.js"></script>
-
-<script>
-
-window.addEventListener(
-
-    "DOMContentLoaded",
-
-    ()=>{
-
-        Utils.id("btnLe")
-
-            .addEventListener(
-
-                "click",
-
-                ()=>AttendanceController.start(
-
-                    LOAI.LE
-
-                )
-
-            );
-
-        Utils.id("btnGiaoLy")
-
-            .addEventListener(
-
-                "click",
-
-                ()=>AttendanceController.start(
-
-                    LOAI.GIAOLY
-
-                )
-
-            );
-
-        Utils.id("btnBack")
-
-            .addEventListener(
-
-                "click",
-
-                AttendanceController.backHome
-
-            );
-
-        Utils.id("overlay")
-
-            .addEventListener(
-
-                "click",
-
-                AttendanceController.closePopup
-
-            );
-
-    }
-
-);
-
-</script>
-
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            // Khởi tạo các sự kiện điều hướng
+            Utils.id("btnLe").addEventListener("click", () => AttendanceController.start(LOAI.LE));
+            Utils.id("btnGiaoLy").addEventListener("click", () => AttendanceController.start(LOAI.GIAOLY));
+            Utils.id("btnBack").addEventListener("click", AttendanceController.backHome);
+            Utils.id("overlay").addEventListener("click", AttendanceController.closePopup);
+        });
+    </script>
 </body>
 </html>
