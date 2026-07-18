@@ -20,10 +20,19 @@ const AttendanceController = (() => {
             const total = await AttendanceService.getTodayCounter();
             AttendanceRenderer.renderTodayCounter(total);
             
+            // Thêm log để biết chắc chắn code chạy đến đây
+            console.log("Đang bắt đầu camera...");
             await CameraController.start();
+            console.log("Camera đã khởi động thành công.");
+            
         } catch (e) {
+            // Hiển thị rõ ràng loại lỗi và thông báo
+            const errorMessage = `Lỗi hệ thống: ${e.name} - ${e.message}`;
             console.error("Lỗi khởi tạo điểm danh:", e);
-            alert(e.message);
+            alert(errorMessage);
+            
+            // Tùy chọn: Tự động quay về trang chủ nếu lỗi camera để người dùng không bị kẹt
+            backHome();
         }
     }
 
