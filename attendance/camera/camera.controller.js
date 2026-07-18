@@ -20,7 +20,7 @@ const CameraController = (() => {
             alert("Chức năng quét QR chỉ dành cho điện thoại (iOS/Android). Vui lòng sử dụng điện thoại để điểm danh.");
             return;
         } */
-        
+    let processing = false; 
         try {
  
             processing = false;
