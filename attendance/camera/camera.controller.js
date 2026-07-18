@@ -16,9 +16,9 @@ const CameraController = (() => {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             
             if (!isMobile) {
-                console.warn("Đang chạy trên máy tính, bỏ qua camera.");
+                location.href = "../attendance/attendance.html";
                 alert("Chức năng quét QR chỉ dành cho điện thoại (iOS/Android). Vui lòng sử dụng điện thoại để điểm danh.");
-                return location.href = "../attendance/attendance.html";
+                return;
             }
 
             processing = false;
