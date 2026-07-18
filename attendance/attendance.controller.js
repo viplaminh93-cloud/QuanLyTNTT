@@ -7,8 +7,10 @@
 "use strict";
 
 const AttendanceController = (() => {
+    
+    let processing = false;
+    
     async function start(loai) {
-        let processing = false;
         try {
             processing = false;
             
