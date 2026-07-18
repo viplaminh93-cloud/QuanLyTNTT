@@ -136,17 +136,13 @@ const Renderer = (()=>{
 
     function show(elementId){
 
-        const el = Utils.id(elementId);
-     
-    Debug.write("Renderer đang gọi show với ID:", elementId, "và tìm được element:", el);
-    
-        Utils.show(el);
+        Utils.show(
 
-        /*Utils.show(
-
-            Utils.id(elementId)*/
+            Utils.id(elementId)
 
         );
+                    Debug.write("Renderer đang gọi show với ID:", elementId, "và tìm được element:", el);
+
 
     }
 
