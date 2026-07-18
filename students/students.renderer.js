@@ -13,51 +13,48 @@
 
 
 
-/**
- * Render danh sách thiếu nhi ra giao diện
- * @param {Array} list - Danh sách đối tượng thiếu nhi
- */
-function renderList(list) {
-    const container = id("studentList");
-    container.innerHTML = ""; // Xóa danh sách cũ
+"use strict";
 
-    list.forEach(student => {
-        const card = create("div");
-        card.className = "student-card";
-        // Màu viền dựa trên thuộc tính mauKhoi hoặc mặc định
-        card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
-        
-        card.innerHTML = `
-            <img class="student-photo" src="${student.hinh || 'images/avatar.png'}">
-            <div class="student-info">
-                <div class="student-name">${student.hoten}</div>
-                <div class="student-row">Mã số: ${student.maso}</div>
-                <div class="student-row">Lớp: ${student.malop}</div>
-                <div class="student-row">${student.trangthai}</div>
-            </div>
-        `;
+const StudentRenderer = (() => {
 
-        card.addEventListener("click", () => openModal(student));
-        container.appendChild(card);
-    });
-}
+    function renderList(list) {
+        const container = id("studentList");
+        container.innerHTML = "";
 
-/**
- * Hiển thị Modal chi tiết thông tin thiếu nhi
- * @param {Object} student - Đối tượng thiếu nhi cần xem
- */
-function openModal(student) {
-    // Cập nhật ảnh và tên
-    id("modalPhoto").src = student.hinh || "images/no-photo.png";
-    id("modalName").innerText = student.hoten;
+        list.forEach(student => {
+            const card = create("div");
+            card.className = "student-card";
+            card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
+            
+            card.innerHTML = `
+                <img class="student-photo" src="${student.hinh || 'images/avatar.png'}">
+                <div class="student-info">
+                    <div class="student-name">${student.hoten}</div>
+                    <div class="student-row">Mã số: ${student.maso}</div>
+                    <div class="student-row">Lớp: ${student.malop}</div>
+                    <div class="student-row">${student.trangthai}</div>
+                </div>`;
 
-    // Cập nhật thông tin chi tiết
-    id("modalInfo").innerHTML = `
-        <div class="info-row"><span>Mã số</span><b>${student.maso}</b></div>
-        <div class="info-row"><span>Lớp</span><b>${student.lop}</b></div>
-        <div class="info-row"><span>Khối</span><b>${student.khoi}</b></div>
-        <div class="info-row"><span>Trạng thái</span><b>${student.trangthai}</b></div>
-    `;
+            card.addEventListener("click", () => openModal(student));
+            container.appendChild(card);
+        });
+    }
 
-    show(id("studentModal")); // Hiển thị modal
-}
+    function openModal(student) {
+        id("modalPhoto").src = student.hinh || "images/no-photo.png";
+        id("modalName").innerText = student.hoten;
+        id("modalInfo").innerHTML = `
+            <div class="info-row"><span>Mã số</span><b>${student.maso}</b></div>
+            <div class="info-row"><span>Lớp</span><b>${student.lop}</b></div>
+            <div class="info-row"><span>Khối</span><b>${student.khoi}</b></div>
+            <div class="info-row"><span>Trạng thái</span><b>${student.trangthai}</b></div>`;
+
+        show(id("studentModal"));
+    }
+
+    function closeModal() {
+        hide(id("studentModal"));
+    }
+
+    return { renderList, openModal, closeModal };
+})();
