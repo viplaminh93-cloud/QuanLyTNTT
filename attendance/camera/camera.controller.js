@@ -6,16 +6,39 @@
  */
 "use strict";
 
-Debug.write("File camera.controller.js đang được nạp...");
-
 const CameraController = {
-    start: function() {
-        Debug.write("CameraController đã chạy thành công!");
+    start: async function() {
+        Debug.write("Đang bắt đầu khởi tạo camera...");
+        
+        // Kiểm tra xem Html5Qrcode đã được load chưa
+        if (typeof Html5Qrcode === 'undefined') {
+            Debug.write("Thư viện Html5Qrcode chưa được load!");
+            return;
+        }
+
+        const scanner = new Html5Qrcode("scannerBox"); // ID của thẻ div chứa camera
+        
+        try {
+            await scanner.start(
+                { facingMode: "environment" }, 
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                (decodedText) => {
+                    Debug.write("Quét thành công:", decodedText);
+                    // alert("Kết quả: " + decodedText);
+                },
+                (err) => {
+                    // console.log("Lỗi quét:", err);
+                }
+            );
+            Debug.write("Camera đã chạy thành công!");
+        } catch (err) {
+            Debug.write("Lỗi bật camera:", err);
+            alert("Không thể bật camera: " + err.message);
+        }
     }
 };
 
 window.CameraController = CameraController;
-Debug.write("Đã gán CameraController vào window:", window.CameraController);
 /*
 // 3. Camera Controller: Điều khiển luồng nghiệp vụ
 const CameraController = (() => {
