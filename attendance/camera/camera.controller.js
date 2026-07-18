@@ -15,11 +15,11 @@ const CameraController = (() => {
             // 1. Kiểm tra thiết bị (Chỉ cho phép iOS hoặc Android)
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             
-            if (!isMobile) {
+ /*           if (!isMobile) {
                 location.href = "../attendance/attendance.html";
                 alert("Chức năng quét QR chỉ dành cho điện thoại (iOS/Android). Vui lòng sử dụng điện thoại để điểm danh.");
                 return;
-            }
+            }  */
 
             processing = false;
             AttendanceService.setCurrentType(loai);
