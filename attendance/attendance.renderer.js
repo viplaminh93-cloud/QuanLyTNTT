@@ -1,112 +1,73 @@
-//======================================
-// ATTENDANCE RENDERER
-// Giáo xứ Phú Hòa
-//======================================
-
+/**
+ * ======================================
+ * ATTENDANCE CONTROLLER
+ * Giáo xứ Phú Hòa
+ * ======================================
+ */
 "use strict";
 
-const AttendanceRenderer = (()=>{
+const AttendanceController = (() => {
+    let processing = false;
 
-    //----------------------------------
-    // HOME
-    //----------------------------------
-
-    function showHome(){
-
-        Renderer.show("homeBox");
-
-        hideScanner();
-
+    /** Khởi tạo phiên điểm danh */
+    async function start(loai) {
+        try {
+            processing = false;
+            AttendanceService.setCurrentType(loai);
+            
+            AttendanceRenderer.showScanner(loai);
+            
+            const total = await AttendanceService.getTodayCounter();
+            AttendanceRenderer.renderTodayCounter(total);
+            
+            await CameraController.start();
+        } catch (e) {
+            console.error(e);
+            alert(e.message);
+        }
     }
 
-    function hideHome(){
+    /** Xử lý dữ liệu sau khi quét QR thành công */
+    async function onQRCode(qrText) {
+        if (processing) return;
+        processing = true;
 
-        Renderer.hide("homeBox");
+        try {
+            const result = await AttendanceService.sendAttendance(qrText);
 
+            // Cập nhật bộ đếm nếu điểm danh thành công
+            if (result.success) {
+                const total = await AttendanceService.getTodayCounter();
+                AttendanceRenderer.renderTodayCounter(total);
+            }
+
+            // Hiển thị kết quả lên Popup
+            PopupService.show(result);
+        } catch (error) {
+            console.error(error);
+            processing = false;
+            await CameraController.resume();
+        }
     }
 
-    //----------------------------------
-    // SCANNER
-    //----------------------------------
-
-    function showScanner(loai){
-
-        hideHome();
-
-        Renderer.show("scannerBox");
-
-        renderType(loai);
-
+    /** Đóng popup thông báo */
+    async function closePopup() {
+        processing = false;
+        await PopupService.close();
     }
 
-    function hideScanner(){
-
-        Renderer.hide("scannerBox");
-
+    /** Quay lại màn hình chính */
+    async function backHome() {
+        processing = false;
+        AttendanceService.reset();
+        await CameraController.stop();
+        AttendanceRenderer.showHome();
     }
 
-    //----------------------------------
-    // TYPE
-    //----------------------------------
-
-    function renderType(loai){
-
-        Renderer.text(
-
-            "typeTitle",
-
-            "Điểm danh: " + loai
-
-        );
-
-    }
-
-    //----------------------------------
-    // TODAY COUNTER
-    //----------------------------------
-
-    function renderTodayCounter(total){
-
-        Renderer.text(
-
-            "todayCount",
-
-            "Đã điểm danh hôm nay: " + total + " em"
-
-        );
-
-    }
-
-    //----------------------------------
-    // RESET
-    //----------------------------------
-
-    function reset(){
-
-        renderType("");
-
-        renderTodayCounter(0);
-
-    }
-
-    //----------------------------------
-
-    return{
-
-        showHome,
-
-        hideHome,
-
-        showScanner,
-
-        hideScanner,
-
-        renderType,
-
-        renderTodayCounter,
-
-        reset
-
+    return {
+        start,
+        onQRCode,
+        closePopup,
+        backHome
     };
-
 })();
