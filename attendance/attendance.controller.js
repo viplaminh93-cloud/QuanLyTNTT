@@ -16,6 +16,13 @@ const AttendanceController = (() => {
             
             Debug.write("Controller", "Bắt đầu start: " + loai);
             AttendanceService.setCurrentType(loai);
+
+
+const scannerEl = document.getElementById("scannerBox");
+    if (!scannerEl) {
+        console.error("LỖI CHÍ MẠNG: Không tìm thấy #scannerBox trong DOM tại thời điểm này!");
+        return;
+    }
             
             AttendanceRenderer.showScanner(loai);
             
