@@ -2,39 +2,81 @@
  * ======================================
  * ATTENDANCE RENDERER
  * Giáo xứ Phú Hòa
- * Quản lý cập nhật giao diện
  * ======================================
  */
 "use strict";
 
 const AttendanceRenderer = (() => {
 
-    /** Chuyển sang màn hình quét */
-    function showScanner(loai) {
-        Utils.id("homeBox").classList.add("hidden");
-        Utils.id("scannerBox").classList.remove("hidden");
-        
-        // Cập nhật tiêu đề theo loại điểm danh (Lễ hoặc Giáo lý)
-        Utils.id("typeTitle").innerText = (loai === LOAI.LE) ? "ĐIỂM DANH DỰ LỄ" : "ĐIỂM DANH GIÁO LÝ";
-    }
+    //----------------------------------
+    // HOME
+    //----------------------------------
 
-    /** Quay về màn hình chính */
     function showHome() {
-        Utils.id("scannerBox").classList.add("hidden");
-        Utils.id("homeBox").classList.remove("hidden");
+        const home = document.querySelector(".home");
+        if (home) {
+            Renderer.show(home);
+        }
+        hideScanner();
     }
 
-    /** Cập nhật bộ đếm số em đã điểm danh */
-    function renderTodayCounter(total) {
-        const element = Utils.id("todayCount");
-        if (element) {
-            element.innerText = `Đã điểm danh hôm nay: ${total} em`;
+    function hideHome() {
+        const home = document.querySelector(".home");
+        if (home) {
+            Renderer.hide(home);
         }
     }
 
+    //----------------------------------
+    // SCANNER
+    //----------------------------------
+
+    function showScanner(loai) {
+        hideHome();
+        renderType(loai);
+        const box = Utils.id("scannerBox");
+        if (box) {
+            Renderer.show(box);
+        }
+    }
+
+    function hideScanner() {
+        const box = Utils.id("scannerBox");
+        if (box) {
+            Renderer.hide(box);
+        }
+    }
+
+    //----------------------------------
+    // TITLE
+    //----------------------------------
+
+    function renderType(loai) {
+        const txt = Utils.id("typeTitle");
+        if (!txt) return;
+        txt.innerText = "Điểm danh: " + loai;
+    }
+
+    //----------------------------------
+    // COUNTER
+    //----------------------------------
+
+    function renderTodayCounter(total) {
+        const txt = Utils.id("todayCount");
+        if (!txt) return;
+        txt.innerText = "Đã điểm danh hôm nay: " + total + " em";
+    }
+
+    //----------------------------------
+    // PUBLIC
+    //----------------------------------
+
     return {
-        showScanner,
         showHome,
+        hideHome,
+        showScanner,
+        hideScanner,
+        renderType,
         renderTodayCounter
     };
 })();
