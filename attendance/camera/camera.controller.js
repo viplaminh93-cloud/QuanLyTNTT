@@ -43,7 +43,7 @@ const CameraController = (() => {
     }
 
     // Tạm dừng và làm sạch màn hình
-    async function pause() {
+/*    async function pause() {
         if (scanner && scanning) {
             scanner.pause();
             
@@ -67,7 +67,30 @@ const CameraController = (() => {
             }
             Debug.write("Camera đã tiếp tục.");
         }
+    }*/
+
+
+    async function pause() {
+        if (scanner && scanning) {
+            scanner.pause();
+            // Thay vì display: none, hãy ẩn lớp video element bên trong
+            const videoElement = document.querySelector("#reader video");
+            if (videoElement) {
+                videoElement.style.opacity = "0"; // Vẫn giữ layout, nhưng làm mờ hoàn toàn
+            }
+        }
     }
+    
+    async function resume() {
+        if (scanner && scanning) {
+            scanner.resume();
+            const videoElement = document.querySelector("#reader video");
+            if (videoElement) {
+                videoElement.style.opacity = "1"; // Hiện lại
+            }
+        }
+    }
+    
 
     // Xử lý nội dung QR
     async function onScan(qrText) {
