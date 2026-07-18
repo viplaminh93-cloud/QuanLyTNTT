@@ -1,158 +1,73 @@
-//======================================
-// ATTENDANCE CONTROLLER
-// Giáo xứ Phú Hòa
-//======================================
-
+/**
+ * ======================================
+ * ATTENDANCE CONTROLLER
+ * Giáo xứ Phú Hòa
+ * ======================================
+ */
 "use strict";
 
-const AttendanceController = (()=>{
-
+const AttendanceController = (() => {
     let processing = false;
 
-    //----------------------------------
-    // START
-    //----------------------------------
-
-    async function start(loai){
-    
-        try{
-    
+    /** Khởi tạo phiên điểm danh */
+    async function start(loai) {
+        try {
             processing = false;
-    
             AttendanceService.setCurrentType(loai);
-    
-            console.log("1");
-    
+            
             AttendanceRenderer.showScanner(loai);
-    
-            console.log("2");
-    
+            
             const total = await AttendanceService.getTodayCounter();
-    
-            console.log("3");
-    
             AttendanceRenderer.renderTodayCounter(total);
-    
-            console.log("4");
-    
+            
             await CameraController.start();
-    
-            console.log("5");
-    
-        }
-    
-        catch(e){
-    
-            console.error(e);
-    
+        } catch (e) {
+            console.error("Lỗi khởi tạo điểm danh:", e);
             alert(e.message);
-    
         }
-    
     }
 
-    //----------------------------------
-    // QR SUCCESS
-    //----------------------------------
-
-    async function onQRCode(qrText){
-
-        if(processing){
-
-            return;
-
-        }
-
+    /** Xử lý kết quả quét mã QR */
+    async function onQRCode(qrText) {
+        if (processing) return;
+        
         processing = true;
+        try {
+            const result = await AttendanceService.sendAttendance(qrText);
 
-        try{
-
-            const result =
-
-                await AttendanceService.sendAttendance(
-
-                    qrText
-
-                );
-
-            //----------------------------------
-            // Update counter
-            //----------------------------------
-
-            if(result.success){
-
-                const total =
-
-                    await AttendanceService.getTodayCounter();
-
-                AttendanceRenderer.renderTodayCounter(
-
-                    total
-
-                );
-
+            // Cập nhật bộ đếm nếu điểm danh thành công
+            if (result.success) {
+                const total = await AttendanceService.getTodayCounter();
+                AttendanceRenderer.renderTodayCounter(total);
             }
 
-            //----------------------------------
-            // Popup
-            //----------------------------------
-
+            // Hiển thị thông tin lên Popup
             PopupService.show(result);
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
+        } catch (error) {
+            console.error("Lỗi xử lý QR:", error);
             processing = false;
-
             await CameraController.resume();
-
         }
-
     }
 
-    //----------------------------------
-    // CLOSE POPUP
-    //----------------------------------
-
-    async function closePopup(){
-
+    /** Đóng popup và cho phép tiếp tục quét */
+    async function closePopup() {
         processing = false;
-
         await PopupService.close();
-
     }
 
-    //----------------------------------
-    // BACK HOME
-    //----------------------------------
-
-    async function backHome(){
-
+    /** Quay về màn hình chính */
+    async function backHome() {
         processing = false;
-
         AttendanceService.reset();
-
         await CameraController.stop();
-
         AttendanceRenderer.showHome();
-
     }
 
-    //----------------------------------
-
-    return{
-
+    return {
         start,
-
         onQRCode,
-
         closePopup,
-
         backHome
-
     };
-
 })();
