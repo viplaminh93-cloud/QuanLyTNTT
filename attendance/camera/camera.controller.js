@@ -10,7 +10,7 @@ Debug.write("File camera.controller.js đang được nạp...");
 
 const CameraController = {
     start: function() {
-        cDebug.write("CameraController đã chạy thành công!");
+        Debug.write("CameraController đã chạy thành công!");
     }
 };
 
