@@ -6,8 +6,19 @@
  */
 "use strict";
 
+console.log("File camera.controller.js đang được nạp...");
+
+const CameraController = {
+    start: function() {
+        console.log("CameraController đã chạy thành công!");
+    }
+};
+
+window.CameraController = CameraController;
+console.log("Đã gán CameraController vào window:", window.CameraController);
+
 // 3. Camera Controller: Điều khiển luồng nghiệp vụ
-const CameraController = (() => {
+/*const CameraController = (() => {
     let scanning = false;
 
 
@@ -26,8 +37,8 @@ const CameraController = (() => {
             await scanner.start(
                 { facingMode: "environment" }, 
                 config,
-                (decodedText) => { /* Xử lý khi quét thành công */ },
-                (errorMessage) => { /* Xử lý khi lỗi */ }
+                (decodedText) => { /* Xử lý khi quét thành công  },
+                (errorMessage) => { /* Xử lý khi lỗi  }
             );
             Debug.write("Camera đã chạy thành công!");
         } catch (err) {
@@ -65,7 +76,7 @@ const CameraController = (() => {
             console.error("Lỗi khởi tạo:", e);
             alert("Lỗi camera: " + e.message);
         }
-    }*/
+    }
 
     async function stop() {
         scanning = false;
