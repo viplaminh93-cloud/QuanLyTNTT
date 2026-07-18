@@ -62,11 +62,11 @@ const Utils = (()=>{
     function show(element){
 
         if(!element){
-
+Debug.write("lỗi 1 show");
             return;
 
         }
-
+Debug.write("lỗi 2 show");
         element.classList.remove("hidden");
 
     }
@@ -74,11 +74,11 @@ const Utils = (()=>{
     function hide(element){
 
         if(!element){
-
+Debug.write("lỗi 1 hide");
             return;
 
         }
-
+Debug.write("lỗi 1 hide");
         element.classList.add("hidden");
 
     }
