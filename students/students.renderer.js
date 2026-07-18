@@ -48,8 +48,8 @@ function renderList(list) {
  */
 function openModal(student) {
     // Cập nhật ảnh và tên
-    Utils.id("modalPhoto").src = student.hinh || "images/no-photo.png";
-    Utils.id("modalName").innerText = student.hoten;
+    Utils.id("modalPhoto").src = students.hinh || "images/no-photo.png";
+    Utils.id("modalName").innerText = students.hoten;
 
     // Cập nhật thông tin chi tiết
     Utils.id("modalInfo").innerHTML = 
