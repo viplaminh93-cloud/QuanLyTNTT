@@ -1,254 +1,69 @@
 //======================================
-// DEBUG
-// Giáo xứ Phú Hòa
+// DEBUG MODULE - Giáo xứ Phú Hòa
 //======================================
-
 "use strict";
 
-/**
- * ======================================
- * DEBUG MODULE
- *
- * Quản lý toàn bộ log của hệ thống.
- *
- * Chức năng:
- * - Hiển thị log trên Console
- * - Hiển thị Debug Panel
- * - Bật / Tắt Debug
- *
- * Không chứa business.
- * ======================================
- */
-
-const Debug = (()=>{
-
-    //======================================
-    // PRIVATE
-    //======================================
-
+const Debug = (() => {
+    // Trạng thái debug dựa trên config
     let enabled = Config.APP.DEBUG;
 
-    //======================================
-    // ENABLE
-    //======================================
-
-    function enable(){
-
+    /** Bật chế độ debug và hiển thị nút điều khiển */
+    function enable() {
         enabled = true;
-
-        Utils.show(
-
-            Utils.id("debugButton")
-
-        );
-
+        Utils.show(Utils.id("debugButton"));
     }
 
-    //======================================
-    // DISABLE
-    //======================================
-
-    function disable(){
-
+    /** Tắt debug và ẩn toàn bộ panel */
+    function disable() {
         enabled = false;
-
-        Utils.hide(
-
-            Utils.id("debugButton")
-
-        );
-
-        Utils.hide(
-
-            Utils.id("debugPanel")
-
-        );
-
+        Utils.hide(Utils.id("debugButton"));
+        Utils.hide(Utils.id("debugPanel"));
     }
 
-    //======================================
-    // WRITE
-    //======================================
-
-    function write(
-
-        module,
-
-        message
-
-    ){
-
-        if(!enabled){
-
-            return;
-
-        }
-
-        const text =
-
-            "[" +
-
-            module +
-
-            "] " +
-
-            message;
-
+    /** Ghi log vào console và panel debug */
+    function write(module, message) {
+        if (!enabled) return;
+        const text = `[${module}] ${message}`;
         console.log(text);
-
         append(text);
-
     }
 
-    //======================================
-    // APPEND PANEL
-    //======================================
-
-    function append(text){
-
-        const panel =
-
-            Utils.id(
-
-                "debugContent"
-
-            );
-
-        if(!panel){
-
-            return;
-
-        }
-
-        const line =
-
-            Utils.create("div");
-
+    /** Thêm dòng log vào panel hiển thị trên giao diện */
+    function append(text) {
+        const panel = Utils.id("debugContent");
+        if (!panel) return;
+        const line = Utils.create("div");
         line.innerText = text;
-
         panel.appendChild(line);
-
-        panel.scrollTop =
-
-            panel.scrollHeight;
-
+        panel.scrollTop = panel.scrollHeight; // Cuộn xuống dưới cùng
     }
 
-    //======================================
-    // CLEAR
-    //======================================
-
-    function clear(){
-
-        const panel =
-
-            Utils.id(
-
-                "debugContent"
-
-            );
-
-        if(!panel){
-
-            return;
-
-        }
-
-        panel.innerHTML = "";
-
+    /** Xóa sạch nội dung panel debug */
+    function clear() {
+        const panel = Utils.id("debugContent");
+        if (panel) panel.innerHTML = "";
     }
 
-    //======================================
-    // TOGGLE PANEL
-    //======================================
-
-    function toggle(){
-
-        const panel =
-
-            Utils.id(
-
-                "debugPanel"
-
-            );
-
-        if(!panel){
-
-            return;
-
-        }
-
-        Utils.toggle(panel);
-
+    /** Ẩn/Hiện panel debug */
+    function toggle() {
+        const panel = Utils.id("debugPanel");
+        if (panel) Utils.toggle(panel);
     }
 
-    //======================================
-    // INIT
-    //======================================
-
-    function init(){
-
-        if(!enabled){
-
-            return;
-
+    /** Khởi tạo sự kiện cho nút debug */
+    function init() {
+        if (!enabled) return;
+        const button = Utils.id("debugButton");
+        if (button) {
+            Utils.show(button);
+            button.addEventListener("click", toggle);
         }
-
-        const button =
-
-            Utils.id(
-
-                "debugButton"
-
-            );
-
-        if(!button){
-
-            return;
-
-        }
-
-        Utils.show(button);
-
-        button.addEventListener(
-
-            "click",
-
-            toggle
-
-        );
-
     }
 
-    //======================================
-
-    return{
-
-        init,
-
-        enable,
-
-        disable,
-
-        write,
-
-        clear,
-
-        toggle
-
-    };
-
+    return { init, enable, disable, write, clear, toggle };
 })();
-
 
 //======================================
 // AUTO INIT
 //======================================
-
-window.addEventListener(
-
-    "load",
-
-    Debug.init
-
-);
+window.addEventListener("load", Debug.init);
