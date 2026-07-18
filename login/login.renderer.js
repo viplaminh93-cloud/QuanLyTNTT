@@ -1,63 +1,22 @@
-//======================================
-// LOGIN RENDERER
-// Giáo xứ Phú Hòa
-//======================================
-
 "use strict";
 
 /**
- * ======================================
  * LOGIN RENDERER
- * Chỉ cập nhật giao diện
- * Không gọi Server
- * Không xử lý nghiệp vụ
- * ======================================
+ * Quản lý cập nhật giao diện màn hình đăng nhập.
  */
+const LoginRenderer = (() => {
 
-//======================================
-// LOGIN RENDERER
-//======================================
+    // Hiển thị thông báo lỗi
+    const showError = (message) => alert(message);
 
-const LoginRenderer = (()=>{
+    // Bật/tắt trạng thái loading cho nút đăng nhập
+    const setLoading = (loading) => {
+        const btn = Utils.id("btnLogin");
+        if (!btn) return;
 
-    /**
-     * Hiển thị lỗi
-     */
-    function showError(message){
-
-        alert(message);
-
-    }
-
-    /**
-     * Loading Button
-     */
-    function setLoading(loading){
-
-        const button = Utils.id("btnLogin");
-
-        if(!button){
-
-            return;
-
-        }
-
-        button.disabled = loading;
-
-        button.innerText = loading
-
-            ? "ĐANG ĐĂNG NHẬP..."
-
-            : "ĐĂNG NHẬP";
-
-    }
-
-    return{
-
-        showError,
-
-        setLoading
-
+        btn.disabled = loading;
+        btn.innerText = loading ? "ĐANG ĐĂNG NHẬP..." : "ĐĂNG NHẬP";
     };
 
+    return { showError, setLoading };
 })();
