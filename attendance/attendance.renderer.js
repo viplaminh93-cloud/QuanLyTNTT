@@ -8,75 +8,32 @@
 
 const AttendanceRenderer = (() => {
 
-    //----------------------------------
-    // HOME
-    //----------------------------------
-
     function showHome() {
-        const home = document.querySelector(".home");
-        if (home) {
-            Renderer.show(home);
-        }
-        hideScanner();
+        Renderer.show("homeBox"); // Truyền ID là string
+        Renderer.hide("scannerBox");
     }
 
     function hideHome() {
-        const home = document.querySelector(".home");
-        if (home) {
-            Renderer.hide(home);
-        }
+        Renderer.hide("homeBox");
     }
-
-    //----------------------------------
-    // SCANNER
-    //----------------------------------
 
     function showScanner(loai) {
         hideHome();
         renderType(loai);
-        const box = Utils.id("scannerBox");
-        if (box) {
-            Renderer.show(box);
-        }
+        Renderer.show("scannerBox"); // Truyền ID là string
     }
 
     function hideScanner() {
-        const box = Utils.id("scannerBox");
-        if (box) {
-            Renderer.hide(box);
-        }
+        Renderer.hide("scannerBox"); // Truyền ID là string
     }
-
-    //----------------------------------
-    // TITLE
-    //----------------------------------
 
     function renderType(loai) {
-        const txt = Utils.id("typeTitle");
-        if (!txt) return;
-        txt.innerText = "Điểm danh: " + loai;
+        Renderer.text("typeTitle", "Điểm danh: " + loai);
     }
-
-    //----------------------------------
-    // COUNTER
-    //----------------------------------
 
     function renderTodayCounter(total) {
-        const txt = Utils.id("todayCount");
-        if (!txt) return;
-        txt.innerText = "Đã điểm danh hôm nay: " + total + " em";
+        Renderer.text("todayCount", "Đã điểm danh hôm nay: " + total + " em");
     }
 
-    //----------------------------------
-    // PUBLIC
-    //----------------------------------
-
-    return {
-        showHome,
-        hideHome,
-        showScanner,
-        hideScanner,
-        renderType,
-        renderTodayCounter
-    };
+    return { showHome, hideHome, showScanner, hideScanner, renderTodayCounter };
 })();
