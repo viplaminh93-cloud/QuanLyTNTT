@@ -1,73 +1,40 @@
 /**
  * ======================================
- * ATTENDANCE CONTROLLER
+ * ATTENDANCE RENDERER
  * Giáo xứ Phú Hòa
+ * Quản lý cập nhật giao diện
  * ======================================
  */
 "use strict";
 
-const AttendanceController = (() => {
-    let processing = false;
+const AttendanceRenderer = (() => {
 
-    /** Khởi tạo phiên điểm danh */
-    async function start(loai) {
-        try {
-            processing = false;
-            AttendanceService.setCurrentType(loai);
-            
-            AttendanceRenderer.showScanner(loai);
-            
-            const total = await AttendanceService.getTodayCounter();
-            AttendanceRenderer.renderTodayCounter(total);
-            
-            await CameraController.start();
-        } catch (e) {
-            console.error(e);
-            alert(e.message);
+    /** Chuyển sang màn hình quét */
+    function showScanner(loai) {
+        Utils.id("homeBox").classList.add("hidden");
+        Utils.id("scannerBox").classList.remove("hidden");
+        
+        // Cập nhật tiêu đề theo loại điểm danh (Lễ hoặc Giáo lý)
+        Utils.id("typeTitle").innerText = (loai === LOAI.LE) ? "ĐIỂM DANH DỰ LỄ" : "ĐIỂM DANH GIÁO LÝ";
+    }
+
+    /** Quay về màn hình chính */
+    function showHome() {
+        Utils.id("scannerBox").classList.add("hidden");
+        Utils.id("homeBox").classList.remove("hidden");
+    }
+
+    /** Cập nhật bộ đếm số em đã điểm danh */
+    function renderTodayCounter(total) {
+        const element = Utils.id("todayCount");
+        if (element) {
+            element.innerText = `Đã điểm danh hôm nay: ${total} em`;
         }
-    }
-
-    /** Xử lý dữ liệu sau khi quét QR thành công */
-    async function onQRCode(qrText) {
-        if (processing) return;
-        processing = true;
-
-        try {
-            const result = await AttendanceService.sendAttendance(qrText);
-
-            // Cập nhật bộ đếm nếu điểm danh thành công
-            if (result.success) {
-                const total = await AttendanceService.getTodayCounter();
-                AttendanceRenderer.renderTodayCounter(total);
-            }
-
-            // Hiển thị kết quả lên Popup
-            PopupService.show(result);
-        } catch (error) {
-            console.error(error);
-            processing = false;
-            await CameraController.resume();
-        }
-    }
-
-    /** Đóng popup thông báo */
-    async function closePopup() {
-        processing = false;
-        await PopupService.close();
-    }
-
-    /** Quay lại màn hình chính */
-    async function backHome() {
-        processing = false;
-        AttendanceService.reset();
-        await CameraController.stop();
-        AttendanceRenderer.showHome();
     }
 
     return {
-        start,
-        onQRCode,
-        closePopup,
-        backHome
+        showScanner,
+        showHome,
+        renderTodayCounter
     };
 })();
