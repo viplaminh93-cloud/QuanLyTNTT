@@ -60,7 +60,7 @@ const CameraController = (() => {
         await CameraController.stop(); 
         Debug.write("Controller", "Camera đã dừng hẳn sau khi quét");
     
-        if (navigator.vibrate) navigator.vibrate(100);
+        if (Utils.vibrate) Utils.vibrate(100);
     
         try {
             await AttendanceController.onQRCode(qrText);
