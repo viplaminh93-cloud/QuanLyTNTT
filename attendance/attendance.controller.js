@@ -56,8 +56,8 @@ const AttendanceController = (() => {
             Debug.write("Controller-ERROR", e.message);
             console.error("LỖI TẠI START:", e);
             alert("Lỗi: " + e.message);
-        }*/
-    }
+        }
+    }   */
 
 
     async function onQRCode(qrText) {
