@@ -1,86 +1,44 @@
-//======================================
-// POPUP SERVICE
-// Giáo xứ Phú Hòa
-//======================================
-
 "use strict";
 
-const PopupService = (()=>{
-
+/**
+ * POPUP SERVICE
+ * Quản lý logic hiển thị và đóng popup kết quả
+ */
+const PopupService = (() => {
     let showing = false;
 
-    //----------------------------------
-    // SHOW
-    //----------------------------------
-
-    function show(data){
-
+    // Hiển thị popup với dữ liệu trả về
+    function show(data) {
         showing = true;
-
         PopupRenderer.reset();
-
         PopupRenderer.renderTitle(data);
-
         PopupRenderer.renderStudent(data);
-
         PopupRenderer.renderHint();
-
         PopupRenderer.show();
-
     }
 
-    //----------------------------------
-    // CLOSE
-    //----------------------------------
-
-    async function close(){
-
-        if(!showing){
-
-            return;
-
-        }
-
+    // Đóng popup
+    async function close() {
+        if (!showing) return;
+        
         showing = false;
-
         PopupRenderer.hide();
-
         await Utils.sleep(150);
-
+        
+        // Gọi lại controller để xử lý logic sau khi đóng
         AttendanceController.closePopup();
-
     }
 
-    //----------------------------------
-    // STATUS
-    //----------------------------------
-
-    function isShowing(){
-
+    // Kiểm tra trạng thái hiển thị
+    function isShowing() {
         return showing;
-
     }
 
-    //----------------------------------
+    // Lắng nghe sự kiện click đóng trên overlay
+    const overlay = Utils.id("overlay");
+    if (overlay) {
+        overlay.addEventListener("click", close);
+    }
 
-    Utils.id("overlay").addEventListener(
-
-        "click",
-
-        close
-
-    );
-
-    //----------------------------------
-
-    return{
-
-        show,
-
-        close,
-
-        isShowing
-
-    };
-
+    return { show, close, isShowing };
 })();
