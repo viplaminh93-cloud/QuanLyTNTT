@@ -94,7 +94,7 @@ const CameraController = (() => {
             // Thay vì display: none, hãy ẩn lớp video element bên trong
             const videoElement = document.querySelector("#reader video");
             if (videoElement) {
-                videoElement.style.opacity = "0"; // Vẫn giữ layout, nhưng làm mờ hoàn toàn
+                videoElement.style.opacity = "1"; // Vẫn giữ layout, nhưng làm mờ hoàn toàn
             }
         }
     }
