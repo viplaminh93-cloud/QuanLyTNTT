@@ -1,53 +1,29 @@
-/**
- * ======================================
- * ATTENDANCE CONTROLLER
- * Giáo xứ Phú Hòa
- * ======================================
- */
 "use strict";
 
+/**
+ * ATTENDANCE CONTROLLER
+ * Giáo xứ Phú Hòa - Điều khiển luồng nghiệp vụ điểm danh
+ */
 const AttendanceController = (() => {
-    
-    let processing = false;
-    
-    async function start(loai) {
 
-        console.log("1. Đã gọi start với:", loai);
-        
-            try {
-                // TỰ ĐỘNG HIỂN THỊ GIAO DIỆN BẰNG DOM GỐC (Bỏ qua module)
-                document.getElementById("homeBox").classList.add("hidden");
-                document.getElementById("scannerBox").classList.remove("hidden");
-                console.log("2. Đã hiển thị scannerBox thủ công");
-        
-                // GỌI THỬ ATTENDANCE RENDERER
-                AttendanceRenderer.showScanner(loai);
-                console.log("3. Đã gọi AttendanceRenderer.showScanner");
-        
-                // GỌI THỬ CAMERA CONTROLLER
-                console.log("4. Chuẩn bị gọi CameraController.start");
-                await CameraController.camerastart(); 
-                console.log("5. CameraController.start đã chạy xong");
-        
-            } catch (e) {
-                console.error("XẢY RA LỖI TẠI:", e);
-                alert("Lỗi tại: " + e.message);
-            }
-        }
-        
-/*        try {
-            processing = false;
-            
+    let processing = false;
+
+    async function start(loai) {
+        try {
             Debug.write("Controller", "Bắt đầu start: " + loai);
+            
+            // 1. Chuẩn bị dữ liệu và giao diện
             AttendanceService.setCurrentType(loai);
-           
             AttendanceRenderer.showScanner(loai);
-            
+
+            // 2. Đợi một chút cho hiệu ứng hiển thị hoàn tất
             await new Promise(resolve => setTimeout(resolve, 300));
-            
+
+            // 3. Cập nhật số liệu hôm nay
             const total = await AttendanceService.getTodayCounter();
             AttendanceRenderer.renderTodayCounter(total);
-            
+
+            // 4. Khởi động camera
             Debug.write("Controller", "Đang gọi CameraController.start()");
             await CameraController.start();
             
@@ -57,13 +33,13 @@ const AttendanceController = (() => {
             console.error("LỖI TẠI START:", e);
             alert("Lỗi: " + e.message);
         }
-    }   */
-
+    }
 
     async function onQRCode(qrText) {
         if (processing) return;
         processing = true;
-        Debug.write("Controller", "Đang xử lý QR...")
+        
+        Debug.write("Controller", "Đang xử lý QR...");
         try {
             const result = await AttendanceService.sendAttendance(qrText);
             if (result.success) {
@@ -86,11 +62,11 @@ const AttendanceController = (() => {
     async function backHome() {
         Debug.write("Controller", "Quay lại trang chủ");
         processing = false;
+        
         AttendanceService.reset();
         await CameraController.stop();
         AttendanceRenderer.showHome();
     }
 
-    // Đảm bảo có đủ ngoặc đóng cho module pattern
     return { start, onQRCode, closePopup, backHome };
 })();
