@@ -16,9 +16,9 @@ const CameraController = {
 
 window.CameraController = CameraController;
 Debug.write("Đã gán CameraController vào window:", window.CameraController);
-
+/*
 // 3. Camera Controller: Điều khiển luồng nghiệp vụ
-/*const CameraController = (() => {
+const CameraController = (() => {
     let scanning = false;
 
 
@@ -37,8 +37,8 @@ Debug.write("Đã gán CameraController vào window:", window.CameraController);
             await scanner.start(
                 { facingMode: "environment" }, 
                 config,
-                (decodedText) => { /* Xử lý khi quét thành công  },
-                (errorMessage) => { /* Xử lý khi lỗi  }
+                (decodedText) => {  Xử lý khi quét thành công  },
+                (errorMessage) => {  Xử lý khi lỗi  }
             );
             Debug.write("Camera đã chạy thành công!");
         } catch (err) {
@@ -49,7 +49,7 @@ Debug.write("Đã gán CameraController vào window:", window.CameraController);
     return { camerastart };
 //})();
 
- /*   async function start(loai) {
+    async function start(loai) {
 
         // 1. Kiểm tra thiết bị (Chỉ cho phép iOS hoặc Android)
         const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -126,3 +126,4 @@ Debug.write("Đã gán CameraController vào window:", window.CameraController);
 
     return { start, stop, pause, resume, restart };
 })();
+*/
