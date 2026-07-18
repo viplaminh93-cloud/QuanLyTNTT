@@ -16,7 +16,7 @@ const CameraController = {
             return;
         }
 
-        const scanner = new Html5Qrcode("scannerBox"); // ID của thẻ div chứa camera
+        const scanner = new Html5Qrcode("reader"); // ID của thẻ div chứa camera
         
         try {
             await scanner.start(
