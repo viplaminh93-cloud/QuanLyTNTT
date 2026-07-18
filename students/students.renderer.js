@@ -27,7 +27,7 @@ function renderList(list) {
         // Màu viền dựa trên thuộc tính mauKhoi hoặc mặc định
         card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
         
-        card.innerHTML = `
+        card.innerHTML = 
             <img class="student-photo" src="${student.hinh || 'images/avatar.png'}">
             <div class="student-info">
                 <div class="student-name">${student.hoten}</div>
@@ -35,7 +35,7 @@ function renderList(list) {
                 <div class="student-row">Lớp: ${student.malop}</div>
                 <div class="student-row">${student.trangthai}</div>
             </div>
-        `;
+        ;
 
         card.addEventListener("click", () => openModal(student));
         container.appendChild(card);
