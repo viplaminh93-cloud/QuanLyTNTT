@@ -1,327 +1,49 @@
 /*======================================
   STUDENTS
 ======================================*/
-
-*{
-
-    margin:0;
-
-    padding:0;
-
-    box-sizing:border-box;
-
-}
-
-body{
-
-    background:#f4f6fb;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    color:#333;
-
-}
-
-.container{
-
-    width:min(1000px,95%);
-
-    margin:30px auto;
-
-}
-
-h1{
-
-    text-align:center;
-
-    color:#1565C0;
-
-    font-size:32px;
-
-    margin-bottom:8px;
-
-}
-
-h2{
-
-    text-align:center;
-
-    color:#666;
-
-    margin-bottom:30px;
-
-}
-
-.student-list{
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(
-
-            auto-fill,
-
-            minmax(320px,1fr)
-
-        );
-
-    gap:20px;
-
-}
-
-.student-card{
-
-    background:#fff;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    display:flex;
-
-    gap:16px;
-
-    align-items:center;
-
-    box-shadow:
-
-        0 4px 12px
-
-        rgba(0,0,0,.08);
-
-    transition:.25s;
-
-}
-
-.student-card:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-
-        0 8px 20px
-
-        rgba(0,0,0,.15);
-
-}
-
-.student-photo{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:3px solid #1565C0;
-
-    background:#eee;
-
-}
-
-.student-info{
-
-    flex:1;
-
-}
-
-.student-name{
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-
-}
-
-.student-row{
-
-    margin:4px 0;
-
-    color:#555;
-
-}
-
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f4f6fb; font-family: Arial, Helvetica, sans-serif; color: #333; }
+.container { width: min(1000px, 95%); margin: 30px auto; }
+
+h1 { text-align: center; color: #1565C0; font-size: 32px; margin-bottom: 8px; }
+h2 { text-align: center; color: #666; margin-bottom: 30px; }
+
+.student-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.student-card { background: #fff; border-radius: 16px; padding: 18px; display: flex; gap: 16px; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: .25s; }
+.student-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
+
+.student-photo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #1565C0; background: #eee; }
+.student-info { flex: 1; }
+.student-name { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+.student-row { margin: 4px 0; color: #555; }
 
 /*======================================
-SEARCH
+  SEARCH
 ======================================*/
-
-.search-box{
-
-    margin:20px 0;
-
-}
-
-.search-box input{
-
-    width:100%;
-
-    padding:12px 16px;
-
-    border:1px solid #DDD;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    box-sizing:border-box;
-
-}
-
-.search-box input:focus{
-
-    outline:none;
-
-    border-color:#1565C0;
-
-}
-
-
-
-
-
+.search-box { margin: 20px 0; }
+.search-box input { width: 100%; padding: 12px 16px; border: 1px solid #DDD; border-radius: 10px; font-size: 15px; box-sizing: border-box; }
+.search-box input:focus { outline: none; border-color: #1565C0; }
 
 /*======================================
-MODAL
+  MODAL
 ======================================*/
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; justify-content: center; align-items: center; z-index: 999; }
+.modal.hidden { display: none; }
+.modal-box { width: min(420px, 92%); background: #FFF; border-radius: 18px; padding: 28px; text-align: center; animation: fadeUp .2s ease; }
+.modal-photo { width: 180px; height: 180px; object-fit: cover; border-radius: 16px; border: 3px solid #1565C0; margin-bottom: 20px; }
 
-.modal{
+#modalName { color: #1565C0; margin-bottom: 18px; font-size: 24px; }
+#modalInfo { text-align: left; line-height: 1.9; font-size: 16px; }
 
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:999;
-
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
 }
-
-.modal.hidden{
-
-    display:none;
-
-}
-
-.modal-box{
-
-    width:min(420px,92%);
-
-    background:#FFF;
-
-    border-radius:18px;
-
-    padding:28px;
-
-    text-align:center;
-
-    animation:fadeUp .2s ease;
-
-}
-
-.modal-photo{
-
-    width:180px;
-
-    height:180px;
-
-    object-fit:cover;
-
-    border-radius:16px;
-
-    border:3px solid #1565C0;
-
-    margin-bottom:20px;
-
-}
-
-#modalName{
-
-    color:#1565C0;
-
-    margin-bottom:18px;
-
-    font-size:24px;
-
-}
-
-#modalInfo{
-
-    text-align:left;
-
-    line-height:1.9;
-
-    font-size:16px;
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-
-
 
 /*======================================
-INFO ROW
+  INFO ROW
 ======================================*/
-
-.info-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:10px 0;
-
-    border-bottom:1px solid #EEE;
-
-}
-
-.info-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.info-row span{
-
-    color:#666;
-
-}
-
-.info-row b{
-
-    color:#1565C0;
-
-}
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #EEE; }
+.info-row:last-child { border-bottom: none; }
+.info-row span { color: #666; }
+.info-row b { color: #1565C0; }
