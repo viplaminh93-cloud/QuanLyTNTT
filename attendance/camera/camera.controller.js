@@ -42,14 +42,31 @@ const CameraController = (() => {
         }
     }
 
-    // Tạm dừng
-    function pause() {
-        if (scanner && scanning) scanner.pause();
+    // Tạm dừng và làm sạch màn hình
+    async function pause() {
+        if (scanner && scanning) {
+            scanner.pause();
+            
+            const videoElement = document.querySelector("#reader video");
+            if (videoElement) {
+                videoElement.style.display = "none"; 
+            }
+            Debug.write("Camera đã tạm dừng và ẩn hình ảnh.");
+        }
     }
-
-    // Tiếp tục
-    function resume() {
-        if (scanner && scanning) scanner.resume();
+    
+    // Tiếp tục và hiển thị lại hình ảnh
+    async function resume() {
+        if (scanner && scanning) {
+            scanner.resume();
+            
+            // Hiện lại hình ảnh
+            const videoElement = document.querySelector("#reader video");
+            if (videoElement) {
+                videoElement.style.display = "block";
+            }
+            Debug.write("Camera đã tiếp tục.");
+        }
     }
 
     // Xử lý nội dung QR
