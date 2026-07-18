@@ -1,43 +1,26 @@
-const cameras = await Html5Qrcode.getCameras();
+/**
+ * ======================================
+ * CAMERA INITIALIZATION
+ * Cấu hình và khởi chạy Camera
+ * ======================================
+ */
+(async () => {
+    const devices = await Html5Qrcode.getCameras();
+    if (!devices || devices.length === 0) return;
 
-let cameraId = null;
+    // Ưu tiên chọn camera sau, nếu không có thì mặc định camera đầu tiên
+    const backCamera = devices.find(c => /back|rear|environment/i.test(c.label));
+    const cameraId = backCamera ? backCamera.id : devices[0].id;
 
-// Ưu tiên camera sau
-const back = cameras.find(c =>
-    /back|rear|environment/i.test(c.label)
-);
-
-if(back){
-
-    cameraId = back.id;
-
-}else{
-
-    cameraId = cameras[0].id;
-
-}
-
-await scanner.start(
-
-    cameraId,
-
-    {
-
-        fps:10,
-
-        qrbox:{
-            width:250,
-            height:250
+    await scanner.start(
+        cameraId,
+        {
+            fps: 10,
+            qrbox: { width: 250, height: 250 },
+            aspectRatio: 1,
+            disableFlip: false
         },
-
-        aspectRatio:1,
-
-        disableFlip:false
-
-    },
-
-    onSuccess,
-
-    ()=>{}
-
-);
+        onSuccess,
+        () => {} // Bỏ qua lỗi quét liên tục
+    );
+})();
