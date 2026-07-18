@@ -6,12 +6,12 @@
  */
 // 1. Khởi tạo Scanner (Thay 'reader' bằng id thẻ div của bạn)
 const scanner = new Html5Qrcode("reader");
-console.log("Danh sách camera:", devices);
 
 // 2. Camera Service: Cầu nối giữa Library và Controller
 const CameraService = {
     start: async (onScan) => {
         const devices = await Html5Qrcode.getCameras();
+console.log("Danh sách camera:", devices);
         if (!devices || devices.length === 0) throw new Error("Không tìm thấy camera");
         
         const back = devices.find(c => /back|rear|environment/i.test(c.label));
