@@ -28,11 +28,11 @@ const StudentRenderer = (() => {
             card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
             
             card.innerHTML = `
-                <img class="student-photo" src="${student.hinh || 'images/avatar.png'}">
+                <img class="student-photo" src="${student.hinh || '#ffffff'}">
                 <div class="student-info">
                     <div class="student-name">${student.hoten}</div>
                     <div class="student-row">Mã số: ${student.maso}</div>
-                    <div class="student-row">Lớp: ${student.malop}</div>
+                    <div class="student-row">Lớp: ${student.lop}</div>
                     <div class="student-row">${student.trangthai}</div>
                 </div>`;
 
