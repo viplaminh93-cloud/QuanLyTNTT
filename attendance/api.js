@@ -48,7 +48,7 @@ const AttendanceAPI = (() => {
     /** Gửi điểm danh: Kiểm tra mạng trước khi gửi */
     async function sendAttendance(maso) {
         const request = createRequest(maso);
-        Debug.write("Gửi request:", request);
+        Debug.write("Gửi request:", JSON.stringify(request, null, 2));
         // Trường hợp ngoại tuyến: Lưu vào hàng đợi
         if (!navigator.onLine) {
             OfflineService.push(request);
