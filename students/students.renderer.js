@@ -17,12 +17,10 @@
 const StudentRenderer = (() => {
 
     function renderList(list) {
-        // Sử dụng Utils.id
         const container = Utils.id("studentList");
         container.innerHTML = "";
 
         list.forEach(student => {
-            // Sử dụng Utils.create (hoặc document.createElement nếu bạn chưa có hàm Utils.create)
             const card = Utils.create("div"); 
             card.className = "student-card";
             card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
@@ -40,8 +38,11 @@ const StudentRenderer = (() => {
         });
     }
 
+
+
+    
+
     function openModal(student) {
-        // Sửa toàn bộ thành Utils.id, Utils.show
         Utils.id("modalPhoto").src = student.hinh || "images/no-photo.png";
         Utils.id("modalName").innerText = student.hoten;
         Utils.id("modalInfo").innerHTML = `
@@ -52,10 +53,14 @@ const StudentRenderer = (() => {
         Utils.show(Utils.id("studentModal"));
     }
 
+
+    
     function closeModal() {
         // Sửa thành Utils.hide
         Utils.hide(Utils.id("studentModal"));
     }
 
     return { renderList, openModal, closeModal };
+
+    
 })();
