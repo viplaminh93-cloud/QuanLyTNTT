@@ -11,7 +11,14 @@ const AttendanceController = (() => {
     let processing = false;
     
     async function start(loai) {
-        try {
+
+const homeBox = document.getElementById("homeBox");
+    const scannerBox = document.getElementById("scannerBox");
+    
+    if (homeBox) homeBox.style.display = "none";
+    if (scannerBox) scannerBox.style.display = "block";
+        
+/*        try {
             processing = false;
             
             Debug.write("Controller", "Bắt đầu start: " + loai);
@@ -32,7 +39,7 @@ const AttendanceController = (() => {
             Debug.write("Controller-ERROR", e.message);
             console.error("LỖI TẠI START:", e);
             alert("Lỗi: " + e.message);
-        }
+        }*/
     }
 
 
