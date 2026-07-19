@@ -72,26 +72,6 @@ const AttendanceAPI = (() => {
         }
     }
 
-    
-    /** Gửi điểm danh: Kiểm tra mạng trước khi gửi 
-    async function sendAttendance(maso) {
-        const request = createRequest(maso);
-        Debug.write("Gửi request:", JSON.stringify(request, null, 2));
-        // Trường hợp ngoại tuyến: Lưu vào hàng đợi
-        if (!navigator.onLine) {
-            OfflineService.push(request);
-            return { success: false, offline: true, maso: request.maso, message: "Offline" };
-        }
-
-        // Trường hợp trực tuyến: Thử gửi tới server
-        try {
-            return await fetchWithTimeout(request);
-        } catch (error) {
-            OfflineService.push(request);
-            Debug.write("Lỗi API:", error);
-            return { success: false, offline: true, maso: request.maso, message: error.message };
-        }
-    }  */
 
     /** Gửi lại request đã lưu từ hàng đợi */
     async function resend(request) {
