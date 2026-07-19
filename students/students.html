@@ -62,11 +62,14 @@ MODAL
 <script src="students.renderer.js"></script>
 <script src="students.controller.js"></script>
 
-<script 
-window.addEventListener("DOMContentLoaded",()=>{
+<script>
+window.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
         Utils.id("btnBack")
-            .addEventListener("click", ()=>history.back());
+             .addEventListener("click", ()=>history.back());
     }
+);
 </script>
     
 </body>
