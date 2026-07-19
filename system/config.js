@@ -10,7 +10,7 @@ const Config = Object.freeze({
     APP: Object.freeze({
         NAME: "Điểm danh TNTT",
         PARISH: "Giáo xứ Phú Hòa",
-        DEBUG: true
+        DEBUG: false
     }),
 
     // API Endpoint
