@@ -5,28 +5,9 @@
 
 "use strict";
 
-/**
- * ======================================
- * AUTH MODULE
- *
- * Quản lý xác thực người dùng.
- *
- * Chức năng:
- * - Login
- * - Logout
- * - Save Token
- * - Get Token
- * - Require Login
- * - Authenticated POST
- *
- * Không chứa UI.
- * Không chứa Business.
- * ======================================
- */
-
 const Auth = (() => {
     const TOKEN_KEY = "attendance_token";
-    const USER_INFO_KEY = "user_info"; // Key mới để lưu thông tin user
+    const USER_INFO_KEY = "user_info";
 
     function saveToken(token) {
         localStorage.setItem(TOKEN_KEY, token);
