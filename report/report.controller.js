@@ -30,7 +30,7 @@ console.log("lỗi 4");
         }
 
         catch(error){
-            Debug.write(error);
+            console.log(error);
             alert ("Lỗi tải báo cáo.");
         }
 
