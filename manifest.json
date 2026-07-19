@@ -9,7 +9,7 @@
 
     "start_url": "QuanLyTNTT/login/login.html",
 
-    "scope": "./",
+    "scope": "QuanLyTNTT/",
 
     "display": "standalone",
 
