@@ -127,32 +127,13 @@ function bindEvents(){
 
 function bind(id,callback){
 
-    const element =
+    const element = Utils.id(id);
 
-        Utils.id(id);
-
-    if(!element){
-
-        Debug.warn(
-
-            "Không tìm thấy:",
-
-            id
-
-        );
-
+    if(!element) {Debug.write("Không tìm thấy:", id);
         return;
-
     }
 
-    element.addEventListener(
-
-        "click",
-
-        callback
-
-    );
-
+    element.addEventListener("click", callback));
 }
 
 
@@ -188,11 +169,7 @@ window.addEventListener("load", init);
  * ======================================
  */
 
-function openAttendance(){
-
-    location.href = "../attendance/attendance.html";
-
-}
+function openAttendance() {location.href = "../attendance/attendance.html";}
 
 /**
  * ======================================
@@ -200,11 +177,7 @@ function openAttendance(){
  * ======================================
  */
 
-function openStudents(){
-
-    location.href = "../students/students.html";
-
-}
+function openStudents() {location.href = "../students/students.html";}
 
 /**
  * ======================================
@@ -212,11 +185,7 @@ function openStudents(){
  * ======================================
  */
 
-function openReport(){
-
-
-    location.href="../report/report.html";
-}
+function openReport() {location.href="../report/report.html";}
 
 /**
  * ======================================
@@ -224,8 +193,4 @@ function openReport(){
  * ======================================
  */
 
-function logout(){
-
-    Auth.logout();
-
-}
+function logout() {Auth.logout();}
