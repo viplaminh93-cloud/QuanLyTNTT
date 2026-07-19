@@ -62,8 +62,12 @@ const ReportController = (() => {
         Utils.id("resultArea").classList.remove("hidden");
     }
 
+    
     function closeResult() {
         Utils.id("resultArea").classList.add("hidden");
+        if (typeof scanner !== 'undefined' && scanner.isScanning) {
+            scanner.stop().catch(err => console.error("Lỗi tắt camera:", err));
+        }
     }
 
     return { load, startLookup, onScanResult, closeResult };
