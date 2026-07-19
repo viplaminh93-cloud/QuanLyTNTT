@@ -27,8 +27,14 @@ const ReportController = (() => {
     // --- Tra cứu cá nhân ---
     function startLookup() {
         isLookingUp = true;
-        alert("Hãy quét mã học sinh...");
-        // Gọi module Camera của bạn tại đây, ví dụ: CameraService.start(ReportController.onScanResult);
+        // Gọi CameraService với callback là hàm onScanResult của chính Controller này
+        CameraService.start((maso) => {
+            // Khi quét xong, CameraService gọi callback này
+            ReportController.onScanResult(maso);
+        }).catch(err => {
+            alert("Lỗi camera: " + err.message);
+            isLookingUp = false;
+        });
     }
 
     async function onScanResult(maso) {
