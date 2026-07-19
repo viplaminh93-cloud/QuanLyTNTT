@@ -31,7 +31,7 @@ const ReportController = (()=>{
 
         catch(error){
             Debug.write(error);
-            PopupService.error("Lỗi tải báo cáo.");
+            alert ("Lỗi tải báo cáo.");
         }
 
     }
