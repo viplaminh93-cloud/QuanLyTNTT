@@ -9,7 +9,7 @@
 
     "start_url": "/login/login.html",
 
-    "scope": "/",
+    "scope": "./",
 
     "display": "standalone",
 
