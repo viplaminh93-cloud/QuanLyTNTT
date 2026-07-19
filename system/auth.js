@@ -79,13 +79,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token"); // Hoặc cách bạn đang lưu token
     
     // 2. Nếu không có token, chuyển hướng về trang đăng nhập
-    if (!token && window.location.pathname !== "./login/login.html") {
-        window.location.href = "./login/login.html";
+    if (!token && window.location.pathname !== "/QuanLyTNTT/login/login.html") {
+        window.location.href = "/QuanLyTNTT/login/login.html";
         return;
     }
 
     // 3. Nếu có token, chuyển hướng vào Dashboard (nếu đang ở trang login)
-    if (token && window.location.pathname.includes("./login/login.html")) {
-        window.location.href = "./dashboard/dashboard.html";
+    if (token && window.location.pathname.includes("/QuanLyTNTT/login/login.html")) {
+        window.location.href = "/QuanLyTNTT/dashboard/dashboard.html";
     }
 });
