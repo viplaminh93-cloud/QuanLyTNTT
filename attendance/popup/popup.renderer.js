@@ -24,12 +24,20 @@ const PopupRenderer = (() => {
 
     // Render thông tin học sinh
     function renderStudent(data) {
-        Renderer.image("overlayPhoto", data.photo || "../icons/avatar.png");
-        Renderer.text("overlayName", data.hoten || "Không thấy tên");
-        Renderer.text("overlayKhoi", data.khoi || "");
-        Renderer.text("overlayClass", data.lop || "");
-        Renderer.text("overlayCode", data.maso || "Không có mã số");
+        // Nếu data có chứa thông tin học sinh (khi success là true hoặc có object student)
+        const s = data.student || data; 
+    
+        Renderer.image("overlayPhoto", s.photo || s.hinh || "../icons/avatar.png");
+        Renderer.text("overlayName", s.hoten || "Không tìm thấy tên");
+        Renderer.text("overlayKhoi", s.khoi || "");
+        Renderer.text("overlayClass", s.lop || "");
+        Renderer.text("overlayCode", s.maso || "");
         Renderer.text("overlayTime", data.time || Utils.formatTime());
+        
+        // Nếu có lỗi, bạn có thể muốn hiện message lỗi ở đâu đó
+        if (!data.success && data.message) {
+            Renderer.text("overlayName", data.message); // Ghi đè tên bằng thông báo lỗi
+        }
     }
 
     // Hiển thị lời nhắc
