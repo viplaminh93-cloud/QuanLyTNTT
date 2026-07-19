@@ -10,10 +10,20 @@
 window.addEventListener("load", () => {
     console.log("=== APP START ==="); 
     console.log(Config.APP.PARISH, Config.APP.NAME, "Version:", Version.VERSION); 
+    
     initializePWA(); // Khởi động đồng bộ offline 
+    
     if (typeof OfflineService !== "undefined") { 
         OfflineService.renderQueueBadge(); 
-        OfflineService.sync(); } });
+        OfflineService.sync(); } 
+    
+    if ("serviceWorker" in navigator) { 
+            window.addEventListener("load", () => { 
+                navigator.serviceWorker 
+                .register("../service-worker.js") 
+                .then(reg => console.log("Service Worker OK", reg)) 
+                .catch(console.error); }); }
+});
 
 
 /*window.addEventListener("load", () => {       //đoạn này mới mà ko sài được :(((
@@ -27,15 +37,11 @@ window.addEventListener("load", () => {
     // SERVICE WORKER REGISTRATION
     if ("serviceWorker" in navigator) {
         await navigator.serviceWorker.register("/service-worker.js");
-    } */
+    } 
+    });*/
 
-    if ("serviceWorker" in navigator) { 
-        window.addEventListener("load", () => { 
-            navigator.serviceWorker 
-            .register("../service-worker.js") 
-            .then(reg => console.log("Service Worker OK", reg)) 
-            .catch(console.error); }); }
-});
+    
+
 
 
 // Lắng nghe trạng thái mạng (chỉ cần ở đây, không cần trong offline.js nữa)
