@@ -221,7 +221,7 @@ self.addEventListener(
 
                     return caches.match(
 
-                        "./login/login.html"
+                        "/QuanLyTNTT/login/login.html"
 
                     );
 
