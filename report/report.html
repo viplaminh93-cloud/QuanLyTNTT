@@ -52,13 +52,12 @@
 
         <!-- Nút Tra cứu -->
         <button class="btn back" onclick="ReportController.startLookup()">Tra cứu cá nhân (Quét mã)</button>
-        <!-- Nút đóng trong resultArea -->
-        <button class="btn" onclick="ReportController.closeResult()">Đóng</button>        
         <!-- Khu vực hiển thị kết quả -->
         <div id="resultArea" class="card hidden">
             <h3>Lịch sử điểm danh</h3>
             <div id="historyList"></div>
-            <button class="btn" onclick="closeResult()">Đóng</button>
+            <div id="reader" style="width: 100%;"></div>
+            <button class="btn" onclick="ReportController.closeResult()">Đóng</button>
         </div>
 
     </div>
