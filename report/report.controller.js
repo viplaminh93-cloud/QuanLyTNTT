@@ -47,3 +47,50 @@ console.log("lỗi 4");
     return{load, refresh};
 
 })();
+
+
+// Biến trạng thái
+let isLookingUp = false;
+
+// Hàm bắt đầu chế độ tra cứu
+function startLookup() {
+    isLookingUp = true;
+    // Gọi hàm mở camera của bạn (ví dụ: CameraService.start())
+    // Giả sử sau khi quét xong, nó gọi hàm onScanResult(maso)
+    alert("Hãy quét mã học sinh...");
+}
+
+// Hàm xử lý sau khi quét mã
+async function onScanResult(maso) {
+    if (isLookingUp) {
+        // Gọi API chúng ta vừa tạo
+        const res = await Auth.post({ action: "studentHistory", maso: maso });
+        if (res.success && res.list.length > 0) {
+            renderHistory(res.list);
+        } else {
+            alert("Không tìm thấy dữ liệu hoặc mã không hợp lệ.");
+        }
+        isLookingUp = false; // Tắt chế độ tra cứu
+    } else {
+        // Điểm danh bình thường
+        AttendanceService.send(maso);
+    }
+}
+
+// Hàm hiển thị lên màn hình
+function renderHistory(list) {
+    const container = document.getElementById("historyList");
+    container.innerHTML = list.map(item => `
+        <div class="report-row">
+            <div>
+                <strong>${item.ngay}</strong><br>
+                <small>${item.loai} - ${item.lop}</small>
+            </div>
+        </div>
+    `).join("");
+    document.getElementById("resultArea").classList.remove("hidden");
+}
+
+function closeResult() {
+    document.getElementById("resultArea").classList.add("hidden");
+}
