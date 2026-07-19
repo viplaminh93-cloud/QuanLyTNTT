@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Báo cáo điểm danh</title>
+
+<link rel="manifest" href="../manifest.json">
+
+<meta name="theme-color" content="#1565C0">
+
+<link rel="icon" href="../icons/icon-192.png">
+
+<link rel="apple-touch-icon" href="../icons/icon-192.png">
+
+<link rel="stylesheet" href="report.css">
+
+</head>
+
+<body>
+
+<div id="reportBox" class="container">
+
+    <div class="card">
+
+        <h1>BÁO CÁO ĐIỂM DANH</h1>
+
+        <div
+            id="reportDate"
+            class="report-date">
+        </div>
+
+        <div class="summary">
+
+            <div class="summary-item">
+
+                <div class="summary-title">
+                    Tổng lượt
+                </div>
+
+                <div
+                    id="tongCount"
+                    class="summary-value">
+
+                    0
+
+                </div>
+
+            </div>
+
+            <div class="summary-item">
+
+                <div class="summary-title">
+                    Dự lễ
+                </div>
+
+                <div
+                    id="leCount"
+                    class="summary-value">
+
+                    0
+
+                </div>
+
+            </div>
+
+            <div class="summary-item">
+
+                <div class="summary-title">
+                    Giáo lý
+                </div>
+
+                <div
+                    id="glCount"
+                    class="summary-value">
+
+                    0
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            id="reportList"
+            class="report-list">
+
+        </div>
+
+        <button
+            id="btnRefresh"
+            class="btn btnBlue">
+
+            LÀM MỚI
+
+        </button>
+
+        <button
+            id="btnBack"
+            class="btn back">
+
+            QUAY LẠI
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../system/version.js"></script>
+<script src="../system/config.js"></script>
+<script src="../system/constants.js"></script>
+<script src="../system/model.js"></script>
+<script src="../system/core.js"></script>
+<script src="../system/utils.js"></script>
+<script src="../system/renderer.js"></script>
+<script src="../system/debug.js"></script>
+<script src="../system/auth.js"></script>
+
+<script src="report.renderer.js"></script>
+<script src="report.service.js"></script>
+<script src="report.controller.js"></script>
+
+<script>
+
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        Utils.id("btnRefresh")
+
+            .addEventListener(
+
+                "click",
+
+                ReportController.load
+
+            );
+
+        Utils.id("btnBack")
+
+            .addEventListener(
+
+                "click",
+
+                ()=>history.back()
+
+            );
+
+        ReportController.load();
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>
