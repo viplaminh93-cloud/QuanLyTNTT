@@ -44,22 +44,29 @@ const OfflineService = (() => {
         while (hasQueue()) {
             const req = peek();
             
-            // CẬP NHẬT LẠI TOKEN MỚI NHẤT VÀO REQUEST TRƯỚC KHI GỬI
-            // Đề phòng trường hợp token cũ trong hàng đợi đã hết hạn hoặc bị trống
-            req.token = Auth.getToken(); 
+            // --- QUAN TRỌNG: CẬP NHẬT LẠI TOKEN MỚI NHẤT ---
+            // Lấy token đang có hiện tại trong Auth (trình duyệt của bạn)
+            const currentToken = Auth.getToken();
             
+            if (currentToken) {
+                req.token = currentToken; // Ghi đè token mới vào request cũ
+            } else {
+                console.error("Không có Token đăng nhập, dừng đồng bộ!");
+                break; // Dừng lại nếu chưa đăng nhập
+            }
+            // ------------------------------------------------
+    
             try {
-                console.log("Đang đồng bộ:", req);
                 const res = await AttendanceAPI.resend(req);
-                
                 if (res.success) {
-                    pop(); // Xóa khỏi hàng đợi nếu thành công
+                    pop(); // Chỉ xóa khỏi hàng đợi khi thành công
                 } else {
-                    console.warn("Sync thất bại:", res.message);
-                    break; // Dừng lại nếu Server trả về lỗi logic (để tránh lỗi vòng lặp)
+                    console.warn("Server từ chối request này:", res.message);
+                    // Nếu lỗi do Token (ví dụ 401), thì phải dừng sync để không bị lặp vô tận
+                    break; 
                 }
             } catch (e) { 
-                console.error("Lỗi kết nối khi sync:", e); 
+                console.error("Lỗi mạng:", e); 
                 break; 
             }
         }
