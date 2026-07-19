@@ -133,7 +133,7 @@ function bind(id,callback){
         return;
     }
 
-    element.addEventListener("click", callback));
+    element.addEventListener("click", callback);
 }
 
 
