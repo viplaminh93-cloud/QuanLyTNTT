@@ -216,7 +216,7 @@ function openReport(){
 
 
     location.href="../report/report.html";
-        );
+}
 
 /**
  * ======================================
