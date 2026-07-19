@@ -9,15 +9,11 @@
 
 <title>Báo cáo điểm danh</title>
 
-<link rel="manifest" href="../manifest.json">
-
-<meta name="theme-color" content="#1565C0">
-
-<link rel="icon" href="../icons/icon-192.png">
-
-<link rel="apple-touch-icon" href="../icons/icon-192.png">
-
-<link rel="stylesheet" href="report.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1565C0">
+    <link rel="icon" href="../icons/icon-192.png">
+    <link rel="apple-touch-icon" href="../icons/icon-192.png">
+    <link rel="stylesheet" href="report.css">
 
 </head>
 
@@ -29,84 +25,40 @@
 
         <h1>BÁO CÁO ĐIỂM DANH</h1>
 
-        <div
-            id="reportDate"
-            class="report-date">
-        </div>
-
+        <div id="reportDate" class="report-date"> </div>
         <div class="summary">
-
             <div class="summary-item">
-
-                <div class="summary-title">
-                    Tổng lượt
-                </div>
-
-                <div
-                    id="tongCount"
-                    class="summary-value">
-
-                    0
-
-                </div>
-
+                <div class="summary-title"> Tổng lượt </div>
+                <div id="tongCount" class="summary-value"> 0 </div>
             </div>
-
+            
             <div class="summary-item">
+                <div class="summary-title"> Dự lễ </div>
+                <div id="leCount" class="summary-value"> 0 </div>
+           </div>
 
-                <div class="summary-title">
-                    Dự lễ
-                </div>
+           <div class="summary-item">
+                <div class="summary-title"> Giáo lý </div>
+                <div id="glCount" class="summary-value"> 0 </div>
+           </div>
 
-                <div
-                    id="leCount"
-                    class="summary-value">
+      </div>
 
-                    0
+        <div id="reportList" class="report-list"> </div>
 
-                </div>
+        <button id="btnRefresh" class="btn btnBlue"> LÀM MỚI </button>
+        <button id="btnBack" class="btn back"> QUAY LẠI </button>
 
-            </div>
-
-            <div class="summary-item">
-
-                <div class="summary-title">
-                    Giáo lý
-                </div>
-
-                <div
-                    id="glCount"
-                    class="summary-value">
-
-                    0
-
-                </div>
-
-            </div>
-
+        
+                <!-- Nút Tra cứu -->
+        <button class="btn back" onclick="startLookup()">Tra cứu cá nhân (Quét mã)</button>
+        
+        <!-- Khu vực hiển thị kết quả -->
+        <div id="resultArea" class="card hidden">
+            <h3>Lịch sử điểm danh</h3>
+            <div id="historyList"></div>
+            <button class="btn" onclick="closeResult()">Đóng</button>
         </div>
-
-        <div
-            id="reportList"
-            class="report-list">
-
-        </div>
-
-        <button
-            id="btnRefresh"
-            class="btn btnBlue">
-
-            LÀM MỚI
-
-        </button>
-
-        <button
-            id="btnBack"
-            class="btn back">
-
-            QUAY LẠI
-
-        </button>
 
     </div>
 
