@@ -31,6 +31,12 @@ const APP_FILES = [
 
     "./manifest.json",
 
+    "./login/login.html",
+    "./login/login.css",
+    "./login/login.controller.js",
+    "./login/login.service.js",
+    "./login/login.renderer.js",
+
     "./attendance/attendance.html",
     "./attendance/attendance.css",
 
