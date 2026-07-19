@@ -79,13 +79,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token"); // Hoặc cách bạn đang lưu token
     
     // 2. Nếu không có token, chuyển hướng về trang đăng nhập
-    if (!token && window.location.pathname !== "/login.html") {
-        window.location.href = "login.html";
+    if (!token && window.location.pathname !== "./login/login.html") {
+        window.location.href = "./login/login.html";
         return;
     }
 
     // 3. Nếu có token, chuyển hướng vào Dashboard (nếu đang ở trang login)
-    if (token && window.location.pathname.includes("login.html")) {
-        window.location.href = "dashboard.html";
+    if (token && window.location.pathname.includes("./login/login.html")) {
+        window.location.href = "./dashboard/dashboard.html";
     }
 });
