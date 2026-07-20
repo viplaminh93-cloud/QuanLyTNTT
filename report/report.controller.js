@@ -76,10 +76,11 @@ const ReportController = (() => {
         }
 
         let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-        csvContent += "Họ Tên,Lớp,Loại,Ngày,Giờ\n";
+        csvContent += "Mã số,Họ Tên,Lớp,Loại,Ngày,Giờ\n"; 
         
         filtered.forEach(item => {
-            csvContent += `"${item.hoten}","${item.lop}","${item.loai}","${item.ngay}","${item.gio}"\n`;
+            // Đảm bảo dữ liệu không bị trống
+            csvContent += `"${item.maso}","${item.hoten}","${item.lop}","${item.loai}","${item.ngay}","${item.gio}"\n`;
         });
 
         const encodedUri = encodeURI(csvContent);
