@@ -79,7 +79,18 @@ const ReportController = (() => {
     }
 
     function filter() {
-        renderData(getFilteredData());
+        const data = getFilteredData();
+        renderData(data);
+        
+        // Cập nhật lại Summary dựa trên dữ liệu đã lọc
+        const summary = {
+            tong: data.length,
+            le1: data.filter(i => i.loai === "Lễ 1").length,
+            le2: data.filter(i => i.loai === "Lễ 2").length,
+            leChieu: data.filter(i => i.loai === "Lễ Chiều").length,
+            giaoly: data.filter(i => i.loai === "Giáo lý").length
+        };
+        ReportRenderer.renderSummary(summary); // Hãy cập nhật renderer để hiển thị các con số mới
     }
 
     function renderData(list) {
