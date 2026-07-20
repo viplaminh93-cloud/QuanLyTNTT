@@ -56,7 +56,6 @@ const StudentRenderer = (() => {
 
     
     function closeModal() {
-        // Sửa thành Utils.hide
         Utils.hide(Utils.id("studentModal"));
     }
 
