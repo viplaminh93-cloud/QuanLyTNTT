@@ -56,7 +56,9 @@ const ReportController = (() => {
                 item.lop.toLowerCase().includes(query);
                 
             const matchDate = dateQuery ? convertToDDMMYYYY(dateQuery) === item.ngay : true;
-            const matchType = item.loai.toUpperCase().includes(currentType.toUpperCase());         
+            const matchType = (currentType === "TẤT CẢ") 
+                  ? true 
+                  : item.loai.toUpperCase().includes(currentType.toUpperCase());        
             
             let matchCount = true;
             if (compareType !== "none" && threshold > 0) {
