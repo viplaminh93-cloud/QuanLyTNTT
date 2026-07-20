@@ -52,7 +52,7 @@ h2 { text-align: center; color: #666; margin-bottom: 30px; }
 /*======================================
   INFO ROW
 ======================================*/
-.info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #EEE; }
-.info-row:last-child { border-bottom: none; }
-.info-row span { color: #666; }
-.info-row b { color: #1565C0; }
+.info-row {display: grid; grid-template-columns: 90px 1fr; align-items: center; padding: 10px 0; border-bottom: 1px solid #EEE;}
+.info-row:last-child {border-bottom: none;}
+.info-row span {color: #666; font-weight: 600;}
+.info-row b {color: #1565C0; font-weight: normal;}
