@@ -8,6 +8,8 @@
 
 
 window.addEventListener("load", init);
+const installBtn = Utils.id("installBtn");
+if (installBtn) installBtn.classList.add("hidden");
 
 /**
  * ======================================
