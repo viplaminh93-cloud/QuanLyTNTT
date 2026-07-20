@@ -70,5 +70,13 @@ const ReportController = (() => {
         }
     }
 
+    async function backHome() {
+        processing = false;
+        
+        ReportService.reset();
+        await CameraController.stop();
+        ReportRenderer.showHome();
+    }
+
     return { load, startLookup, onScanResult, closeResult };
 })();
