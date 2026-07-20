@@ -5,16 +5,7 @@
 
 "use strict";
 
-/**
- * ======================================
- * DASHBOARD CONTROLLER
- *
- * Dashboard là Menu chính.
- * Không tải dữ liệu.
- * Không render thống kê.
- * Chỉ điều hướng.
- * ======================================
- */
+
 
 window.addEventListener("load", init);
 
@@ -70,20 +61,7 @@ function bindEvents(){
     bind("btnAttendance", openAttendance);
     bind("btnStudents", openStudents);
     bind("btnReport", openReport);
-    
-/*    Utils.id("btnReports").addEventListener("click", () => {
-        const role = Auth.getRole();
-        if (role !== "ADMIN" && role !== "QUAN_LY") {
-                alert("Bạn không có quyền truy cập trang này!");
-                return;
-        }
-        alert("Chức năng đang phát triển.");
-        
-    });*/
-    
-
     bind("btnLogout", logout);
-
 }
 
 /**
@@ -93,13 +71,10 @@ function bindEvents(){
  */
 
 function bind(id,callback){
-
     const element = Utils.id(id);
-
     if(!element) {Debug.write("Không tìm thấy:", id);
         return;
     }
-
     element.addEventListener("click", callback);
 }
 
@@ -122,13 +97,6 @@ function loadUser() {
     if (roleEl) roleEl.innerText = role;
 }
 
-function init() {
-    Auth.requireLogin();
-    loadUser();
-    bindEvents();
-}
-
-window.addEventListener("load", init);
 
 /**
  * ======================================
