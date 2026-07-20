@@ -184,23 +184,26 @@ self.addEventListener(
 self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") return;
 
-    // Ngoại trừ các file bạn KHÔNG muốn cache (ví dụ: data từ Google Script)
+    // Ngoại trừ các request đến Google Script (vì dữ liệu cần lấy mới mỗi lần)
     if (event.request.url.includes('/exec')) return;
 
     event.respondWith(
         caches.match(event.request).then(cachedResponse => {
-            // Lấy từ cache trước
+            // Nếu có trong cache, trả về luôn (Stale-While-Revalidate chiến lược)
             const fetchPromise = fetch(event.request).then(networkResponse => {
-                // Nếu fetch thành công, cập nhật cache với bản mới nhất
-                if (networkResponse.ok) {
+                // Kiểm tra nếu response hợp lệ
+                if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                    // CLONE trước khi put vào cache
+                    const responseToCache = networkResponse.clone();
                     caches.open(CACHE_NAME).then(cache => {
-                        cache.put(event.request, networkResponse.clone());
+                        cache.put(event.request, responseToCache);
                     });
                 }
                 return networkResponse;
+            }).catch(() => {
+                // Có thể xử lý fallback ở đây nếu cần
             });
 
-            // Trả về cache ngay lập tức, nếu không có mới đợi network
             return cachedResponse || fetchPromise;
         })
     );
