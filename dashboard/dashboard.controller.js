@@ -16,39 +16,26 @@ window.addEventListener("load", init);
  */
 
 function init(){
-
-    //----------------------------------
-    // Kiểm tra đăng nhập
-    //----------------------------------
-
-     if (!Auth.requireLogin()) return;
-
-    //----------------------------------
-    // Hiển thị người dùng
-    //----------------------------------
+    if (!Auth.requireLogin()) return;
 
     loadUser();
-    const role = Auth.getRole(); // Lấy quyền
+    const role = Auth.getRole();
 
-    // Nếu là TAM_KHOA, chặn ngay từ đầu
-        if (role === "TAM_KHOA") {
-            alert("Tài khoản của bạn chưa được cấp quyền sử dụng hệ thống.");
-            Auth.logout();
-            return;
-        }
-    
-    // Ẩn/Hiện nút dựa trên quyền
-        if (role === "QUET_MA") {
-            Utils.id("btnReports").style.display = "none";
-    
-    //----------------------------------
-    // Gắn sự kiện
-    //----------------------------------
-
-    bindEvents();
-
+    if (role === "TAM_KHOA") {
+        alert("Tài khoản của bạn chưa được cấp quyền sử dụng hệ thống.");
+        Auth.logout();
+        return;
     }
+    
+    // Gắn sự kiện trước (để nút cài đặt có thể hoạt động)
+    bindEvents();
+    initializePWA(); // Gọi hàm khởi tạo PWA ở đây!
 
+    // Ẩn nút báo cáo nếu là QUET_MA
+    if (role === "QUET_MA") {
+        const reportBtn = Utils.id("btnReport");
+        if (reportBtn) reportBtn.style.display = "none";
+    }
 }
 
 /**
