@@ -22,7 +22,7 @@ window.addEventListener("load", () => {
                 navigator.serviceWorker 
                 .register("../service-worker.js") 
                 .then(reg => console.log("Service Worker OK", reg)) 
-                .catch(console.error); }); }
+                .catch(console.error); });
 });
 
 
