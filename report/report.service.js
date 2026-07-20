@@ -31,33 +31,32 @@ const ReportService = (() => {
     /**
      * Đồng bộ dữ liệu từ Google Sheets về localStorage
      */
-    async function syncFromGoogle() {
+    async syncFromGoogle() {
         return new Promise((resolve) => {
-            // Kiểm tra xem google.script có tồn tại không trước khi gọi
+            // Kiểm tra môi trường (tránh lỗi khi test ở máy tính)
             if (typeof google === 'undefined' || !google.script) {
-                console.warn("Không có kết nối Google Script, sử dụng cache cũ.");
-                return resolve(getHistory());
+                console.warn("Đang dùng dữ liệu offline.");
+                resolve(JSON.parse(localStorage.getItem("APP_DATA") || "{}"));
+                return;
             }
 
             google.script.run
                 .withSuccessHandler(data => {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                    // data ở đây là object {students: [...], history: [...]}
+                    localStorage.setItem("APP_DATA", JSON.stringify(data));
                     resolve(data);
                 })
                 .withFailureHandler(err => {
                     console.error("Lỗi đồng bộ:", err);
-                    resolve(getHistory()); // Trả về cache cũ nếu lỗi
+                    resolve({});
                 })
-                .getAllAttendanceHistory();
+                .getAppData();
         });
-    }
+    },
 
-    /**
-     * Lấy dữ liệu lịch sử từ localStorage
-     */
-    function getHistory() {
-        const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
+    getHistory() {
+        const data = JSON.parse(localStorage.getItem("APP_DATA") || "{}");
+        return data.history || [];
     }
 
     /**
