@@ -92,7 +92,9 @@ async function handleLogin() {
         location.href = "../dashboard/dashboard.html";
     } catch (err) {
         console.error(err);
-        LoginRenderer.showError("Không kết nối được máy chủ.");
+        LoginRenderer.showError("Đang kết nối lại...");
+            setTimeout(() => {
+            }, 1000);
     } finally {
         LoginRenderer.setLoading(false);
     }
