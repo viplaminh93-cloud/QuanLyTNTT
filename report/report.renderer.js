@@ -44,7 +44,7 @@ const ReportRenderer = (()=>{
     }
 
     function showHome() {
-            Renderer.show("homeBox"); // Truyền ID là string
+            Renderer.show("reportBox");
             Renderer.hide("scannerBox");
         }
     
