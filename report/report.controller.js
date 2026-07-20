@@ -69,31 +69,29 @@ const ReportController = (() => {
 
     // --- Xuất Excel ---
     function exportToExcel() {
-        const filtered = getFilteredData();
+        const filtered = getFilteredData(); // Lấy danh sách đang lọc
         if (filtered.length === 0) {
             alert("Không có dữ liệu để xuất!");
             return;
         }
     
-        // Tạo nội dung CSV
-        let csvContent = "\uFEFFMã số,Họ Tên,Lớp,Loại,Ngày,Giờ\n";
+        // Tiêu đề cột
+        let csvContent = "\uFEFFMã số,Họ Tên,Lớp,Loại,Ngày,Giờ\n"; 
+        
         filtered.forEach(item => {
+            // Ghi từng dòng, mỗi giá trị cách nhau bằng dấu phẩy
             csvContent += `"${item.maso}","${item.hoten}","${item.lop}","${item.loai}","${item.ngay}","${item.gio}"\n`;
         });
     
-        // Tạo Blob thay vì dùng encodeURI
+        // Tạo file tải về
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         
         const link = document.createElement("a");
         link.href = url;
         link.setAttribute("download", `Bao_cao_${Utils.formatDate().replace(/\//g, "-")}.csv`);
-        
-        // Thêm vào body và click
         document.body.appendChild(link);
         link.click();
-        
-        // Dọn dẹp
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
