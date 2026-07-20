@@ -15,7 +15,7 @@ const Config = Object.freeze({
 
     // API Endpoint
     API: Object.freeze({
-        URL: "https://script.google.com/macros/s/AKfycbxAKLw7oYFHQ4yEY0MRpXwzEQl6l1_hFumMpDbwyc4thxFHKEuUUJY4eHEarE-MWsoMEA/exec"
+        URL: "https://script.google.com/macros/s/AKfycbwcV0Uv2U8NoP3jtwmQ0hx04yu_8I71iszC8Eg4m1zd0Rj6DoZJxtMAcRgajUiO7RYm9Q/exec"
     }),
 
     // Cấu hình Camera
