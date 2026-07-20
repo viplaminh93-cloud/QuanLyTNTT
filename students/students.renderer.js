@@ -48,7 +48,7 @@ const StudentRenderer = (() => {
         Utils.id("modalInfo").innerHTML = `
             <div class="info-row"><span>Mã số</span><b>${student.maso}</b></div>
             <div class="info-row"><span>Lớp</span><b>${student.lop}</b></div>
-            <div class="info-row"><span>Lễ: <b>${student.soBuoiLe}</b></span>GL: <b>${student.soBuoiGiaoLy}</b></div>
+            <div class="info-row"><span>Lễ <b>${student.soBuoiLe}</b></span>GL <b>${student.soBuoiGiaoLy}</b></div>
             <div class="info-row"><span>Trạng thái</span><b>${student.trangthai}</b></div>`;
         Utils.show(Utils.id("studentModal"));
     }
