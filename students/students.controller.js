@@ -5,42 +5,63 @@
 
 "use strict";
 
-// Kiểm tra quyền đăng nhập trước khi thực thi
 Auth.requireLogin();
 
-// Lắng nghe sự kiện load trang để khởi tạo dữ liệu
 window.addEventListener("load", initStudents);
 
 /**
- * Khởi tạo dữ liệu: Tải từ server và hiển thị toàn bộ danh sách
+ * Khởi tạo dữ liệu: Dùng ReportService làm nguồn dữ liệu trung tâm
  */
-async function initStudents() {  
-    if (typeof loadUser === 'function') loadUser(); 
-    const list = await StudentService.getStudentsWithStats();
-    // Render
-    StudentRenderer.renderList(list);
+async function initStudents() {
+    // 1. Lấy dữ liệu từ ReportService (thay vì AttendanceData cũ)
+    const history = ReportService.getHistory();
+    
+    // 2. Lấy danh sách thiếu nhi từ Service chuyên trách
+    const students = StudentService.getAll(); 
+
+    // 3. Xử lý logic thống kê
+    const studentsWithStats = students.map(s => {
+        const stats = history.filter(h => h.maso == s.maso);
+        return {
+            ...s,
+            // Đảm bảo tên thuộc tính 'type' hoặc 'loai' khớp với dữ liệu từ Google trả về
+            soBuoiLe: stats.filter(h => h.loai && h.loai.includes("Lễ")).length, 
+            soBuoiGiaoLy: stats.filter(h => h.loai && h.loai.includes("Giáo lý")).length
+        };
+    });
+
+    // 4. Render danh sách
+    StudentRenderer.renderList(studentsWithStats);
 }
 
-// Lắng nghe sự kiện người dùng nhập liệu vào ô tìm kiếm
+// Lắng nghe sự kiện người dùng nhập liệu
 Utils.id("txtSearch").addEventListener("input", onSearch);
 
 /**
- * Xử lý tìm kiếm: Lọc danh sách theo từ khóa hoặc hiển thị tất cả nếu ô trống
+ * Xử lý tìm kiếm
  */
 function onSearch() {
     const keyword = Utils.id("txtSearch").value.trim().toLowerCase();
+    const history = ReportService.getHistory();
+    
+    // Tìm kiếm trong StudentService
+    const filteredStudents = StudentService.search(keyword);
 
-    if (keyword === "") {
-        StudentRenderer.renderList(StudentService.getAll());
-        return;
-    }
+    // Render lại kèm thống kê (để số liệu không bị mất khi tìm kiếm)
+    const displayList = filteredStudents.map(s => {
+        const stats = history.filter(h => h.maso == s.maso);
+        return {
+            ...s,
+            soBuoiLe: stats.filter(h => h.loai && h.loai.includes("Lễ")).length,
+            soBuoiGiaoLy: stats.filter(h => h.loai && h.loai.includes("Giáo lý")).length
+        };
+    });
 
-    StudentRenderer.renderList(StudentService.search(keyword));
+    StudentRenderer.renderList(displayList);
 }
 
-// Lắng nghe sự kiện click vào nền Modal để đóng Modal
+// Sự kiện Modal
 Utils.id("studentModal").addEventListener("click", e => {
-    // Chỉ đóng khi click trực tiếp vào vùng nền (studentModal), không phải nội dung bên trong
     if (e.target.id === "studentModal") {
         StudentRenderer.closeModal();
     }
