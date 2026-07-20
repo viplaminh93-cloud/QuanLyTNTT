@@ -8,6 +8,7 @@
 "use strict";
 
 const CameraService = {
+    scanner: null,
     start: async (onScan) => {
         try {
             const scanner = new Html5Qrcode("reader");
