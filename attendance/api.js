@@ -19,6 +19,7 @@ const AttendanceAPI = (() => {
         return {
             action: "attendance",
             maso: String(maso).trim().toUpperCase(),
+            nguoiQuet: Auth.getEmail(),
             loai: AttendanceService.getCurrentType(),
             requestId: Date.now() + "_" + Math.random().toString(36).substring(2, 8),
             time: Date.now()
