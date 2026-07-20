@@ -101,7 +101,7 @@ const ReportController = (() => {
             <body>
                 <table>
                     <tr>
-                        <th>Mã số</th><th>Họ Tên</th><th>Lớp</th><th>Loại</th><th>Ngày</th><th>Giờ</th>
+                        <th>Mã số</th><th>Họ Tên</th><th>Lớp</th><th>Loại</th><th>Ngày</th><th>Giờ</th><th>Người quét</th>
                     </tr>`;
         
             filtered.forEach(item => {
@@ -113,6 +113,7 @@ const ReportController = (() => {
                         <td>${item.loai}</td>
                         <td>${item.ngay}</td>
                         <td>${item.gio}</td>
+                        <td>${item.nguoiQuet || 'Không xác định'}</td>
                     </tr>`;
             });
         
