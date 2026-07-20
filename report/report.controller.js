@@ -85,30 +85,32 @@ const ReportController = (() => {
     // --- Xuất Excel ---
     function exportToExcel() {
         const filtered = getFilteredData(); // Lấy danh sách đang lọc
+        const today = new Date();
+        const dateStr = today.getDate().toString().padStart(2, '0') + '-' + 
+                        (today.getMonth() + 1).toString().padStart(2, '0') + '-' + 
+                        today.getFullYear();
+        
         if (filtered.length === 0) {
             alert("Không có dữ liệu để xuất!");
             return;
         }
     
         // Tiêu đề cột
-        let csvContent = "\uFEFFMã số,Họ Tên,Lớp,Loại,Ngày,Giờ\n"; 
+        let content = "Mã số\tHọ Tên\tLớp\tLoại\tNgày\tGiờ\n";
         
         filtered.forEach(item => {
             // Ghi từng dòng, mỗi giá trị cách nhau bằng dấu phẩy
-            csvContent += `"${item.maso}","${item.hoten}","${item.lop}","${item.loai}","${item.ngay}","${item.gio}"\n`;
+            content += `${item.maso}\t${item.hoten}\t${item.lop}\t${item.loai}\t${item.ngay}\t${item.gio}\n`;
         });
     
-        // Tạo file tải về
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        // Tạo file với đuôi .xls (Excel sẽ nhận diện và mở đúng cột)
+        const blob = new Blob([content], { type: 'application/vnd.ms-excel;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", `Bao_cao_${Utils.formatDate().replace(/\//g, "-")}.csv`);
-        document.body.appendChild(link);
+        link.download = `BaoCaoTNTTPhuHoa_${dateStr}.xls`;
         link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
     }
 
     // --- Tra cứu cá nhân ---
