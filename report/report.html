@@ -44,13 +44,10 @@
 
       </div>
 
-        <div id="reportList" class="report-list"> </div>
-
         <button id="btnRefresh" class="btn btnBlue"> LÀM MỚI </button>
         <button id="btnQRFind" class="btn back" onclick="ReportController.startLookup()">Tìm bằng QR</button>
         <button id="btnBack" class="btn back"> QUAY LẠI </button>
-
-       
+     
         <!-- Khu vực hiển thị kết quả -->
         <div id="resultArea" class="card hidden">
             <h3>Lịch sử điểm danh</h3>
@@ -79,9 +76,11 @@
                 </select>
                 <input type="number" id="threshold" placeholder="Nhập số buổi" onkeyup="ReportController.filter()" 
                        style="padding: 10px; border-radius: 8px; border: 1px solid #ddd; width: 100%;">
-            </div>
-        </div>
+           </div>
+      </div>
 
+      <div id="reportList" class="report-list"> </div>
+        
     </div>
 
 </div>
