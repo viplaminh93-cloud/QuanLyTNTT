@@ -31,9 +31,6 @@ const StudentRenderer = (() => {
                     <div class="student-name">${student.hoten}</div>
                     <div class="student-row">Mã số: ${student.maso}</div>
                     <div class="student-row">Lớp: ${student.lop}</div>
-                    <div class="student-row" style="font-size: 0.85em; color: #444;">
-                            Lễ: <b>${student.soBuoiLe}</b> | GL: <b>${student.soBuoiGiaoLy}</b>
-                        </div>
                 </div>`;
 
             card.addEventListener("click", () => openModal(student));
@@ -51,6 +48,7 @@ const StudentRenderer = (() => {
         Utils.id("modalInfo").innerHTML = `
             <div class="info-row"><span>Mã số</span><b>${student.maso}</b></div>
             <div class="info-row"><span>Lớp</span><b>${student.lop}</b></div>
+            <div class="student-row" style="font-size: 0.85em; color: #444;">Lễ: <b>${student.soBuoiLe}</b> | GL: <b>${student.soBuoiGiaoLy}</b></div>
             <div class="info-row"><span>Trạng thái</span><b>${student.trangthai}</b></div>`;
 
         Utils.show(Utils.id("studentModal"));
