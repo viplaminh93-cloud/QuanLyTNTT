@@ -22,7 +22,7 @@ const ReportService = (() => {
             console.error("Lỗi khi gọi ReportService:", error);
             return { success: false, message: "Không thể kết nối đến máy chủ." };
         }
-    }
+    },
 
     //----------------------------------
     // API MỚI (Lịch sử điểm danh toàn cục)
