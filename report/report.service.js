@@ -57,12 +57,12 @@ const ReportService = (() => {
     getHistory() {
         const data = JSON.parse(localStorage.getItem("APP_DATA") || "{}");
         return data.history || [];
-    }
+    },
 
     /**
      * Xóa dữ liệu cũ (nếu cần Reset)
      */
-    function clearData() {
+    clearData() {
         localStorage.removeItem(STORAGE_KEY);
     }
 
