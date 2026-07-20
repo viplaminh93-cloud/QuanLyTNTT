@@ -57,3 +57,34 @@ h1 { text-align: center; color: var(--primary); margin-bottom: 10px; }
 #reader video {
     width: 100% !important;
 }
+
+
+
+
+/* Bộ lọc báo cáo */
+.filter-box {
+    margin-bottom: 20px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box; /* Quan trọng để không bị tràn khung */
+}
+
+.filter-select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 100%;
+}
