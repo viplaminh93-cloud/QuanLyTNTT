@@ -27,7 +27,7 @@ const AttendanceAPI = (() => {
     }
 
     /** Gửi dữ liệu tới server với cơ chế timeout */
-    async function fetchWithTimeout(body, timeout = 6000) {
+    async function fetchWithTimeout(body, timeout = 10000) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeout);
 
