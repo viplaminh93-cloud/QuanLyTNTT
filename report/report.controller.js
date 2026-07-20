@@ -103,7 +103,7 @@ const ReportController = (() => {
         });
     
         // 2. Tạo Blob với BOM đã được chèn
-        const blob = new Blob([content], { 'type: 'text/csv;charset=utf-8;' });
+        const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         
         const link = document.createElement("a");
