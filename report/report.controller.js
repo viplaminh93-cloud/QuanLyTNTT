@@ -9,7 +9,7 @@ const ReportController = (() => {
     let processing = false;
     let isLookingUp = false;
     let allDataList = [];
-    let currentType = "Dự Lễ"; // Mặc định là DỰ LỄ
+    let activeTypes = ["Lễ 1", "Lễ 2", "Lễ Chiều", "Giáo lý"];
 
     async function load() {
         try {
@@ -29,9 +29,19 @@ const ReportController = (() => {
     }
     
     // Hàm gọi khi nhấn nút lọc
-    function setFilterType(type) {
-        currentType = type;
-        filter();
+    function setFilterType(type, btnElement) {
+        // 1. Cập nhật trạng thái Active cho nút
+        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+    
+        // 2. Cập nhật logic lọc
+        if (type === 'TẤT CẢ') {
+            activeTypes = ["Lễ 1", "Lễ 2", "Lễ Chiều", "Giáo lý"];
+        } else {
+            activeTypes = [type];
+        }
+        
+        filter(); // Gọi lại hàm lọc
     }
 
     // Hàm lấy dữ liệu sau khi đã áp dụng tất cả bộ lọc
@@ -56,9 +66,7 @@ const ReportController = (() => {
                 item.lop.toLowerCase().includes(query);
                 
             const matchDate = dateQuery ? convertToDDMMYYYY(dateQuery) === item.ngay : true;
-            const matchType = (currentType === "TẤT CẢ") 
-                  ? true 
-                  : item.loai.toUpperCase().includes(currentType.toUpperCase());        
+            const matchType = activeTypes.includes(item.loai.trim()); 
             
             let matchCount = true;
             if (compareType !== "none" && threshold > 0) {
