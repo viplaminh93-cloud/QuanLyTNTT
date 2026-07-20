@@ -152,8 +152,7 @@ self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") return;
 
     // Ngoại trừ các request đến Google Script (vì dữ liệu cần lấy mới mỗi lần)
-    if (event.request.url.includes('/exec')) return;
-
+    if (event.request.url.includes('script.google.com') || event.request.url.includes('/exec')) {return; }
     event.respondWith(
         caches.match(event.request).then(cachedResponse => {
             // Nếu có trong cache, trả về luôn (Stale-While-Revalidate chiến lược)
