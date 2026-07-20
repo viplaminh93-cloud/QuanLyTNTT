@@ -88,7 +88,8 @@
             // Khởi tạo các sự kiện điều hướng
             Utils.id("btnLe").addEventListener("click", () => AttendanceController.start(LOAI.LE));
             Utils.id("btnGiaoLy").addEventListener("click", () => AttendanceController.start(LOAI.GIAOLY));
-            Utils.id("btnBack").addEventListener("click", AttendanceController.backHome);
+            Utils.id("btnBackScanner").addEventListener("click", AttendanceController.backHome);
+            Utils.id("btnBackHome").addEventListener("click", () => { window.location.href = "../dashboard/dashboard.html"; });
             Utils.id("overlay").addEventListener("click", AttendanceController.closePopup);
         });
     </script>
