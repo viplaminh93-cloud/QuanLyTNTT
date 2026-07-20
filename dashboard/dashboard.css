@@ -37,3 +37,9 @@ button:hover { background: #1565C0; }
 .btn { background: #1565c0; color: white; width: 100%; margin-top: 18px; padding: 18px; border: none; border-radius: 14px; font-size: 22px; font-weight: bold; cursor: pointer; transition: .2s; }
 .btn:active { transform: scale(.97); }
 .install { background: #207d32; }
+
+
+
+.hidden {
+    display: none !important;
+}
