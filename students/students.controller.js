@@ -10,29 +10,19 @@ Auth.requireLogin();
 window.addEventListener("load", initStudents);
 
 
-const leCount = myHistory.filter(h => 
-    h.loai === "Lễ 1" || h.loai === "Lễ 2" || h.loai === "Lễ Chiều"
-).length;
 /**
  * Khởi tạo dữ liệu: Dùng ReportService làm nguồn dữ liệu trung tâm
  */
 async function initStudents() {
     const data = await ReportService.syncFromGoogle();
-    const students = data.students;
-    const history = data.history;
+    const history = data.history || [];
+    const students = data.students || [];
 
-    // 3. Xử lý logic thống kê
-    const studentsWithStats = students.map(s => {
-        const stats = history.filter(h => h.maso == s.maso);
-        return {
-            ...s,
-            // Đảm bảo tên thuộc tính 'type' hoặc 'loai' khớp với dữ liệu từ Google trả về
-            soBuoiLe: stats.filter(h => h.loai && h.loai.includes("Lễ")).length, 
-            soBuoiGiaoLy: stats.filter(h => h.loai && h.loai.includes("Giáo lý")).length
-        };
-    });
-
-    // 4. Render danh sách
+    const studentsWithStats = students.map(s => ({
+        ...s,
+        ...calculateStats(history, s.maso)
+    }));
+    
     StudentRenderer.renderList(studentsWithStats);
 }
 
@@ -45,26 +35,28 @@ Utils.id("txtSearch").addEventListener("input", onSearch);
 function onSearch() {
     const keyword = Utils.id("txtSearch").value.trim().toLowerCase();
     const history = ReportService.getHistory();
-    
-    // Tìm kiếm trong StudentService
-    const filteredStudents = StudentService.search(keyword);
+    const filtered = StudentService.search(keyword);
 
-    // Render lại kèm thống kê (để số liệu không bị mất khi tìm kiếm)
-    const displayList = filteredStudents.map(s => {
-        const stats = history.filter(h => h.maso == s.maso);
-        return {
-            ...s,
-            soBuoiLe: stats.filter(h => h.loai && h.loai.includes("Lễ")).length,
-            soBuoiGiaoLy: stats.filter(h => h.loai && h.loai.includes("Giáo lý")).length
-        };
-    });
+    const displayList = filtered.map(s => ({
+        ...s,
+        ...calculateStats(history, s.maso)
+    }));
 
     StudentRenderer.renderList(displayList);
 }
-
 // Sự kiện Modal
 Utils.id("studentModal").addEventListener("click", e => {
     if (e.target.id === "studentModal") {
         StudentRenderer.closeModal();
     }
 });
+
+
+// Hàm hỗ trợ đếm
+function calculateStats(history, studentMaso) {
+    const stats = history.filter(h => h.maso == studentMaso);
+    return {
+        soBuoiLe: stats.filter(h => h.loai && h.loai.includes("Lễ")).length,
+        soBuoiGiaoLy: stats.filter(h => h.loai && h.loai.includes("Giáo lý")).length
+    };
+}
