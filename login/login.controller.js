@@ -12,20 +12,14 @@
  */
 window.addEventListener("load", () => {
     initLogin();
-    
-    // TỰ ĐỘNG ĐĂNG KÝ SERVICE WORKER TẠI ĐÂY
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/QuanLyTNTT/service-worker.js')
         .then(reg => {
-            reg.addEventListener('updatefound', () => {
-                const newWorker = reg.installing;
-                newWorker.onstatechange = () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        if (confirm("Đã có bản cập nhật mới! Tải lại trang ngay?")) {
-                            window.location.reload();
-                        }
-                    }
-                };
+            // Khi SW mới kích hoạt, nó sẽ chiếm quyền và phát tín hiệu controllerchange
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                console.log("Cập nhật mới đã sẵn sàng. Tải lại trang...");
+                window.location.reload();
             });
         });
     }
