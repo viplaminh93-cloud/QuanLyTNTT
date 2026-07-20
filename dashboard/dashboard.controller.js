@@ -204,28 +204,3 @@ async function installApplication() {
     }
     installPrompt = null;
 }
-
-/**
- * Tự động kiểm tra và cập nhật PWA khi có phiên bản mới
- */
-function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/QuanLyTNTT/service-worker.js')
-        .then(reg => {
-            reg.addEventListener('updatefound', () => {
-                const newWorker = reg.installing;
-                newWorker.onstatechange = () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        // Thông báo khi có phiên bản mới
-                        if (confirm("Đã có bản cập nhật mới! Tải lại trang ngay để áp dụng?")) {
-                            window.location.reload();
-                        }
-                    }
-                };
-            });
-        }).catch(err => console.error("ServiceWorker registration failed:", err));
-    }
-}
-
-// Gọi hàm này khi ứng dụng bắt đầu khởi chạy
-registerServiceWorker();
