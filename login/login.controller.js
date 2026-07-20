@@ -10,6 +10,7 @@
  * KHỞI TẠO
  * ======================================
  */
+registerServiceWorker();
 
 window.addEventListener(
 
