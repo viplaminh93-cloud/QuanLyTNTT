@@ -36,27 +36,35 @@ const ReportController = (() => {
 
     // Hàm lấy dữ liệu sau khi đã áp dụng tất cả bộ lọc
     function getFilteredData() {
-        const nameQuery = Utils.id("filterName").value.toLowerCase();
+        const query = Utils.id("filterGeneral").value.toLowerCase();
         const dateQuery = Utils.id("filterDate").value;
         const compareType = Utils.id("compareType").value;
         const threshold = parseInt(Utils.id("threshold").value) || 0;
-
+    
+        // Tính số lần xuất hiện của mỗi mã số
         const stats = {};
         allDataList.forEach(item => {
             if (!stats[item.maso]) stats[item.maso] = 0;
             stats[item.maso]++;
         });
-
+    
         return allDataList.filter(item => {
-            const matchName = item.hoten.toLowerCase().includes(nameQuery);
+            // Tìm kiếm đa năng trên 3 trường
+            const matchGeneral = 
+                item.hoten.toLowerCase().includes(query) || 
+                item.maso.toLowerCase().includes(query) || 
+                item.lop.toLowerCase().includes(query);
+                
             const matchDate = dateQuery ? convertToDDMMYYYY(dateQuery) === item.ngay : true;
+            const matchType = item.loai.toUpperCase() === currentType;
             
             let matchCount = true;
             if (compareType !== "none" && threshold > 0) {
                 const count = stats[item.maso];
                 matchCount = (compareType === "duoi") ? count < threshold : count > threshold;
             }
-            return matchName && matchDate && matchCount;
+            
+            return matchGeneral && matchDate && matchType && matchCount;
         });
     }
 
@@ -153,5 +161,5 @@ const ReportController = (() => {
         history.back(); 
     }
 
-    return { load, startLookup, onScanResult, closeResult, backHome, filter, exportToExcel };
+    return { load, startLookup, onScanResult, closeResult, backHome, filter, setFilterType, exportToExcel };
 })();
