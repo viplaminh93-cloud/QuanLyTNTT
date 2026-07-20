@@ -9,7 +9,7 @@ const ReportController = (() => {
     let processing = false;
     let isLookingUp = false;
     let allDataList = [];
-    let currentType = "DỰ LỄ"; // Mặc định là DỰ LỄ
+    let currentType = "Dự Lễ"; // Mặc định là DỰ LỄ
 
     async function load() {
         try {
