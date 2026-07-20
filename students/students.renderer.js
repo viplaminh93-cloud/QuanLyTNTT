@@ -26,7 +26,7 @@ const StudentRenderer = (() => {
             card.style.borderLeft = `8px solid ${student.mauKhoi || "#1565C0"}`;
             
             card.innerHTML = `
-                <img class="student-photo" src="${student.hinh || '"/QuanLyTNTT/icons/avatar.png"'}">
+                <img class="student-photo" src="${student.hinh || "/QuanLyTNTT/icons/avatar.png"}">
                 <div class="student-info">
                     <div class="student-name">${student.hoten}</div>
                     <div class="student-row">Mã số: ${student.maso}</div>
@@ -43,7 +43,7 @@ const StudentRenderer = (() => {
     
 
     function openModal(student) {
-        Utils.id("modalPhoto").src = student.hinh || "images/no-photo.png";
+        Utils.id("modalPhoto").src = student.hinh || "/QuanLyTNTT/icons/avatar.png";
         Utils.id("modalName").innerText = student.hoten;
         Utils.id("modalInfo").innerHTML = `
             <div class="info-row"><span>Mã số</span><b>${student.maso}</b></div>
